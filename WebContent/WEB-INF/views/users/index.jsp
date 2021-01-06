@@ -7,13 +7,13 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>ユーザー　一覧</h2>
+        <h2>飼い主様　一覧ページ</h2>
         <table id="user_list">
             <tbody>
                 <tr>
-                    <th>ユーザーID</th>
-                    <th>氏名</th>
-                    <th>操作</th>
+                    <th>飼い主様　ID</th>
+                    <th>お名前</th>
+                    <th>詳しく見てみる</th>
                 </tr>
                 <c:forEach var="user" items="${users}" varStatus="status">
                     <tr class="row${status.count % 2}">
@@ -22,10 +22,10 @@
                         <td>
                             <c:choose>
                                 <c:when test="${user.delete_flag == 1}">
-                                    （退会済み）
+                                    （退会されています。）
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="<c:url value='/users/show?id=${user.id}' />">詳細を表示</a>
+                                    <a href="<c:url value='/users/show?id=${user.id}' />">詳細を確認する</a>
                                 </c:otherwise>
                             </c:choose>
                         </td>
@@ -47,7 +47,7 @@
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a href="<c:url value='/users/new' />">新規ユーザーの登録</a></p>
+        <p><a href="<c:url value='/users/new' />">新しい飼い主様の登録</a></p>
 
     </c:param>
 </c:import>
