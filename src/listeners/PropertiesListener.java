@@ -49,8 +49,8 @@ public class PropertiesListener implements ServletContextListener {
                 String pname = pit.next();
                 context.setAttribute(pname, properties.getProperty(pname));
             }
-        } catch(FileNotFoundException e) {
-        } catch(IOException e) {}
+        } catch(FileNotFoundException u) {
+        } catch(IOException u) {}
     }
 
 }

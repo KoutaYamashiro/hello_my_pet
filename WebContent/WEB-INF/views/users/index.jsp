@@ -7,13 +7,13 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>飼い主様　一覧ページ</h2>
+        <h2>飼い主様　全体ページ</h2>
         <table id="user_list">
             <tbody>
                 <tr>
                     <th>飼い主様　ID</th>
                     <th>お名前</th>
-                    <th>詳しく見てみる</th>
+                    <th>詳細</th>
                 </tr>
                 <c:forEach var="user" items="${users}" varStatus="status">
                     <tr class="row${status.count % 2}">
