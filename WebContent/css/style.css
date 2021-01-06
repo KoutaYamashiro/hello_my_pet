@@ -133,3 +133,24 @@ select {
 h1 a {
     color: #eeeeee;
 }
+
+table#pet_list th {
+    font-weight: bold;
+    padding: 10px 2%;
+}
+
+table#pet_list .pet_name {
+    width: 20%;
+    padding: 10px 2%;
+}
+table#pet_list .pet_date {
+    width: 20%;
+}
+
+table#pet_list .pet_title {
+    width: 37%;
+}
+
+table#pet_list .pet_action {
+    width: 13%;
+}

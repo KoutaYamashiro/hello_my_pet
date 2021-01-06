@@ -38,7 +38,7 @@ public class Pet {
     private User user;
 
     @Column(name = "pet_date", nullable = false)
-    private Date report_date;
+    private Date pet_date;
 
     @Column(name = "pet_type", length = 255, nullable = false)
     private String pet_type;
@@ -77,12 +77,12 @@ public class Pet {
         this.user = user;
     }
 
-    public Date getReport_date() {
-        return report_date;
+    public Date getpet_date() {
+        return pet_date;
     }
 
-    public void setReport_date(Date report_date) {
-        this.report_date = report_date;
+    public void setpet_date(Date pet_date) {
+        this.pet_date = pet_date;
     }
 
     public String getPet_type() {

@@ -17,7 +17,7 @@
                         <c:if test="${sessionScope.login_user.admin_flag == 1}">
                             <a href="<c:url value='/users/index' />">飼い主様達</a>&nbsp;&nbsp;
                         </c:if>
-                        <a href="<c:url value='/reports/index' />">ペット達</a>&nbsp;&nbsp;
+                        <a href="<c:url value='/pets/index' />">ペット達</a>&nbsp;&nbsp;
                     </c:if>
                 </div>
                 <c:if test="${sessionScope.login_user != null}">
