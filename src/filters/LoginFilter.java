@@ -54,7 +54,7 @@ public class LoginFilter implements Filter {
                     return;
                 }
 
-                // 従業員管理の機能は管理者のみが閲覧できるようにする
+                // ペットハウスのみが閲覧できるようにする
                 if(servlet_path.matches("/users.*") && u.getAdmin_flag() == 0) {
                     ((HttpServletResponse)response).sendRedirect(context_path + "/");
                     return;
