@@ -3,15 +3,13 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:choose>
-            <c:when test="${user != null}">
-                <h2>id : ${user.id} の飼い主情報　編集ページ</h2>
-                <p>（パスワードは変更する場合のみ入力してください）</p>
-                <form method="POST" action="<c:url value='/users/update' />">
+            <c:when test="${pet != null}">
+                <h2>ペット情報　編集ページ</h2>
+                <form method="POST" action="<c:url value='/pets/update' />">
                     <c:import url="_form.jsp" />
                 </form>
-
-                <p><a href="#" onclick="confirmDestroy();">この飼い主情報を削除する</a></p>
-                <form method="POST" action="<c:url value='/users/destroy' />">
+                <p><a href="#" onclick="confirmDestroy();">このペット情報を削除する</a></p>
+                <form method="POST" action="<c:url value='/pets/destroy' />">
                     <input type="hidden" name="_token" value="${_token}" />
                 </form>
                 <script>
@@ -23,10 +21,10 @@
                 </script>
             </c:when>
             <c:otherwise>
-                <h2>お探しのデータは見つかりませんでした。</h2>
+                <h2>お探しのペットデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
 
-        <p><a href="<c:url value='/users/index' />">一覧ページに戻る</a></p>
+        <p><a href="<c:url value='/pets/index' />">ペット　一覧に戻る</a></p>
     </c:param>
 </c:import>

@@ -7,11 +7,11 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>飼い主様　全体ページ</h2>
+        <h2>飼い主　一覧ページ</h2>
         <table id="user_list">
             <tbody>
                 <tr>
-                    <th>飼い主様　ID</th>
+                    <th>飼い主　番号</th>
                     <th>お名前</th>
                     <th>詳細</th>
                 </tr>
@@ -47,7 +47,7 @@
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a href="<c:url value='/users/new' />">新しい飼い主様の登録</a></p>
+        <p><a href="<c:url value='/users/new' />">新しい飼い主の登録</a></p>
 
     </c:param>
 </c:import>

@@ -8,7 +8,7 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>ペット達のページ</h2>
+        <h2>ペットのページ</h2>
         <table id="pet_list">
             <tbody>
                 <tr>
@@ -26,7 +26,16 @@
                         <td class="pet_pet_name">${pet.pet_name}</td>
                         <td class="pet_pet_type">${pet.pet_type}</td>
                         <td class="pet_pet_breed">${pet.pet_breed}</td>
-                        <td class="pet_action"><a href="<c:url value='/pets/show?id=${pet.id}' />">詳細を確認する</a></td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${pet.delete_flag == 1}">
+                                    （削除済み）
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="<c:url value='/pets/show?id=${pet.id}' />">詳細を表示</a>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>

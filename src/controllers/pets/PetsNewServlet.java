@@ -34,7 +34,7 @@ public class PetsNewServlet extends HttpServlet {
         request.setAttribute("_token", request.getSession().getId());
 
         Pet p = new Pet();
-        p.setpet_date(new Date(System.currentTimeMillis()));
+        p.setPet_date(new Date(System.currentTimeMillis()));
         request.setAttribute("pet", p);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/pets/new.jsp");

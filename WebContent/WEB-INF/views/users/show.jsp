@@ -5,12 +5,12 @@
     <c:param name="content">
         <c:choose>
             <c:when test="${user != null}">
-                <h2>id : ${user.id} の飼い主様情報　詳細ページ</h2>
+                <h2>id : ${user.id} の飼い主情報　詳細ページ</h2>
 
                 <table>
                     <tbody>
                         <tr>
-                            <th>飼い主様　ID</th>
+                            <th>飼い主　番号</th>
                             <td><c:out value="${user.code}" /></td>
                         </tr>
                         <tr>
@@ -22,7 +22,7 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${user.admin_flag == 1}">ペットハウス</c:when>
-                                    <c:otherwise>飼い主様</c:otherwise>
+                                    <c:otherwise>飼い主</c:otherwise>
                                 </c:choose>
                             </td>
                         </tr>
@@ -41,13 +41,13 @@
                     </tbody>
                 </table>
 
-                <p><a href="<c:url value='/users/edit?id=${user.id}' />">飼い主様の情報を編集する</a></p>
+                <p><a href="<c:url value='/users/edit?id=${user.id}' />">飼い主の情報を編集する</a></p>
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
 
-        <p><a href="<c:url value='/users/index' />">全体ページに戻る</a></p>
+        <p><a href="<c:url value='/users/index' />">一覧ページに戻る</a></p>
     </c:param>
 </c:import>

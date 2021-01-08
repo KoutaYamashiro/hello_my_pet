@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
-        <h2>飼い主様　新規登録ページ</h2>
+        <h2>飼い主　新規登録ページ</h2>
 
         <form method="POST" action="<c:url value='/users/create' />">
             <c:import url="_form.jsp" />

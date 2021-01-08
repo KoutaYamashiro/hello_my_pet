@@ -8,6 +8,6 @@
             <c:import url="_form.jsp" />
         </form>
 
-        <p><a href="<c:url value='/pets/index' />">全体ページに戻る</a></p>
+        <p><a href="<c:url value='/pets/index' />">一覧ページに戻る</a></p>
     </c:param>
 </c:import>

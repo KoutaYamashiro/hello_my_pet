@@ -25,6 +25,14 @@ import javax.persistence.Table;
         name = "getPetsCount",
         query = "SELECT COUNT(r) FROM Pet AS r"
     ),
+    @NamedQuery(
+        name = "getMyAllPets",
+        query = "SELECT r FROM Pet AS r WHERE r.user = :user ORDER BY r.id DESC"
+    ),
+    @NamedQuery(
+        name = "getMyPetsCount",
+        query = "SELECT COUNT(r) FROM Pet AS r WHERE r.user = :user"
+    )
 })
 @Entity
 public class Pet {
@@ -65,8 +73,19 @@ public class Pet {
     @Column(name = "updated_at", nullable = false)
     private Timestamp updated_at;
 
+    @Column(name = "delete_flag", nullable = false)
+    private Integer delete_flag;
+
     public Integer getId() {
         return id;
+    }
+
+    public Integer getDelete_flag() {
+        return delete_flag;
+    }
+
+    public void setDelete_flag(Integer delete_flag) {
+        this.delete_flag = delete_flag;
     }
 
     public User getUser() {
@@ -77,11 +96,11 @@ public class Pet {
         this.user = user;
     }
 
-    public Date getpet_date() {
+    public Date getPet_date() {
         return pet_date;
     }
 
-    public void setpet_date(Date pet_date) {
+    public void setPet_date(Date pet_date) {
         this.pet_date = pet_date;
     }
 
