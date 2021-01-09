@@ -35,7 +35,7 @@ public class UserValidator {
         private static String validateCode(String code, Boolean codeDuplicateCheckFlag) {
             // 必須入力チェック
             if (code == null || code.equals("")) {
-                return "ユーザーIDを入力してください。";
+                return "飼い主番号を入力してください。";
             }
 
             // すでに登録されている社員番号との重複チェック
@@ -46,7 +46,7 @@ public class UserValidator {
                         .getSingleResult();
                 em.close();
                 if(users_count > 0) {
-                    return "入力されたユーザーIDの情報はすでに存在しています。";
+                    return "入力された飼い主番号の情報はすでに存在しています。";
                 }
             }
 

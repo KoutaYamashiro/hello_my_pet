@@ -18,9 +18,21 @@
                             <td><fmt:formatDate value="${pet.pet_date}" pattern="yyyy-MM-dd" /></td>
                         </tr>
                         <tr>
-                            <th>ペットのお名前</th>
+                            <th>ペットの名前</th>
                             <td>
                                 <pre><c:out value="${pet.pet_name}" /></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>♡　お気に入り</th>
+                            <td>
+                                <pre><c:out value="${pet.favorite}" /></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>ペットの画像</th>
+                            <td>
+                                <pre><c:out value="${pet.image_url}" /></pre>
                             </td>
                         </tr>
                         <tr>

@@ -53,6 +53,8 @@ public class PetsCreateServlet extends HttpServlet {
             p.setPet_date(pet_date);
 
             p.setPet_name(request.getParameter("pet_name"));
+            p.setFavorite(request.getParameter("favorite"));
+            p.setImage_url(request.getParameter("image_url"));
             p.setPet_type(request.getParameter("pet_type"));
             p.setPet_breed(request.getParameter("pet_breed"));
             p.setAge(request.getParameter("age"));

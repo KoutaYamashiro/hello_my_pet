@@ -14,7 +14,7 @@
                             <td><c:out value="${user.code}" /></td>
                         </tr>
                         <tr>
-                            <th>お名前</th>
+                            <th>名前</th>
                             <td><c:out value="${user.name}" /></td>
                         </tr>
                         <tr>

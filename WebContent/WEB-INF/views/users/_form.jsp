@@ -13,7 +13,7 @@
 <input type="text" name="code" value="${employee.code}" />
 <br /><br />
 
-<label for="name">お名前</label><br />
+<label for="name">名前</label><br />
 <input type="text" name="name" value="${employee.name}" />
 <br /><br />
 

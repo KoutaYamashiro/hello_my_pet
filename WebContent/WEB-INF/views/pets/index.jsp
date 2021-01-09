@@ -14,18 +14,22 @@
                 <tr>
                     <th class="pet_name">飼い主名</th>
                     <th class="pet_date">日付</th>
-                    <th class="pet_pet_name">ペットのお名前</th>
+                    <th class="pet_pet_name">ペットの名前</th>
+                    <th class="pet_favorite">♡ お気に入り</th>
+                    <th class="pet_image_url">ペットの画像</th>
                     <th class="pet_pet_type">ペットの種類</th>
                     <th class="pet_pet_breed">ペットの品種</th>
                     <th class="pet_action">詳細</th>
                 </tr>
                 <c:forEach var="pet" items="${pets}" varStatus="status">
                     <tr class="row${status.count % 2}">
-                        <td class="pet_name"><c:out value="${pet.user.name}" /></td>
+                        <td class="user_name"><c:out value="${pet.user.name}" /></td>
                         <td class="pet_date"><fmt:formatDate value='${pet.pet_date}' pattern='yyyy-MM-dd' /></td>
-                        <td class="pet_pet_name">${pet.pet_name}</td>
-                        <td class="pet_pet_type">${pet.pet_type}</td>
-                        <td class="pet_pet_breed">${pet.pet_breed}</td>
+                        <td class="pet_name">${pet.pet_name}</td>
+                        <td class="pet_favorite">${pet.favorite}</td>
+                        <td class="image_url"><img src="file:///C:/pleiades/workspace/hello_my_pet/WebContent/images/mypets/kawaiiCat77.jpg"></td>
+                        <td class="pet_type">${pet.pet_type}</td>
+                        <td class="pet_breed">${pet.pet_breed}</td>
                         <td>
                             <c:choose>
                                 <c:when test="${pet.delete_flag == 1}">

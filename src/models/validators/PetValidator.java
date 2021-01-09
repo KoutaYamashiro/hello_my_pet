@@ -29,7 +29,7 @@ public class PetValidator {
 
     private static String _validatePet_Name(String pet_name) {
         if(pet_name == null || pet_name.equals("")) {
-            return "ペットのお名前を入力してください。";
+            return "ペットの名前を入力してください。";
             }
 
         return "";

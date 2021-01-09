@@ -12,7 +12,7 @@
             <tbody>
                 <tr>
                     <th>飼い主　番号</th>
-                    <th>お名前</th>
+                    <th>名前</th>
                     <th>詳細</th>
                 </tr>
                 <c:forEach var="user" items="${users}" varStatus="status">

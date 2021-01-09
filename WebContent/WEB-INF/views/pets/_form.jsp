@@ -15,15 +15,23 @@
 <br /><br />
 
 
-<label for="name">ペットのお名前</label><br />
+<label for="name">ペットの名前</label><br />
 <input type="text" name="pet_name" value="${pet.pet_name}" />
 <br /><br />
 
-<label for="type">ペットの種類</label><br />
+<label for="favorite">♡　お気に入り</label><br />
+<input type="text" name="favorite" value="${pet.favorite}" />
+<br /><br />
+
+<label for="image_url">ペットの画像</label><br />
+<input type="text" name="image_url" value="${pet.image_url}" />
+<br /><br />
+
+<label for="pet_type">ペットの種類</label><br />
 <input type="text" name="pet_type" value="${pet.pet_type}" />
 <br /><br />
 
-<label for="breed">ペットの品種</label><br />
+<label for="pet_breed">ペットの品種</label><br />
 <input type="text" name="pet_breed" value="${pet.pet_breed}" />
 <br /><br />
 

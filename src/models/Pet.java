@@ -76,9 +76,32 @@ public class Pet {
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
 
+    @Column(name = "image_url" , length= 250, nullable = false)
+    private String image_url;
+
+    @Column(name = "favorite", length= 250, nullable = false)
+    private String favorite;
+
     public Integer getId() {
         return id;
     }
+
+    public String getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(String favorite) {
+        this.favorite = favorite;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+
 
     public Integer getDelete_flag() {
         return delete_flag;
