@@ -4,7 +4,7 @@
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
-        <title>Hello My Pet</title>
+        <title>ハロー！My ペット</title>
         <link rel="stylesheet" href="<c:url value='/css/reset.css' />">
         <link rel="stylesheet" href="<c:url value='/css/style.css' />">
     </head>
@@ -12,12 +12,12 @@
         <div id="wrapper">
             <div id="header">
                 <div id="header_menu">
-                    <h1><a href="<c:url value='/' />">Hello My Pet</a></h1>&nbsp;&nbsp;&nbsp;
+                    <h1><a href="<c:url value='/' />">ハロー！My ペット</a></h1>&nbsp;&nbsp;&nbsp;
                     <c:if test="${sessionScope.login_user != null}">
-                        <c:if test="${sessionScope.login_user.admin_flag == 1}">
-                            <a href="<c:url value='/users/index' />">飼い主</a>&nbsp;&nbsp;
+                        <c:if test="${sessionScope.login_user.admin_flag == 0}">
+                            <a href="<c:url value='/users/index' />">ユーザー一覧</a>&nbsp;&nbsp;
                         </c:if>
-                        <a href="<c:url value='/pets/index' />">ペット</a>&nbsp;&nbsp;
+                        <a href="<c:url value='/pets/index' />">全ペット一覧</a>&nbsp;&nbsp;
                     </c:if>
                 </div>
                 <c:if test="${sessionScope.login_user != null}">

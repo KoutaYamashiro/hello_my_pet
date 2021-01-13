@@ -9,7 +9,7 @@
 
     </div>
 </c:if>
-<label for="code">飼い主　番号</label><br />
+<label for="code">ユーザー　番号</label><br />
 <input type="text" name="code" value="${employee.code}" />
 <br /><br />
 
@@ -23,8 +23,9 @@
 
 <label for="admin_flag">登録種別</label><br />
 <select name="admin_flag">
-    <option value="0"<c:if test="${user.admin_flag == 0}"> selected</c:if>>飼い主</option>
-    <option value="1"<c:if test="${user.admin_flag == 1}"> selected</c:if>>ペットハウス</option>
+    <option value="0"<c:if test="${user.admin_flag == 0}"> selected</c:if>>管理者</option>
+    <option value="1"<c:if test="${user.admin_flag == 1}"> selected</c:if>>ユーザー</option>
+    <option value="2"<c:if test="${user.admin_flag == 2}"> selected</c:if>>ペットオーナー</option>
 </select>
 <br /><br />
 

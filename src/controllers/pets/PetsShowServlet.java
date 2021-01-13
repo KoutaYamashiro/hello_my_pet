@@ -40,6 +40,7 @@ public class PetsShowServlet extends HttpServlet {
 
             request.setAttribute("pet", p);
             request.setAttribute("_token", request.getSession().getId());
+            request.getSession().setAttribute("pet_id", p.getId());
 
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/pets/show.jsp");
             rd.forward(request, response);

@@ -7,18 +7,26 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>飼い主　一覧ページ</h2>
+        <h2>ユーザー一覧ページ</h2>
         <table id="user_list">
             <tbody>
-                <tr>
-                    <th>飼い主　番号</th>
+                <tr class=row>
+                    <th>ユーザー番号</th>
                     <th>名前</th>
+                    <th>登録種別</th>
                     <th>詳細</th>
                 </tr>
                 <c:forEach var="user" items="${users}" varStatus="status">
                     <tr class="row${status.count % 2}">
                         <td><c:out value="${user.code}" /></td>
                         <td><c:out value="${user.name}" /></td>
+                        <td>
+                                <c:choose>
+                                    <c:when test="${user.admin_flag == 0}">管理者</c:when>
+                                    <c:when test="${user.admin_flag == 1}">ユーザー</c:when>
+                                    <c:otherwise>ペットオーナー</c:otherwise>
+                                </c:choose>
+                        </td>
                         <td>
                             <c:choose>
                                 <c:when test="${user.delete_flag == 1}">
@@ -47,7 +55,7 @@
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a href="<c:url value='/users/new' />">新しい飼い主の登録</a></p>
+        <p><a href="<c:url value='/users/new' />">新しいユーザーの登録</a></p>
 
     </c:param>
 </c:import>

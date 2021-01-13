@@ -5,12 +5,12 @@
     <c:param name="content">
         <c:choose>
             <c:when test="${user != null}">
-                <h2>id : ${user.id} の飼い主情報　詳細ページ</h2>
+                <h2>id : ${user.id} のユーザー情報　詳細ページ</h2>
 
                 <table>
                     <tbody>
                         <tr>
-                            <th>飼い主　番号</th>
+                            <th>ユーザー　番号</th>
                             <td><c:out value="${user.code}" /></td>
                         </tr>
                         <tr>
@@ -21,8 +21,9 @@
                             <th>登録種別</th>
                             <td>
                                 <c:choose>
-                                    <c:when test="${user.admin_flag == 1}">ペットハウス</c:when>
-                                    <c:otherwise>飼い主</c:otherwise>
+                                    <c:when test="${user.admin_flag == 0}">管理者</c:when>
+                                    <c:when test="${user.admin_flag == 1}">ユーザー</c:when>
+                                    <c:otherwise>ペットオーナー</c:otherwise>
                                 </c:choose>
                             </td>
                         </tr>
@@ -41,7 +42,7 @@
                     </tbody>
                 </table>
 
-                <p><a href="<c:url value='/users/edit?id=${user.id}' />">飼い主の情報を編集する</a></p>
+                <p><a href="<c:url value='/users/edit?id=${user.id}' />">ユーザーの情報を編集する</a></p>
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>

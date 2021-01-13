@@ -30,8 +30,8 @@ import javax.persistence.Table;
         query = "SELECT r FROM Pet AS r WHERE r.user = :user ORDER BY r.id DESC"
     ),
     @NamedQuery(
-        name = "getMyPetsCount",
-        query = "SELECT COUNT(r) FROM Pet AS r WHERE r.user = :user"
+            name = "getMyPetsCount",
+            query = "SELECT COUNT(r) FROM Pet AS r WHERE r.user = :user"
     )
 })
 @Entity
@@ -44,6 +44,9 @@ public class Pet {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @Column(name = "likes", nullable = false)
+    private Integer likes;
 
     @Column(name = "pet_date", nullable = false)
     private Date pet_date;
@@ -64,8 +67,8 @@ public class Pet {
     private String home_town;
 
     @Lob
-    @Column(name = "nemo", nullable = false)
-    private String nemo;
+    @Column(name = "memo", nullable = false)
+    private String memo;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
@@ -79,19 +82,16 @@ public class Pet {
     @Column(name = "image_url" , length= 250, nullable = false)
     private String image_url;
 
-    @Column(name = "favorite", length= 250, nullable = false)
-    private String favorite;
-
     public Integer getId() {
         return id;
     }
 
-    public String getFavorite() {
-        return favorite;
+    public Integer getLikes() {
+        return likes;
     }
 
-    public void setFavorite(String favorite) {
-        this.favorite = favorite;
+    public void setLikes(Integer likes) {
+        this.likes = likes;
     }
 
     public String getImage_url() {
@@ -167,12 +167,12 @@ public class Pet {
         this.home_town = home_town;
     }
 
-    public String getNemo() {
-        return nemo;
+    public String getMemo() {
+        return memo;
     }
 
-    public void setNemo(String nemo) {
-        this.nemo = nemo;
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
     public Timestamp getCreated_at() {
@@ -194,4 +194,5 @@ public class Pet {
     public void setId(Integer id) {
         this.id = id;
     }
+
 }
