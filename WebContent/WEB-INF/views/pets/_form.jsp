@@ -12,7 +12,7 @@
 
     </div>
 </c:if>
-<label for="date">日付</label>
+<label for="date">掲載日</label>
 <br />
 <input type="date" name="pet_date"
     value="<fmt:formatDate value='${pet.pet_date}' pattern='yyyy-MM-dd' />" />
@@ -25,39 +25,46 @@
 <br />
 <br />
 
-<label for="file">ペットの画像</label>
-<br />
-    <input class="bottom" type="file" name="file" value="${pet.image_url}"/><br />
-<br />
-<br />
-
-<label for="pet_type">ペットの種類</label>
-<br />
-<input type="text" name="pet_type" value="${pet.pet_type}" />
-<br />
-<br />
-
 <label for="pet_breed">ペットの品種</label>
 <br />
 <input type="text" name="pet_breed" value="${pet.pet_breed}" />
 <br />
 <br />
 
-<label for="age">年齢</label>
+<label for="file">ペットの画像</label>
 <br />
-<input type="text" name="age" value="${pet.age}" />
+    <input class="bottom" type="file" name="file" value="${pet.image_url}"/><br />
+<br />
+
+<p>
+<label>ペットの種類</label>
+<br />
+<select  class="pet_type" name="pet_type">
+<option value="ネコ">ネコ</option>
+<option value="イヌ">イヌ</option>
+<option value="小動物">小動物（ウサギ・ハムスターなど）</option>
+<option value="鳥類">鳥類</option>
+<option value="爬虫類">爬虫類</option>
+<option value="その他">その他</option>
+</select>
+</p>
+
+<label for="visit_area">見学地域</label>
+<br />
+<input type="text" name="visit_area" value="${pet.visit_area}" />
 <br />
 <br />
 
-<label for="home_town">住んでいる場所</label>
+<label for="date">誕生日</label>
 <br />
-<input type="text" name="home_town" value="${pet.home_town}" />
+<input type="date" name="birthday"
+    value="<fmt:formatDate value='${pet.birthday}' pattern='yyyy-MM-dd' />" />
 <br />
 <br />
 
-<label for="memo">メモ</label>
+<label for="appeal_point">アピールポイント</label>
 <br />
-<textarea name="memo" rows="10" cols="50">${pet.memo}</textarea>
+<textarea name="appeal_point" rows="10" cols="50">${pet.appeal_point}</textarea>
 <br />
 <br />
 

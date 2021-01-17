@@ -11,7 +11,7 @@
         </c:if>
         <div id="image">
             <img class="cats"
-                src="<c:url value='/images/mypets/kawaiiCat77.jpg' />">
+                src="<c:url value='/images/mypets/cat.jpg' />">
         </div>
         <h2>ペット　ページ</h2>
         <table id="pet_list">
@@ -22,14 +22,14 @@
                     <th class="pet_likes">いいね♡数</th>
                     <th class="pet_pet_type">ペットの種類</th>
                     <th class="pet_pet_breed">ペットの品種</th>
-                    <th class="pet_date">日付</th>
+                    <th class="pet_date">掲載日</th>
                     <th class="pet_name">ユーザー名</th>
                     <th class="pet_action">詳細</th>
                 </tr>
                 <c:forEach var="pet" items="${pets}" varStatus="status">
                     <tr ${status.count % 2}>
                         <td class="pet_name">${pet.pet_name}</td>
-                        <td class="image_url"><img src="<c:url value='/upload/${pet.image_url}' />"></td>
+                        <td class="image_url"><img src="https://yamashiro-test-20200114.s3.amazonaws.com/upload/${pet.image_url}"></td>
                         <td class="pet_likes"><c:out value="${pet.likes}" /></td>
                         <td class="pet_type">${pet.pet_type}</td>
                         <td class="pet_breed">${pet.pet_breed}</td>

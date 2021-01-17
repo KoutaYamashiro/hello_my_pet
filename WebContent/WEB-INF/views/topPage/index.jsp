@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
@@ -9,10 +10,10 @@
             </div>
         </c:if>
         <div id="image">
-            <img class="cats" src="<c:url value='/images/mypets/kawaiiCat77.jpg' />">
+            <img class="cats" src="<c:url value='/images/mypets/cat.jpg' />">
         </div>
-        <h2>ハロー！My ペット　へようこそ</h2>
-        <h3>　ペット　一覧　</h3>
+        <h2>ハロー！My ペット へようこそ</h2>
+        <h3>ペット 一覧</h3>
         <table id="pet_list">
             <tbody>
                 <tr class=row>
@@ -21,20 +22,23 @@
                     <th class="pet_likes">いいね♡数</th>
                     <th class="pet_type">ペットの種類</th>
                     <th class="pet_breed">ペットの品種</th>
-                    <th class="pet_date">日付</th>
+                    <th class="pet_date">掲載日</th>
                     <th class="user_name">ユーザー名</th>
                     <th class="pet_action">詳細</th>
                 </tr>
                 <c:forEach var="pet" items="${pets}" varStatus="status">
                     <tr class="row${status.count % 2}">
                         <td class="pet_name">${pet.pet_name}</td>
-                        <td class="image_url"><img src="<c:url value='/upload/${pet.image_url}' />"></td>
+                        <td class="image_url"><img
+                            src="{https://yamashiro-test-20200114.s3-ap-northeast-1.amazonaws.com/upload/C%3A%5Cpleiades%5Cworkspace%5C.metadata%5C.plugins%5Corg.eclipse.wst.server.core%5Ctmp1%5Cwtpwebapps%5Chello_my_pet%5Cupload/${pet.image_url}"></td>
                         <td class="pet_likes"><c:out value="${pet.likes}" /></td>
                         <td class="pet_type">${pet.pet_type}</td>
                         <td class="pet_breed">${pet.pet_breed}</td>
-                        <td class="pet_date"><fmt:formatDate value='${pet.pet_date}' pattern='yyyy-MM-dd' /></td>
+                        <td class="pet_date"><fmt:formatDate value='${pet.pet_date}'
+                                pattern='yyyy-MM-dd' /></td>
                         <td class="user_name"><c:out value="${pet.user.name}" /></td>
-                        <td class="pet_action"><a href="<c:url value='/pets/show?id=${pet.id}' />">詳細を確認する</a></td>
+                        <td class="pet_action"><a
+                            href="<c:url value='/pets/show?id=${pet.id}' />">詳細を確認する</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -42,7 +46,8 @@
 
         <div id="pagination">
             （全 ${pets_count} 件）<br />
-            <c:forEach var="i" begin="1" end="${((pets_count - 1) / 15) + 1}" step="1">
+            <c:forEach var="i" begin="1" end="${((pets_count - 1) / 15) + 1}"
+                step="1">
                 <c:choose>
                     <c:when test="${i == page}">
                         <c:out value="${i}" />&nbsp;
@@ -54,6 +59,8 @@
             </c:forEach>
         </div>
 
-        <p><a href="<c:url value='/pets/new' />">新しいペットの登録</a></p>
+        <p>
+            <a href="<c:url value='/pets/new' />">新しいペットの登録</a>
+        </p>
     </c:param>
 </c:import>

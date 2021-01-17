@@ -46,9 +46,9 @@ public class PetsUpdateServlet extends HttpServlet {
             p.setPet_name(request.getParameter("pet_name"));
             p.setPet_type(request.getParameter("pet_type"));
             p.setPet_breed(request.getParameter("pet_breed"));
-            p.setAge(request.getParameter("age"));
-            p.setHome_town(request.getParameter("home_town"));
-            p.setMemo(request.getParameter("memo"));
+            p.setBirthday(Date.valueOf(request.getParameter("birthday")));
+            p.setVisit_area(request.getParameter("visit_area"));
+            p.setAppeal_point(request.getParameter("appeal_point"));
             p.setUpdated_at(new Timestamp(System.currentTimeMillis()));
 
             List<String> errors = PetValidator.validate(p);

@@ -1,5 +1,6 @@
 package controllers.pets;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -15,6 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+
 import models.Pet;
 import models.User;
 import models.validators.PetValidator;
@@ -24,7 +31,7 @@ import utils.DBUtil;
  * Servlet implementation class PetsCreateServlet
  */
 @WebServlet("/pets/create")
-@MultipartConfig(location = "C:\\pleiades\\workspace\\hello_my_pet\\tmp", maxFileSize = 1048576)
+@MultipartConfig
 public class PetsCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -48,6 +55,34 @@ public class PetsCreateServlet extends HttpServlet {
         System.out.println("File Path : " + fileName);
         part.write(fileName);
 
+        /* S3 */
+        String region = (String) this.getServletContext().getAttribute("region");
+        String awsAccessKey = (String) this.getServletContext().getAttribute("awsAccessKey");
+        String awsSecretKey = (String) this.getServletContext().getAttribute("awsSecretKey");
+        String bucketName = (String) this.getServletContext().getAttribute("bucketName");
+        // 認証情報を用意
+        AWSCredentials credentials = new BasicAWSCredentials(
+                // アクセスキー
+                awsAccessKey,
+                // シークレットキー
+                awsSecretKey);
+        // クライアントを生成
+        AmazonS3 s3 = AmazonS3ClientBuilder.standard()
+                // 認証情報を設定
+                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                // リージョンを AP_NORTHEAST_1(東京) に設定
+                .withRegion(region).build();
+        // === ファイルから直接アップロードする場合 ===
+        // アップロードするファイル
+        File file = new File(fileName);
+        // ファイルをアップロード
+        s3.putObject(
+                // アップロード先バケット名
+                bucketName,
+                // アップロード後のキー名
+                "upload/" + fileName,
+                // ファイルの実体
+                file);
         //part.write("C:\\pleiades\\workspace\\hello_my_pet\\upload\\" + name);
 
         String _token = (String) request.getParameter("_token");
@@ -59,6 +94,8 @@ public class PetsCreateServlet extends HttpServlet {
             p.setUser((User) request.getSession().getAttribute("login_user"));
 
             Date pet_date = new Date(System.currentTimeMillis());
+            Date birthday = new Date(System.currentTimeMillis());
+
             String rd_str = request.getParameter("pet_date");
             if (rd_str != null && !rd_str.equals("")) {
                 pet_date = Date.valueOf(request.getParameter("pet_date"));
@@ -70,9 +107,9 @@ public class PetsCreateServlet extends HttpServlet {
             p.setImage_url(name);
             p.setPet_type(request.getParameter("pet_type"));
             p.setPet_breed(request.getParameter("pet_breed"));
-            p.setAge(request.getParameter("age"));
-            p.setHome_town(request.getParameter("home_town"));
-            p.setMemo(request.getParameter("memo"));
+            p.setBirthday(birthday);
+            p.setVisit_area(request.getParameter("visit_area"));
+            p.setAppeal_point(request.getParameter("appeal_point"));
             p.setDelete_flag(0);
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());

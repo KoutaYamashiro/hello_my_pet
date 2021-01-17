@@ -15,7 +15,7 @@
                             <td><c:out value="${pet.user.name}" /></td>
                         </tr>
                         <tr>
-                            <th>日付</th>
+                            <th>掲載日</th>
                             <td><fmt:formatDate value="${pet.pet_date}"
                                     pattern="yyyy-MM-dd" /></td>
                         </tr>
@@ -50,21 +50,21 @@
                                 </pre></td>
                         </tr>
                         <tr>
-                            <th>年齢</th>
+                            <th>誕生日</th>
                             <td><pre>
-                                    <c:out value="${pet.age}" />
+                                    <c:out value="${pet.birthday}" />
                                 </pre></td>
                         </tr>
                         <tr>
-                            <th>住んでいる場所</th>
+                            <th>見学地域</th>
                             <td><pre>
-                                    <c:out value="${pet.home_town}" />
+                                    <c:out value="${pet.visit_area}" />
                                 </pre></td>
                         </tr>
                         <tr>
                             <th>メモ</th>
                             <td><pre>
-                                    <c:out value="${pet.memo}" />
+                                    <c:out value="${pet.appeal_point}" />
                                 </pre></td>
                         </tr>
                         <tr>

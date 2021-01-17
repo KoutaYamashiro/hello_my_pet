@@ -60,15 +60,15 @@ public class Pet {
     @Column(name = "pet_name", length = 255, nullable = false)
     private String pet_name;
 
-    @Column(name = "age", length = 255, nullable = false)
-    private String age;
+    @Column(name = "birthday", nullable = false)
+    private Date birthday;
 
-    @Column(name = "home_town", length = 255, nullable = false)
-    private String home_town;
+    @Column(name = "visit_area", length = 255, nullable = false)
+    private String visit_area;
 
     @Lob
-    @Column(name = "memo", nullable = false)
-    private String memo;
+    @Column(name = "appeal_point", nullable = false)
+    private String appeal_point;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
@@ -151,28 +151,28 @@ public class Pet {
         this.pet_name = pet_name;
     }
 
-    public String getAge() {
-        return age;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
-    public String getHome_town() {
-        return home_town;
+    public String getVisit_area() {
+        return visit_area;
     }
 
-    public void setHome_town(String home_town) {
-        this.home_town = home_town;
+    public void setVisit_area(String visit_area) {
+        this.visit_area = visit_area;
     }
 
-    public String getMemo() {
-        return memo;
+    public String getAppeal_point() {
+        return appeal_point;
     }
 
-    public void setMemo(String memo) {
-        this.memo = memo;
+    public void setAppeal_point(String appeal_point) {
+        this.appeal_point = appeal_point;
     }
 
     public Timestamp getCreated_at() {

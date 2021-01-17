@@ -37,7 +37,7 @@ public class PetValidator {
 
     private static String _validatePet_Type(String pet_type) {
         if(pet_type == null || pet_type.equals("")) {
-            return "ペットの種類を入力してください。";
+            return "ペットの種類を選択してください。";
             }
 
         return "";
