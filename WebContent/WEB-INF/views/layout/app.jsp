@@ -14,24 +14,20 @@
         <div id="header">
             <div id="header_menu">
                 <h1>
-                    <a href="<c:url value='/' />">ハロー！My ペット</a>
-                </h1>
-                &nbsp;&nbsp;&nbsp;
+                    <a class="hello" href="<c:url value='/' />">ハロー！My ペット</a>
+                </h1>&nbsp;&nbsp;&nbsp;
                 <c:if test="${sessionScope.login_user != null}">
                     <c:if test="${sessionScope.login_user.admin_flag == 0}">
                         <a href="<c:url value='/users/index' />">ユーザー一覧</a>&nbsp;&nbsp;
-                        </c:if>
-                    <a href="<c:url value='/pets/index' />">全ペット一覧</a>&nbsp;&nbsp;&nbsp;
+                    </c:if>
+                        <a href="<c:url value='/pets/index' />">ペット一覧</a>&nbsp;&nbsp;
+                        <a href="<c:url value='仮' />">お問い合わせ一覧</a>&nbsp;&nbsp;
                 </c:if>
-                <label class="">
-                <input type="search" name="search" placeholder="検索キーワードを入力">
-                <input type="submit" name="submit" value="検索">
-                </label>
             </div>
             <c:if test="${sessionScope.login_user != null}">
                 <div id="user_name">
-                    <c:out value="${sessionScope.login_user.name}" />
-                    &nbsp;さん&nbsp;&nbsp;&nbsp; <a href="<c:url value='/logout' />">ログアウト</a>
+                    <c:out value="${sessionScope.login_user.name}" />様&nbsp;&nbsp;
+                    <a href="<c:url value='/logout' />">ログアウト</a>
                 </div>
             </c:if>
         </div>

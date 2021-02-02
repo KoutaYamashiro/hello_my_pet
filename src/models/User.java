@@ -15,19 +15,19 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
         name = "getAllUsers",
-        query = "SELECT e FROM User AS e ORDER BY e.id DESC"
+        query = "SELECT u FROM User AS u ORDER BY u.id DESC"
     ),
     @NamedQuery(
         name = "getUsersCount",
-        query = "SELECT COUNT(e) FROM User AS e"
+        query = "SELECT COUNT(u) FROM User AS u"
     ),
     @NamedQuery(
         name = "checkRegisteredCode",
-        query = "SELECT COUNT(e) FROM User AS e WHERE e.code = :code"
+        query = "SELECT COUNT(u) FROM User AS u WHERE u.code = :code"
     ),
     @NamedQuery(
         name = "checkLoginCodeAndPassword",
-        query = "SELECT e FROM User AS e WHERE e.delete_flag = 0 AND e.code = :code AND e.password = :pass"
+        query = "SELECT u FROM User AS u WHERE u.delete_flag = 0 AND u.code = :code AND u.password = :pass"
     )
 })
 @Entity

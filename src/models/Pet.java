@@ -19,19 +19,19 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
         name = "getAllPets",
-        query = "SELECT r FROM Pet AS r ORDER BY r.id DESC"
+        query = "SELECT p FROM Pet AS p ORDER BY p.id DESC"
     ),
     @NamedQuery(
         name = "getPetsCount",
-        query = "SELECT COUNT(r) FROM Pet AS r"
+        query = "SELECT COUNT(p) FROM Pet AS p"
     ),
     @NamedQuery(
         name = "getMyAllPets",
-        query = "SELECT r FROM Pet AS r WHERE r.user = :user ORDER BY r.id DESC"
+        query = "SELECT p FROM Pet AS p WHERE p.user = :user ORDER BY p.id DESC"
     ),
     @NamedQuery(
             name = "getMyPetsCount",
-            query = "SELECT COUNT(r) FROM Pet AS r WHERE r.user = :user"
+            query = "SELECT COUNT(p) FROM Pet AS p WHERE p.user = :user"
     )
 })
 @Entity

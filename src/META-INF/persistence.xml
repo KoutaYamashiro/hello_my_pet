@@ -6,7 +6,6 @@
         <class>models.Pet</class>
         <class>models.Favorite</class>
         <properties>
-            <property name="javax.persistence.schema-generation.database.action" value="create"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
@@ -14,6 +13,7 @@
             <property name="javax.persistence.jdbc.user" value="repuser"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/hello_my_pet?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8"/>
             <property name="javax.persistence.jdbc.password" value="reppass"/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
         </properties>
     </persistence-unit>
 </persistence>

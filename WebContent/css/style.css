@@ -23,8 +23,12 @@ h1 {
 }
 
 h2 {
-    font-size: 36px;
+    font-size: 50px;
     margin-bottom: 15px;
+}
+
+h2#pets_list {
+    text-align: center;
 }
 
 li {
@@ -40,6 +44,10 @@ p {
 a {
     text-decoration: none;
     color: #67471652;
+}
+
+a.hello {
+    font-weight: bold;
 }
 
 table, tr, th, td {

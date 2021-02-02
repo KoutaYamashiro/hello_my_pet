@@ -11,7 +11,7 @@
         </c:if>
         <div id="image">
             <img class="cats"
-                src="<c:url value='/images/mypets/cat.jpg' />">
+                src="<c:url value='/images/mypets/salamander.jpg' />">
         </div>
         <h2>ペット　ページ</h2>
         <table id="pet_list">

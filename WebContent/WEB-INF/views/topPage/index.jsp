@@ -10,16 +10,16 @@
             </div>
         </c:if>
         <div id="image">
-            <img class="cats" src="<c:url value='/images/mypets/cat.jpg' />">
+            <img class="cats" src="<c:url value='/images/mypets/salamander.jpg' />">
         </div>
-        <h2>ハロー！My ペット へようこそ</h2>
+        <h2 id=pets_list>Pets List</h2>
         <h3>ペット 一覧</h3>
         <table id="pet_list">
             <tbody>
                 <tr class=row>
                     <th class="pet_name">ペットの名前</th>
                     <th class="image_url">ペットの画像</th>
-                    <th class="pet_likes">いいね♡数</th>
+                    <th class="pet_likes">いいね数</th>
                     <th class="pet_type">ペットの種類</th>
                     <th class="pet_breed">ペットの品種</th>
                     <th class="pet_date">掲載日</th>
