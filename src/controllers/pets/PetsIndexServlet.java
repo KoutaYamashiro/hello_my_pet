@@ -42,8 +42,8 @@ public class PetsIndexServlet extends HttpServlet {
             page = 1;
         }
         List<Pet> pets = em.createNamedQuery("getAllPets", Pet.class)
-                                  .setFirstResult(15 * (page - 1))
-                                  .setMaxResults(15)
+                                  .setFirstResult(10 * (page - 1))
+                                  .setMaxResults(10)
                                   .getResultList();
 
         long pets_count = (long)em.createNamedQuery("getPetsCount", Long.class)
