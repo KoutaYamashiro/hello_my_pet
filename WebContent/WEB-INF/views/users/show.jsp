@@ -10,7 +10,7 @@
                 <table>
                     <tbody>
                         <tr>
-                            <th>ユーザー　番号</th>
+                            <th>ユーザーID</th>
                             <td><c:out value="${user.code}" /></td>
                         </tr>
                         <tr>
@@ -42,7 +42,7 @@
                     </tbody>
                 </table>
 
-                <p><a href="<c:url value='/users/edit?id=${user.id}' />">ユーザーの情報を編集する</a></p>
+                <p><a href="<c:url value='/users/edit?id=${user.id}' />">ユーザーの情報を変更する</a></p>
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>

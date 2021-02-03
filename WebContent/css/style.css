@@ -1,14 +1,14 @@
 @CHARSET "UTF-8";
 
 body {
-    color: #796b35fa;
+    color: #636363fa;
     font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 }
 
 #header {
     width: 100%;
     height: 100px;
-    background-color: #f1ede4;
+    background-color: #9bd470;
 }
 
 #content {
@@ -41,9 +41,29 @@ p {
     margin-bottom: 15px;
 }
 
+p#admin {
+    color: red;
+}
+
 a {
     text-decoration: none;
-    color: #67471652;
+    color: #ffffff;
+}
+
+a#destroy {
+    color: #84d6b8;
+}
+
+a#all_pages {
+    color: #84d6b8;
+}
+
+a#new_user {
+    color: #84d6b8;
+}
+
+a#details {
+    color: #84d6b8;
 }
 
 a.hello {
@@ -51,7 +71,7 @@ a.hello {
 }
 
 table, tr, th, td {
-    border: 1px solid #9a8a182e;
+    border: 1px solid #d4d0d0fa;
 }
 
 table {
@@ -112,7 +132,7 @@ table#user_list td {
 }
 
 tr.row {
-    background-color: #f1ede4;
+    background-color: #ffffff;
 }
 
 tr.row0 {
@@ -133,7 +153,7 @@ select {
 
 
 #user_name {
-    color: #796b35fa;
+    color: #ffffff;
     width: 36%;
     padding-right: 3%;
     text-align: right;
@@ -141,11 +161,7 @@ select {
 }
 
 #header a {
-    color: #796b35fa;
-}
-
-h1 a {
-    color: #796b35fa;
+    color: ffffff;
 }
 
 table#pet_list th {

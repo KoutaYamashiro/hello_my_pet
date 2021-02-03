@@ -9,11 +9,11 @@
 
     </div>
 </c:if>
-<label for="code">ユーザー　番号</label><br />
+<label for="code">ユーザーID</label><br />
 <input type="text" name="code" value="${employee.code}" />
 <br /><br />
 
-<label for="name">名前</label><br />
+<label for="name">氏名</label><br />
 <input type="text" name="name" value="${employee.name}" />
 <br /><br />
 

@@ -7,12 +7,12 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>ユーザー一覧ページ</h2>
+        <h2>ユーザー　一覧</h2>
         <table id="user_list">
             <tbody>
                 <tr class=row>
-                    <th>ユーザー番号</th>
-                    <th>名前</th>
+                    <th>ユーザーID</th>
+                    <th>氏名</th>
                     <th>登録種別</th>
                     <th>詳細</th>
                 </tr>
@@ -33,7 +33,7 @@
                                     （退会されています。）
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="<c:url value='/users/show?id=${user.id}' />">詳細を確認する</a>
+                                    <a id=details href="<c:url value='/users/show?id=${user.id}' />">詳細を表示</a>
                                 </c:otherwise>
                             </c:choose>
                         </td>
@@ -55,7 +55,7 @@
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a href="<c:url value='/users/new' />">新しいユーザーの登録</a></p>
+        <p><a id=new_user href="<c:url value='/users/new' />">新規ユーザー登録</a></p>
 
     </c:param>
 </c:import>
