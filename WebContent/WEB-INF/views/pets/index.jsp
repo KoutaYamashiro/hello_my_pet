@@ -9,32 +9,33 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <div id="image">
-            <img class="cats"
-                src="<c:url value='/images/mypets/salamander.jpg' />">
-        </div>
-        <h2>ペット　ページ</h2>
+
+        <h2>ペット　一覧</h2>
         <table id="pet_list">
-            <tbody>
-                <tr class=row>
-                    <th class="pet_pet_name">ペットの名前</th>
-                    <th class="pet_image_url">ペットの画像</th>
-                    <th class="pet_likes">いいね♡数</th>
-                    <th class="pet_pet_type">ペットの種類</th>
-                    <th class="pet_pet_breed">ペットの品種</th>
-                    <th class="pet_date">掲載日</th>
-                    <th class="pet_name">ユーザー名</th>
-                    <th class="pet_action">詳細</th>
-                </tr>
-                <c:forEach var="pet" items="${pets}" varStatus="status">
-                    <tr ${status.count % 2}>
-                        <td class="pet_name">${pet.pet_name}</td>
-                        <td class="image_url"><img src="https://yamashiro-test-20200114.s3.amazonaws.com/upload/${pet.image_url}"></td>
-                        <td class="pet_likes"><c:out value="${pet.likes}" /></td>
-                        <td class="pet_type">${pet.pet_type}</td>
+                <tbody class="row${status.count % 2}">
+                    <tr>
+                        <th>画像</th>
+                        <td class="pet_image">${" "}</td>
+                    </tr>
+                    <tr>
+                        <th>種類</th>
                         <td class="pet_breed">${pet.pet_breed}</td>
-                        <td class="pet_date"><fmt:formatDate value='${pet.pet_date}' pattern='yyyy-MM-dd' /></td>
-                        <td class="user_name"><c:out value="${pet.user.name}" /></td>
+                    </tr>
+                    <tr>
+                        <th>誕生日</th>
+                        <td class="birthday"><fmt:formatDate value='${""}'
+                                pattern='yyyy-MM-dd' /></td>
+                    </tr>
+                    <tr>
+                        <th>いいね数</th>
+                        <td class="favorite"><c:out value="${pet.likes}" /></td>
+                    </tr>
+                    <tr>
+                        <th>価格</th>
+                        <td class="pet_price"><c:out value="${' '}" /></td>
+                    </tr>
+                    <tr>
+                        <th>詳細</th>
                         <td><c:choose>
                                 <c:when test="${pet.delete_flag == 1}">
                                     （削除済み）
@@ -44,8 +45,7 @@
                                 </c:otherwise>
                             </c:choose></td>
                     </tr>
-                </c:forEach>
-            </tbody>
+                </tbody>
         </table>
 
         <div id="pagination">
@@ -66,7 +66,7 @@
         <br />
 
         <p>
-            <a href="<c:url value='/pets/new' />">新しいペットの登録</a>
+            <a id=new_pet href="<c:url value='/pets/new' />">新規ペット登録</a>
         </p>
     </c:param>
 </c:import>

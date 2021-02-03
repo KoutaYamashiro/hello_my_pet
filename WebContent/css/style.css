@@ -55,10 +55,14 @@ a#destroy {
 }
 
 a#all_pages {
-    color: #84d6b8;
+    color: #616161;
 }
 
 a#new_user {
+    color: #84d6b8;
+}
+
+a#new_pet {
     color: #84d6b8;
 }
 

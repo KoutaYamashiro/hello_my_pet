@@ -12,7 +12,7 @@
         </form>
 
         <p>
-            <a href="<c:url value='/pets/index' />">一覧ページに戻る</a>
+            <a id=all_pages href="<c:url value='/pets/index' />">一覧に戻る</a>
         </p>
     </c:param>
 </c:import>

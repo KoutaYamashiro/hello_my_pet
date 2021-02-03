@@ -26,7 +26,7 @@
                                 </pre></td>
                         </tr>
                         <tr>
-                            <th>いいね♡数</th>
+                            <th>いいね数</th>
                             <td><pre>
                                     <c:out value="${pet.likes}" />
                                 </pre></td>
