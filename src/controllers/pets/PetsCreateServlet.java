@@ -101,8 +101,7 @@ public class PetsCreateServlet extends HttpServlet {
                 pet_date = Date.valueOf(request.getParameter("pet_date"));
             }
 
-            p.setPet_date(pet_date);
-            p.setPet_name(request.getParameter("pet_name"));
+
             p.setLikes(0);
             p.setImage_url(name);
             p.setPet_type(request.getParameter("pet_type"));

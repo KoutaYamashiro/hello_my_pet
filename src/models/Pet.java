@@ -57,14 +57,8 @@ public class Pet {
     @Column(name = "pet_breed", length = 255, nullable = false)
     private String pet_breed;
 
-    @Column(name = "pet_name", length = 255, nullable = false)
-    private String pet_name;
-
     @Column(name = "birthday", nullable = false)
     private Date birthday;
-
-    @Column(name = "visit_area", length = 255, nullable = false)
-    private String visit_area;
 
     @Lob
     @Column(name = "appeal_point", nullable = false)
@@ -76,39 +70,21 @@ public class Pet {
     @Column(name = "updated_at", nullable = false)
     private Timestamp updated_at;
 
+    @Column(name = "pet_image" , length= 250, nullable = false)
+    private String pet_image;
+
+    @Column(name = "pet_price" , length= 250, nullable = false)
+    private Integer pet_price;
+
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
-
-    @Column(name = "image_url" , length= 250, nullable = false)
-    private String image_url;
 
     public Integer getId() {
         return id;
     }
 
-    public Integer getLikes() {
-        return likes;
-    }
-
-    public void setLikes(Integer likes) {
-        this.likes = likes;
-    }
-
-    public String getImage_url() {
-        return image_url;
-    }
-
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
-    }
-
-
-    public Integer getDelete_flag() {
-        return delete_flag;
-    }
-
-    public void setDelete_flag(Integer delete_flag) {
-        this.delete_flag = delete_flag;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public User getUser() {
@@ -117,6 +93,14 @@ public class Pet {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Integer getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Integer likes) {
+        this.likes = likes;
     }
 
     public Date getPet_date() {
@@ -143,28 +127,12 @@ public class Pet {
         this.pet_breed = pet_breed;
     }
 
-    public String getPet_name() {
-        return pet_name;
-    }
-
-    public void setPet_name(String pet_name) {
-        this.pet_name = pet_name;
-    }
-
     public Date getBirthday() {
         return birthday;
     }
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }
-
-    public String getVisit_area() {
-        return visit_area;
-    }
-
-    public void setVisit_area(String visit_area) {
-        this.visit_area = visit_area;
     }
 
     public String getAppeal_point() {
@@ -191,8 +159,27 @@ public class Pet {
         this.updated_at = updated_at;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getPet_image() {
+        return pet_image;
     }
 
+    public void setPet_image(String pet_image) {
+        this.pet_image = pet_image;
+    }
+
+    public Integer getPet_price() {
+        return pet_price;
+    }
+
+    public void setPet_price(Integer pet_price) {
+        this.pet_price = pet_price;
+    }
+
+    public Integer getDelete_flag() {
+        return delete_flag;
+    }
+
+    public void setDelete_flag(Integer delete_flag) {
+        this.delete_flag = delete_flag;
+    }
 }
