@@ -41,7 +41,7 @@ public class UserValidator {
             // すでに登録されているメールアドレスとの重複チェック
             if(mail_addressDuplicateCheckFlag) {
                 EntityManager em = DBUtil.createEntityManager();
-                long users_count = (long)em.createNamedQuery("checkRegisteredCode", Long.class)
+                long users_count = (long)em.createNamedQuery("checkRegisteredMail_address", Long.class)
                         .setParameter("mail_address", mail_address)
                         .getSingleResult();
                 em.close();

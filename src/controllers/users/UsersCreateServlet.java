@@ -42,8 +42,8 @@ public class UsersCreateServlet extends HttpServlet {
 
             User u = new User();
 
-            u.setCode(request.getParameter("code"));
             u.setName(request.getParameter("name"));
+            u.setMail_address(request.getParameter("mail_address"));
             u.setPassword(
                 EncryptUtil.getPasswordEncrypt(
                     request.getParameter("password"),
