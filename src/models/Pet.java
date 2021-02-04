@@ -51,9 +51,6 @@ public class Pet {
     @Column(name = "pet_date", nullable = false)
     private Date pet_date;
 
-    @Column(name = "pet_type", length = 255, nullable = false)
-    private String pet_type;
-
     @Column(name = "pet_breed", length = 255, nullable = false)
     private String pet_breed;
 
@@ -109,14 +106,6 @@ public class Pet {
 
     public void setPet_date(Date pet_date) {
         this.pet_date = pet_date;
-    }
-
-    public String getPet_type() {
-        return pet_type;
-    }
-
-    public void setPet_type(String pet_type) {
-        this.pet_type = pet_type;
     }
 
     public String getPet_breed() {

@@ -9,12 +9,12 @@ import models.User;
 import utils.DBUtil;
 
 public class UserValidator {
-        public static List<String> validate(User u, Boolean codeDuplicateCheckFlag, Boolean passwordCheckFlag) {
+        public static List<String> validate(User u, Boolean mail_addressDuplicateCheckFlag, Boolean passwordCheckFlag) {
             List<String> errors = new ArrayList<String>();
 
-            String code_error = validateCode(u.getCode(), codeDuplicateCheckFlag);
-            if(!code_error.equals("")) {
-                errors.add(code_error);
+            String mail_address_error = validateMail_address(u.getMail_address(), mail_addressDuplicateCheckFlag);
+            if(!mail_address_error.equals("")) {
+                errors.add(mail_address_error);
             }
 
             String name_error = validateName(u.getName());
@@ -31,22 +31,22 @@ public class UserValidator {
         }
 
 
-        // ユーザーID
-        private static String validateCode(String code, Boolean codeDuplicateCheckFlag) {
+        // メールアドレス
+        private static String validateMail_address(String mail_address, Boolean mail_addressDuplicateCheckFlag) {
             // 必須入力チェック
-            if (code == null || code.equals("")) {
-                return "ユーザー番号を入力してください。";
+            if (mail_address == null || mail_address.equals("")) {
+                return "メールアドレスを入力してください。";
             }
 
-            // すでに登録されている社員番号との重複チェック
-            if(codeDuplicateCheckFlag) {
+            // すでに登録されているメールアドレスとの重複チェック
+            if(mail_addressDuplicateCheckFlag) {
                 EntityManager em = DBUtil.createEntityManager();
                 long users_count = (long)em.createNamedQuery("checkRegisteredCode", Long.class)
-                        .setParameter("code", code)
+                        .setParameter("mail_address", mail_address)
                         .getSingleResult();
                 em.close();
                 if(users_count > 0) {
-                    return "入力されたユーザー番号の情報はすでに存在しています。";
+                    return "入力されたメールアドレスはすでに存在しています。";
                 }
             }
 

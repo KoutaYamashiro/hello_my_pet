@@ -15,7 +15,7 @@
             <tbody class="row${status.count % 2}">
                     <tr>
                             <th>画像 仮処置</th>
-                            <td class="pet_image"><c:out value="${pet.pet_image}" /></td>
+                            <td class="pet_image"><c:out value="" /></td>
                     </tr>
                     <tr>
                             <th>種類</th>
@@ -33,7 +33,7 @@
                     </tr>
                     <tr>
                             <th>価格</th>
-                            <td class="pet_price"><c:out value="${pet.pet_price}" /></td>
+                            <td class="pet_price"><c:out value="${pet.pet_price}" />円（税込み）</td>
                     </tr>
                     <tr>
                             <th>詳細</th>

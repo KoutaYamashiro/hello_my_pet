@@ -22,12 +22,12 @@ import javax.persistence.Table;
         query = "SELECT COUNT(u) FROM User AS u"
     ),
     @NamedQuery(
-        name = "checkRegisteredCode",
-        query = "SELECT COUNT(u) FROM User AS u WHERE u.code = :code"
+        name = "checkRegisteredMail_address",
+        query = "SELECT COUNT(u) FROM User AS u WHERE u.mail_address = :mail_address"
     ),
     @NamedQuery(
-        name = "checkLoginCodeAndPassword",
-        query = "SELECT u FROM User AS u WHERE u.delete_flag = 0 AND u.code = :code AND u.password = :pass"
+        name = "checkLoginMail_addressAndPassword",
+        query = "SELECT u FROM User AS u WHERE u.delete_flag = 0 AND u.mail_address = :mail_address AND u.password = :pass"
     )
 })
 @Entity
@@ -37,11 +37,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "code", nullable = false, unique = true)
-    private String code;
-
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "mail_address", nullable = false, unique = true)
+    private String mail_address;
 
     @Column(name = "password", length = 64, nullable = false)
     private String password;
@@ -62,16 +62,16 @@ public class User {
         return id;
     }
 
+    public String getMail_address() {
+        return mail_address;
+    }
+
+    public void setMail_address(String mail_address) {
+        this.mail_address = mail_address;
+    }
+
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getName() {

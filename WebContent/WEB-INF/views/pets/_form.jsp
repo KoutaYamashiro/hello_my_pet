@@ -22,12 +22,17 @@
 <br /><br />
 
 <label for="pet_image">ペットの画像</label><br />
-<input class="bottom" type="file" name="file" value="${pet.pet_image}"/><br />
+<input class="bottom" type="file" name="file" value="${' '}"/><br />
+
 <br />
 
 <label for="date">誕生日</label><br />
 <input type="date" name="birthday"
     value="<fmt:formatDate value='${pet.birthday}' pattern='yyyy-MM-dd' />" />
+<br /><br />
+
+<label for="pet_price">ペットの金額</label><br />
+<input type="text" name="pet_price" value="${pet.pet_price}" />
 <br /><br />
 
 <label for="appeal_point">アピールポイント</label><br />

@@ -5,7 +5,7 @@
     <c:param name="content">
         <h2>ペット 新規登録ページ</h2>
 
-        <form method="POST" action="$<c:url value='/reports/create' />">
+        <form method="POST" enctype="multipart/form-data" action="<c:url value='/pets/create' />">
             <c:import url="_form.jsp" />
         </form>
 
