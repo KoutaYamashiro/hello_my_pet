@@ -7,6 +7,7 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
+
         <h2>ユーザー　一覧</h2>
         <table id="user_list">
             <tbody>
@@ -40,6 +41,16 @@
                 </c:forEach>
             </tbody>
         </table>
+
+
+        <!-- 島さんへ　質問　ユーザーに非表示としたいがどうしたらいいか -->
+        <c:choose>
+        <c:when test="${user.admin_flag == 1}">
+        </c:when>
+        <c:otherwise>
+        </c:otherwise>
+        </c:choose>
+
 
         <div id="pagination">
             （全 ${users_count} 件）<br />

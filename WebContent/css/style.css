@@ -58,6 +58,18 @@ a#all_pages {
     color: #616161;
 }
 
+a#all_users {
+    color: #616161;
+}
+
+a#logout {
+    color: #616161;
+}
+
+a#profile_edit {
+    color: #84d6b8;
+}
+
 a#new_user {
     color: #84d6b8;
 }

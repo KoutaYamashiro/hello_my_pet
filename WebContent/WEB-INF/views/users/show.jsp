@@ -5,25 +5,28 @@
     <c:param name="content">
         <c:choose>
             <c:when test="${user != null}">
-                <h2>id : ${user.id} のユーザー情報　詳細ページ</h2>
+                <h2>プロフィール情報　詳細ページ</h2>
 
                 <table>
                     <tbody>
                         <tr>
                             <th>ユーザーID</th>
-                            <td><c:out value="${user.code}" /></td>
+                            <td><c:out value="${user.id}" /></td>
                         </tr>
                         <tr>
                             <th>名前</th>
                             <td><c:out value="${user.name}" /></td>
                         </tr>
                         <tr>
-                            <th>登録種別</th>
+                            <th>メールアドレス</th>
+                            <td><c:out value="${user.mail_address}" /></td>
+                        </tr>
+                        <tr>
+                         <th>登録種別</th>
                             <td>
                                 <c:choose>
-                                    <c:when test="${user.admin_flag == 0}">管理者</c:when>
-                                    <c:when test="${user.admin_flag == 1}">ユーザー</c:when>
-                                    <c:otherwise>ペットオーナー</c:otherwise>
+                                    <c:when test="${user.admin_flag == 1}">管理者</c:when>
+                                    <c:otherwise>ユーザー</c:otherwise>
                                 </c:choose>
                             </td>
                         </tr>
@@ -42,13 +45,14 @@
                     </tbody>
                 </table>
 
-                <p><a href="<c:url value='/users/edit?id=${user.id}' />">ユーザーの情報を変更する</a></p>
+                <p><a id=profile_edit href="<c:url value='/users/edit?id=${user.id}' />">ユーザーの情報を変更する</a></p>
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
 
-        <p><a href="<c:url value='/users/index' />">一覧ページに戻る</a></p>
+        <p><a id=logout href="<c:url value='/logout' />">ログアウト</a></p>
+        <p><a id=all_users href="<c:url value='/users/index' />">ユーザー一覧に戻る</a></p>
     </c:param>
 </c:import>
