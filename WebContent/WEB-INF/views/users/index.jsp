@@ -18,23 +18,22 @@
                 </tr>
                 <c:forEach var="user" items="${users}" varStatus="status">
                     <tr class="row${status.count % 2}">
-                        <td><c:out value="${user.code}" /></td>
+                        <td><c:out value="${user.mail_address}" /></td>
                         <td><c:out value="${user.name}" /></td>
                         <td>
                                 <c:choose>
                                     <c:when test="${user.admin_flag == 0}">管理者</c:when>
-                                    <c:when test="${user.admin_flag == 1}">ユーザー</c:when>
-                                    <c:otherwise>ペットオーナー</c:otherwise>
+                                    <c:otherwise>ユーザー</c:otherwise>
                                 </c:choose>
                         </td>
                         <td>
                             <c:choose>
-                                <c:when test="${user.delete_flag == 1}">
-                                    （退会されています。）
-                                </c:when>
-                                <c:otherwise>
+                                    <c:when test="${user.delete_flag == 1}">
+                                        （退会されています。）
+                                    </c:when>
+                                    <c:otherwise>
                                     <a id=details href="<c:url value='/users/show?id=${user.id}' />">詳細を表示</a>
-                                </c:otherwise>
+                                    </c:otherwise>
                             </c:choose>
                         </td>
                     </tr>
@@ -44,7 +43,7 @@
 
         <div id="pagination">
             （全 ${users_count} 件）<br />
-            <c:forEach var="i" begin="1" end="${((users_count - 1) / 15) + 1}" step="1">
+            <c:forEach var="i" begin="1" end="${((users_count - 1) / 10) + 1}" step="1">
                 <c:choose>
                     <c:when test="${i == page}">
                         <c:out value="${i}" />&nbsp;
@@ -55,7 +54,7 @@
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a id=new_user href="<c:url value='/users/new' />">新規ユーザー登録</a></p>
+        <p><a id=new_user href="<c:url value='/users/new' />">管理者　新規登録</a></p>
 
     </c:param>
 </c:import>
