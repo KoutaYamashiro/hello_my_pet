@@ -22,7 +22,7 @@
                         <td><c:out value="${user.name}" /></td>
                         <td>
                                 <c:choose>
-                                    <c:when test="${user.admin_flag == 0}">管理者</c:when>
+                                    <c:when test="${user.admin_flag == 1}">管理者</c:when>
                                     <c:otherwise>ユーザー</c:otherwise>
                                 </c:choose>
                         </td>
