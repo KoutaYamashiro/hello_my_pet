@@ -2,29 +2,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <c:choose>
-            <c:when test="${pet != null}">
-                <h2>ペット情報　編集ページ</h2>
+                <h2>id : ${pet.id}のペット情報　編集ページ</h2>
                 <form method="POST" action="<c:url value='/pets/update' />">
                     <c:import url="_form.jsp" />
                 </form>
-                <p><a href="#" onclick="confirmDestroy();">このペット情報を削除する</a></p>
+                <p><a href="#" onclick="confirmDestroy();">このペットは家族が決まりました。</a></p>
                 <form method="POST" action="<c:url value='/pets/destroy' />">
                     <input type="hidden" name="_token" value="${_token}" />
                 </form>
                 <script>
                     function confirmDestroy() {
-                        if(confirm("本当に削除してよろしいですか？")) {
+                        if(confirm("決定でよろしいですか？")) {
                             document.forms[1].submit();
                         }
                     }
                 </script>
-            </c:when>
-            <c:otherwise>
-                <h2>お探しのペットデータは見つかりませんでした。</h2>
-            </c:otherwise>
-        </c:choose>
 
-        <p><a href="<c:url value='/pets/index' />">ペット　一覧に戻る</a></p>
+        <p><a href="<c:url value='/pets/show' />">ペット詳細に戻る</a></p>
     </c:param>
 </c:import>
