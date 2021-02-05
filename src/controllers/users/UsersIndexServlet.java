@@ -40,8 +40,8 @@ public class UsersIndexServlet extends HttpServlet {
             page = Integer.parseInt(request.getParameter("page"));
         } catch (NumberFormatException u) { }
          List<User> users = em.createNamedQuery("getAllUsers", User.class)
-                 .setFirstResult(15 * (page - 1))
-                 .setMaxResults(15)
+                 .setFirstResult(10 * (page - 1))
+                 .setMaxResults(10)
                  .getResultList();
 
          long users_count = (long)em.createNamedQuery("getUsersCount", Long.class)

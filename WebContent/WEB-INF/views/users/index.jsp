@@ -30,7 +30,7 @@
                         <td>
                             <c:choose>
                                     <c:when test="${user.delete_flag == 1}">
-                                        （退会されています。）
+                                    <a id=details href="<c:url value='/users/show?id=${user.id}' />">（退会済）詳細</a>
                                     </c:when>
                                     <c:otherwise>
                                     <a id=details href="<c:url value='/users/show?id=${user.id}' />">詳細を表示</a>
@@ -41,15 +41,6 @@
                 </c:forEach>
             </tbody>
         </table>
-
-
-        <!-- 島さんへ　質問　ユーザーに非表示としたいがどうしたらいいか -->
-        <c:choose>
-        <c:when test="${user.admin_flag == 1}">
-        </c:when>
-        <c:otherwise>
-        </c:otherwise>
-        </c:choose>
 
 
         <div id="pagination">

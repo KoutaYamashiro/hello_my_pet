@@ -5,7 +5,7 @@
     <c:param name="content">
         <c:choose>
             <c:when test="${user != null}">
-                <h2>id : ${user.id} のユーザー情報 編集ページ</h2>
+                <h2>id : ${user.id} のプロフィール情報 編集ページ</h2>
                 <p>
                     ※ユーザーから依頼があった場合のみ変更してください。<br />&nbsp;&nbsp;
                     パスワードは変更する場合のみ入力してください。
