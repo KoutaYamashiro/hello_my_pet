@@ -42,7 +42,7 @@ public class UsersDestroyServlet extends HttpServlet {
             em.getTransaction().begin();
             em.getTransaction().commit();
             em.close();
-            request.getSession().setAttribute("flush", "削除が完了しました。");
+            request.getSession().setAttribute("flush", "退会しました。");
 
             response.sendRedirect(request.getContextPath() + "/users/index");
         }
