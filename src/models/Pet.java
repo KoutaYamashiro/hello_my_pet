@@ -45,12 +45,6 @@ public class Pet {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "likes", nullable = false)
-    private Integer likes;
-
-    @Column(name = "pet_date", nullable = false)
-    private Date pet_date;
-
     @Column(name = "pet_breed", length = 255, nullable = false)
     private String pet_breed;
 
@@ -71,7 +65,7 @@ public class Pet {
     private String pet_image;
 
     @Column(name = "pet_price" , length= 250, nullable = false)
-    private Integer pet_price;
+    private String pet_price;
 
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
@@ -90,22 +84,6 @@ public class Pet {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Integer getLikes() {
-        return likes;
-    }
-
-    public void setLikes(Integer likes) {
-        this.likes = likes;
-    }
-
-    public Date getPet_date() {
-        return pet_date;
-    }
-
-    public void setPet_date(Date pet_date) {
-        this.pet_date = pet_date;
     }
 
     public String getPet_breed() {
@@ -156,11 +134,11 @@ public class Pet {
         this.pet_image = pet_image;
     }
 
-    public Integer getPet_price() {
+    public String getPet_price() {
         return pet_price;
     }
 
-    public void setPet_price(Integer pet_price) {
+    public void setPet_price(String pet_price) {
         this.pet_price = pet_price;
     }
 
@@ -171,4 +149,6 @@ public class Pet {
     public void setDelete_flag(Integer delete_flag) {
         this.delete_flag = delete_flag;
     }
-}
+
+    }
+

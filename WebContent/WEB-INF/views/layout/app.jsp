@@ -17,17 +17,21 @@
                     <a class="hello" href="<c:url value='/' />">ハロー！My ペット</a>
                 </h1>&nbsp;&nbsp;&nbsp;
                 <c:if test="${sessionScope.login_user != null}">
-                    <c:if test="${sessionScope.login_user.admin_flag == 0}">
+                    <c:if test="${sessionScope.login_user.admin_flag == 1}">
                         <a href="<c:url value='/users/index' />">ユーザー一覧</a>&nbsp;&nbsp;
-                    </c:if>
                         <a href="<c:url value='/pets/index' />">ペット一覧</a>&nbsp;&nbsp;
                         <a href="<c:url value='仮' />">お問い合わせ一覧</a>&nbsp;&nbsp;
+                    </c:if>
+                    <c:if test="${sessionScope.login_user.admin_flag == 0}">
+                        <a href="<c:url value='仮' />">いいねしたペット一覧</a>&nbsp;&nbsp;
+                        <a href="<c:url value='仮' />">お問い合わせ中</a>&nbsp;&nbsp;
+                    </c:if>
                 </c:if>
             </div>
             <c:if test="${sessionScope.login_user != null}">
                 <div id="user_name">
-                    <c:out value="${sessionScope.login_user.name}" />様&nbsp;&nbsp;
-                    <a href="<c:url value='/logout' />">ログアウト</a>
+                        <c:out value="${sessionScope.login_user.name}" />様プロフィール変更&nbsp;&nbsp;
+                        <a href="<c:url value='/logout' />">ログアウト</a>
                 </div>
             </c:if>
         </div>

@@ -8,6 +8,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,7 +18,7 @@ import models.User;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-//@WebFilter("/*")
+@WebFilter("/*")
 public class LoginFilter implements Filter {
 
     /**
@@ -42,7 +43,7 @@ public class LoginFilter implements Filter {
         if(!servlet_path.matches("/css.*")) {       // CSSフォルダ内は認証処理から除外する
             HttpSession session = ((HttpServletRequest)request).getSession();
 
-            // セッションスコープに保存された従業員（ログインユーザ）情報を取得
+            // セッションスコープに保存されたユーザー（ログインユーザ）情報を取得
             User u = (User)session.getAttribute("login_user");
 
             if(!servlet_path.equals("/login")) {        // ログイン画面以外について
