@@ -4,7 +4,7 @@
     <c:param name="content">
         <c:if test="${hasError}">
             <div id="flush_error">
-                 ユーザー　番号かパスワードが間違っています。
+                    メールアドレスかパスワードが間違っています。
             </div>
         </c:if>
         <c:if test="${flush != null}">
@@ -14,8 +14,8 @@
         </c:if>
         <h2>ログイン</h2>
         <form method="POST" action="<c:url value='/login' />">
-            <label for="code">ユーザー　番号</label><br />
-            <input type="text" name="code" value="${code}" />
+            <label for="mail_address">メールアドレス</label><br />
+            <input type="text" name="mail_address" value="${mail_address}" />
             <br /><br />
 
             <label for="password">パスワード</label><br />
