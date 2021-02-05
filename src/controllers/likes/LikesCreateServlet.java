@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Pet;
 import utils.DBUtil;
 
 /**
@@ -35,14 +34,10 @@ public class LikesCreateServlet extends HttpServlet {
 
         System.out.println("セッション中のpet_id : " + request.getSession().getAttribute("pet_id"));
 
-        Pet p = em.find(Pet.class, (Integer) (request.getSession().getAttribute("pet_id")));
-
-        p.setLikes(Integer.parseInt(request.getParameter("likes")) + p.getLikes());
-
         em.getTransaction().begin();
         em.getTransaction().commit();
         em.close();
-        request.getSession().setAttribute("flush", "いいね♡　しました。");
+        request.getSession().setAttribute("flush", "いいねしました。");
 
         request.getSession().removeAttribute("pet_id");
 

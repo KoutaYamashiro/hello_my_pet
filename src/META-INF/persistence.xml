@@ -5,6 +5,7 @@
         <class>models.User</class>
         <class>models.Pet</class>
         <class>models.Favorite</class>
+        <class>models.Contact</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.show_sql" value="true"/>

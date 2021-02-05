@@ -37,7 +37,7 @@
                     </tr>
                     <tr>
                             <th>詳細</th>
-                            <td class="pet_price">
+                            <td class="delete_flag">
                                     <c:choose>
                                             <c:when test="${pet.delete_flag == 1}">
                                                     （家族が決まりました）

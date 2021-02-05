@@ -11,7 +11,6 @@ import javax.persistence.Table;
 
 @Table(name = "favorits")
 @Entity
-
 public class Favorite {
     @Id
     @Column(name = "id")

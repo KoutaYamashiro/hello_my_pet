@@ -42,11 +42,10 @@ public class PetsUpdateServlet extends HttpServlet {
 
             Pet p = em.find(Pet.class, (Integer)(request.getSession().getAttribute("pet_id")));
 
-            p.setPet_date(Date.valueOf(request.getParameter("pet_date")));
             p.setPet_breed(request.getParameter("pet_breed"));
             p.setPet_image(request.getParameter("pet_image"));
             p.setBirthday(Date.valueOf(request.getParameter("birthday")));
-            p.setPet_price(Integer.getInteger(request.getParameter("pet_price")));
+            p.setPet_price(request.getParameter("pet_price"));
             p.setAppeal_point(request.getParameter("appeal_point"));
             p.setUpdated_at(new Timestamp(System.currentTimeMillis()));
 
