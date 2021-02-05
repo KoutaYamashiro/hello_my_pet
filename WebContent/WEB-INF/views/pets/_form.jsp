@@ -10,8 +10,8 @@
                 <br />
             </c:forEach>
     </div>
-
 </c:if>
+
 <label for="pet_breed">ペットの種類</label><br />
 <input type="text" name="pet_breed" value="${pet.pet_breed}" />
 <br /><br />

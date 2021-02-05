@@ -8,99 +8,75 @@
             <c:when test="${pet != null}">
                 <h2>id : ${pet.id}のペット 詳細ページ</h2>
 
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>氏名</th>
-                            <td><c:out value="${pet.user.name}" /></td>
-                        </tr>
-                        <tr>
-                            <th>掲載日</th>
-                            <td><fmt:formatDate value="${pet.pet_date}"
-                                    pattern="yyyy-MM-dd" /></td>
-                        </tr>
-                        <tr>
-                            <th>ペットの名前</th>
-                            <td><pre>
-                                    <c:out value="${pet.pet_name}" />
-                                </pre></td>
-                        </tr>
-                        <tr>
-                            <th>いいね数</th>
-                            <td><pre>
-                                    <c:out value="${pet.likes}" />
-                                </pre></td>
-                        </tr>
-                        <tr>
-                            <th>ペットの画像</th>
-                            <td><pre>
-                                    <c:out value="${pet.image_url}" />
-                                </pre></td>
-                        </tr>
-                        <tr>
-                            <th>ペットの種類</th>
-                            <td><pre>
-                                    <c:out value="${pet.pet_type}" />
-                                </pre></td>
-                        </tr>
-                        <tr>
-                            <th>ペットの品種</th>
-                            <td><pre>
-                                    <c:out value="${pet.pet_breed}" />
-                                </pre></td>
-                        </tr>
-                        <tr>
+                 <table id="pet_list">
+            <tbody class="row${status.count % 2}">
+                    <tr>
+                            <th>画像 仮処置</th>
+                            <td class="pet_image"><c:out value="" /></td>
+                    </tr>
+                    <tr>
+                            <th>種類</th>
+                            <td class="pet_breed">${pet.pet_breed}</td>
+                    </tr>
+                    <tr>
                             <th>誕生日</th>
-                            <td><pre>
-                                    <c:out value="${pet.birthday}" />
-                                </pre></td>
-                        </tr>
-                        <tr>
-                            <th>見学地域</th>
-                            <td><pre>
-                                    <c:out value="${pet.visit_area}" />
-                                </pre></td>
-                        </tr>
-                        <tr>
-                            <th>メモ</th>
-                            <td><pre>
-                                    <c:out value="${pet.appeal_point}" />
-                                </pre></td>
-                        </tr>
-                        <tr>
-                            <th>登録日時</th>
-                            <td><fmt:formatDate value="${pet.created_at}"
-                                    pattern="yyyy-MM-dd HH:mm:ss" /></td>
-                        </tr>
-                        <tr>
-                            <th>更新日時</th>
-                            <td><fmt:formatDate value="${pet.updated_at}"
-                                    pattern="yyyy-MM-dd HH:mm:ss" /></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br>
+                            <td class="birthday">
+                                 <fmt:formatDate value='${pet.birthday}' pattern='yyyy-MM-dd' />
+                            </td>
+                    </tr>
+                    <tr>
+                            <th>いいね数</th>
+                            <td class="favorites"><c:out value="${pet.favorits}" /></td>
+                    </tr>
+                    <tr>
+                            <th>価格</th>
+                            <td class="pet_price"><c:out value="${pet.pet_price}" />円（税込み）</td>
+                    </tr>
+                    <tr>
+                            <th>アピール</th>
+                            <td>
+                                <pre><c:out value="${report.appeal_point}" /></pre>
+                            </td>
+                    </tr>
+            </tbody>
+        </table>
 
-                <c:if test="${sessionScope.login_user.id == pet.user.id}">
-                    <p>
-                        <a href="<c:url value="/pets/edit?id=${pet.id}" />">このペットの情報を編集する</a>
-                    </p>
-                </c:if>
-            </c:when>
-            <c:otherwise>
-                <h2>お探しのペットデータは見つかりませんでした。</h2>
-            </c:otherwise>
+                </c:when>
+                    <c:otherwise>
+                        <h2>お探しのペットデータは見つかりませんでした。</h2>
+                    </c:otherwise>
         </c:choose>
 
-        <!-- いいね♡　ボタンを追加 -->
-        <c:if test="${sessionScope.login_user.id != pet.user.id}">
-            <form method="POST" action="<c:url value='/likes/create' />">
-                <button type="submit" name="likes" value="${1}">いいね♡</button>
-            </form>
+        <!-- 管理者表示 -->
+        <c:if test="${sessionScope.login_user.admin_flag == 1}">
+                <p>
+                     <a href="<c:url value="/pets/edit?id=${pet.id}" />">ペット情報を更新する</a>
+                </p>
+                <p>
+                     <a href="<c:url value="/pets/index" />">ペット 一覧ページに戻る</a>
+               </p>
         </c:if>
 
-        <p>
-            <a href="<c:url value="/pets/index" />">ペット 一覧ページに戻る</a>
-        </p>
+        <!-- ユーザー表示 -->
+        <c:if test="${sessionScope.login_user.admin_flag == 0}">
+                <!-- いいね　ボタンを追加 -->
+                <c:if test="${sessionScope.login_user.id != pet.user.id}">
+                    <form method="POST" action="<c:url value='/favorits/create' />">
+                        <button type="submit" name="favorits" value="${1}">いいね</button>
+                    </form>
+                </c:if>
+                <!-- お問い合わせ　ボタンを追加 -->
+                <c:if test="${sessionScope.login_user.id != pet.user.id}">
+                    <form method="POST" action="<c:url value='/contents/create' />">
+                        <button type="submit" name="favorits">✉この仔について問い合わせる</button>
+                    </form>
+                    <p>※気に入った仔がいましたら、まずはフォームからご連絡ください。</p>
+                    <p> 後日ご来店いただき、店頭でのご購入・お引き渡しとなります。</p>
+                    <p>※メールは24時間受付中です。お気軽にお問い合わせください。</p>
+                </c:if>
+                <p><a href="<c:url value="　" />">お気に入りペット一覧ページに戻る</a></p>
+                <p><a href="<c:url value="/pets/index" />">トップページに戻る</a></p>
+        </c:if>
+
     </c:param>
 </c:import>
