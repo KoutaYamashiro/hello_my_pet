@@ -9,6 +9,6 @@
             <c:import url="_form.jsp" />
         </form>
 
-        <p><a id=all_pages href="<c:url value='/pets/index' />">一覧に戻る</a></p>
+        <p><a id=all_pages href="<c:url value='/pets/index' />">ペット一覧に戻る</a></p>
     </c:param>
 </c:import>

@@ -23,7 +23,7 @@ import utils.DBUtil;
  * Servlet implementation class PetsCreateServlet
  */
 @WebServlet("/pets/create")
-@MultipartConfig
+@MultipartConfig(location="/tmp", maxFileSize=1048576)
 public class PetsCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -48,15 +48,8 @@ public class PetsCreateServlet extends HttpServlet {
 
             p.setUser((User) request.getSession().getAttribute("login_user"));
 
-            Date pet_date = new Date(System.currentTimeMillis());
             Date birthday = new Date(System.currentTimeMillis());
-            String rd_str = request.getParameter("pet_date");
-            if (rd_str != null && !rd_str.equals("")) {
-                pet_date = Date.valueOf(request.getParameter("pet_date"));
-            }
-            p.setPet_date(pet_date);
 
-            p.setLikes(0);
             p.setPet_breed(request.getParameter("pet_breed"));
             p.setPet_image(request.getParameter("pet_imege"));
             p.setBirthday(birthday);

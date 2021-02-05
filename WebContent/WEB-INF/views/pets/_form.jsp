@@ -12,19 +12,13 @@
     </div>
 
 </c:if>
-<label for="pet_date">掲載日</label><br />
-<input type="date" name="pet_date"
-    value="<fmt:formatDate value='${pet.pet_date}' pattern='yyyy-MM-dd' />" />
-<br /><br />
-
 <label for="pet_breed">ペットの種類</label><br />
 <input type="text" name="pet_breed" value="${pet.pet_breed}" />
 <br /><br />
 
 <label for="pet_image">ペットの画像</label><br />
-<input class="bottom" type="file" name="file" value="${' '}"/><br />
-
-<br />
+<input type="text" name="pet_image" value="${pet.pet_image}" />
+<br /><br />
 
 <label for="date">誕生日</label><br />
 <input type="date" name="birthday"
