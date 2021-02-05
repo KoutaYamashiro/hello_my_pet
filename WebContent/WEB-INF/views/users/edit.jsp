@@ -39,7 +39,7 @@
         </c:choose>
 
         <p>
-            <a id=all_pages href="<c:url value='/users/index' />">一覧ページに戻る</a>
+            <a id=all_pages href="<c:url value='/users/show' />">トップページに戻る</a>
         </p>
     </c:param>
 </c:import>
