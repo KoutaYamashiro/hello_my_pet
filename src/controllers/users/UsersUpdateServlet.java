@@ -42,13 +42,13 @@ public class UsersUpdateServlet extends HttpServlet {
 
             User u = em.find(User.class, (Integer)(request.getSession().getAttribute("user_id")));
 
-            // 現在の値と異なる社員番号が入力されていたら
+            // 現在の値と異なるメールアドレスが入力されていたら
             // 重複チェックを行う指定をする
-            Boolean codeDuplicateCheckFlag = true;
-            if(u.getCode().equals(request.getParameter("code"))) {
-                codeDuplicateCheckFlag = false;
+            Boolean mail_addressDuplicateCheckFlag = true;
+            if(u.getMail_address().equals(request.getParameter("mail_address"))) {
+                mail_addressDuplicateCheckFlag = false;
             } else {
-                u.setCode(request.getParameter("code"));
+                u.setMail_address(request.getParameter("mail_address"));
             }
 
             // パスワード欄に入力があったら
@@ -71,7 +71,7 @@ public class UsersUpdateServlet extends HttpServlet {
             u.setUpdated_at(new Timestamp(System.currentTimeMillis()));
             u.setDelete_flag(0);
 
-            List<String> errors = UserValidator.validate(u, codeDuplicateCheckFlag, passwordCheckFlag);
+            List<String> errors = UserValidator.validate(u, mail_addressDuplicateCheckFlag, passwordCheckFlag);
             if(errors.size() > 0) {
                 em.close();
 
