@@ -27,7 +27,7 @@
 
                 <script>
                     function confirmDestroy() {
-                        if (confirm("本当に削除してよろしいですか？")) {
+                        if (confirm("本当に退会してよろしいですか？")) {
                             document.forms[1].submit();
                         }
                     }
@@ -39,7 +39,7 @@
         </c:choose>
 
         <p>
-            <a id=all_pages href="<c:url value='/users/show' />">トップページに戻る</a>
+            <a id=all_pages href="<c:url value='/' />">トップページに戻る</a>
         </p>
     </c:param>
 </c:import>

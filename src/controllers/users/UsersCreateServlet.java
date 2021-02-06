@@ -43,7 +43,11 @@ public class UsersCreateServlet extends HttpServlet {
             User u = new User();
 
             u.setName(request.getParameter("name"));
-            u.setMail_address(request.getParameter("mail_address"));
+            u.setMail_address(EncryptUtil.getMail_addressEncrypt(
+                    request.getParameter("mail_address"),
+                    (String)this.getServletContext().getAttribute("pepper")
+                )
+            );
             u.setPassword(
                 EncryptUtil.getPasswordEncrypt(
                     request.getParameter("password"),
