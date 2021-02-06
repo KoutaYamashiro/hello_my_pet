@@ -2,7 +2,6 @@ package models.validators;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import javax.persistence.EntityManager;
 
@@ -35,8 +34,8 @@ public class UserValidator {
         // メールアドレス
         private static String validateMail_address(String mail_address, Boolean mail_addressDuplicateCheckFlag) {
             //  メールアドレスパターン
-            String pattern = "^([a-zA-Z0-9])+([a-zA-Z0-9\\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\\._-]+)+$";
-            Pattern p = Pattern.compile(pattern);
+//            String pattern = "^([a-zA-Z0-9])+([a-zA-Z0-9\\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\\._-]+)+$";
+//            Pattern p = Pattern.compile(pattern);
 
             // 必須入力チェック
             if (mail_address == null || mail_address.equals("")) {
@@ -44,9 +43,9 @@ public class UserValidator {
             }
 
             // メールアドレスチェック
-            if (p.matcher(mail_address).find()) {
-                return "メールアドレスではありません。";
-            }
+//            if (p.matcher(mail_address).find()) {
+//                return "メールアドレスではありません。";
+//            }
 
             // すでに登録されているメールアドレスとの重複チェック
             if(mail_addressDuplicateCheckFlag) {
