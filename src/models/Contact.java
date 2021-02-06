@@ -14,7 +14,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Table(name= "contents")
+@Table(name= "contacts")
 @NamedQueries({
     @NamedQuery(
             name = "getAllContacts",
@@ -37,6 +37,7 @@ public class Contact {
         @JoinColumn(name= "user_id", nullable = false)
         private User user;
 
+        @ManyToOne
         @JoinColumn(name= "pet_id", nullable = false)
         private Pet pet;
 

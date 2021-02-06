@@ -8,6 +8,9 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
+        <div id="image">
+            <img class="cats" src="<c:url value='/images/mypets/tokage01.jpg' />">
+        </div>
         <h2>Pets List</h2>
             <table id="pet_list">
             <tbody class="row${status.count % 2}">

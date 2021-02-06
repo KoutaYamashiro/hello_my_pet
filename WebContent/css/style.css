@@ -226,3 +226,24 @@ table#pet_list .bottom {
 img {
     max-width: 200px;
 }
+
+table#contact_list th {
+    font-weight: bold;
+    padding: 10px 2%;
+}
+
+table#contact_list .contact_name {
+    width: 20%;
+    padding: 10px 2%;
+}
+table#contact_list .contact_id {
+    width: 20%;
+}
+
+table#contact_list .contact_created {
+    width: 37%;
+}
+
+table#contact_list .contact_action {
+    width: 13%;
+}
