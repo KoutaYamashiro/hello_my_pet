@@ -20,19 +20,4 @@ public class EncryptUtil {
 
         return ret;
     }
-
-    public static String getMail_addressEncrypt(String plain_p, String pepper) {
-        String ret = "";
-
-        if(plain_p != null && !plain_p.equals("")) {
-            byte[] bytes;
-            String mail_address = plain_p + pepper;
-            try {
-                bytes = MessageDigest.getInstance("SHA-256").digest(mail_address.getBytes());
-                ret = DatatypeConverter.printHexBinary(bytes);
-            } catch(NoSuchAlgorithmException ex) {}
-        }
-
-        return ret;
-    }
 }

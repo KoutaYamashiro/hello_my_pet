@@ -7,8 +7,7 @@
             <c:when test="${user != null}">
                 <h2>id : ${user.id} のプロフィール情報 編集ページ</h2>
                 <p>
-                    ※ユーザーから依頼があった場合のみ変更してください。<br />&nbsp;&nbsp;
-                    パスワードは変更する場合のみ入力してください。
+                    ※パスワードは変更する場合のみ入力してください。<br />&nbsp;&nbsp;
                 </p>
                 <form method="POST" action="<c:url value='/users/update' />">
                     <c:import url="_form.jsp" />
@@ -19,7 +18,7 @@
                 </p>
 
                 <p>
-                    <a id=destroy href="#" onclick="confirmDestroy();">このユーザーを退会させる</a>
+                    <a id=destroy href="#" onclick="confirmDestroy();">退会する</a>
                 </p>
                 <form method="POST" action="<c:url value='/users/destroy' />">
                     <input type="hidden" name="_token" value="${_token}" />

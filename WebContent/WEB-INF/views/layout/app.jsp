@@ -13,9 +13,7 @@
     <div id="wrapper">
         <div id="header">
             <div id="header_menu">
-                <h1>
-                    <a class="hello" href="<c:url value='/' />">ハロー！My ペット</a>
-                </h1>&nbsp;&nbsp;&nbsp;
+                <h1><a class="hello" href="<c:url value='/' />">ハロー！My ペット</a></h1>&nbsp;&nbsp;&nbsp;
                 <c:if test="${sessionScope.login_user != null}">
                     <c:if test="${sessionScope.login_user.admin_flag == 1}">
                         <a href="<c:url value='/users/index' />">ユーザー一覧</a>&nbsp;&nbsp;
@@ -26,14 +24,12 @@
                         <a href="<c:url value='仮' />">いいねしたペット一覧</a>&nbsp;&nbsp;
                         <a href="<c:url value='仮' />">お問い合わせ中</a>&nbsp;&nbsp;
                     </c:if>
-                </c:if>
-            </div>
-            <c:if test="${sessionScope.login_user != null}">
-                <div id="user_name">
+                     <div id="user_name">
                         <c:out value="${sessionScope.login_user.name}" />様プロフィール変更&nbsp;&nbsp;
                         <a href="<c:url value='/logout' />">ログアウト</a>
-                </div>
-            </c:if>
+                    </div>
+                </c:if>
+            </div>
         </div>
         <div id="content">${param.content}</div>
         <div id="footer">by Kota Yamashiro.</div>
