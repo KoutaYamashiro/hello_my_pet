@@ -25,7 +25,8 @@
                         <a href="<c:url value='仮' />">お問い合わせ中</a>&nbsp;&nbsp;
                     </c:if>
                      <div id="user_name">
-                        <c:out value="${sessionScope.login_user.name}" />様プロフィール変更&nbsp;&nbsp;
+                        <c:out value="${sessionScope.login_user.name}" />様
+                        <a href="<c:url value='/users/show?this.id=${user.id}' />">プロフィール詳細</a>&nbsp;&nbsp;
                         <a href="<c:url value='/logout' />">ログアウト</a>
                     </div>
                 </c:if>
