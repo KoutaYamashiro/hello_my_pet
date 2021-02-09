@@ -39,5 +39,4 @@ public class PetsNewServlet extends HttpServlet {
         rd.forward(request, response);
     }
 
-
 }

@@ -24,14 +24,6 @@ import javax.persistence.Table;
     @NamedQuery(
         name = "getPetsCount",
         query = "SELECT COUNT(p) FROM Pet AS p"
-    ),
-    @NamedQuery(
-        name = "getMyAllPets",
-        query = "SELECT p FROM Pet AS p WHERE p.user = :user ORDER BY p.id DESC"
-    ),
-    @NamedQuery(
-            name = "getMyPetsCount",
-            query = "SELECT COUNT(p) FROM Pet AS p WHERE p.user = :user"
     )
 })
 @Entity

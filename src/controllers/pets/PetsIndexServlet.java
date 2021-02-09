@@ -26,7 +26,6 @@ public class PetsIndexServlet extends HttpServlet {
      */
     public PetsIndexServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**

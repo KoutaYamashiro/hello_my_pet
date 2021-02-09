@@ -11,8 +11,8 @@
                  <table id="pet_list">
             <tbody class="row${status.count % 2}">
                     <tr>
-                            <th>画像 仮処置</th>
-                            <td class="pet_image"><c:out value="" /></td>
+                            <th>画像</th>
+                            <td class="pet_image">仮<img src="${pet.pet_image}"></td>
                     </tr>
                     <tr>
                             <th>種類</th>
@@ -26,16 +26,24 @@
                     </tr>
                     <tr>
                             <th>いいね数</th>
-                            <td class="favorites"><c:out value="${pet.favorits}" /></td>
+                            <td class="favorites"><c:out value="仮" /></td>
+                    </tr>
+                    <tr>
+                            <th>登録日時</th>
+                            <td class="created_at"><c:out value="${pet.created_at}" /></td>
+                    </tr>
+                    <tr>
+                            <th>更新日時</th>
+                            <td class="updated_at"><c:out value="${pet.updated_at}" /></td>
                     </tr>
                     <tr>
                             <th>価格</th>
                             <td class="pet_price"><c:out value="${pet.pet_price}" />円（税込み）</td>
                     </tr>
                     <tr>
-                            <th>アピール</th>
+                            <th>アピールポイント</th>
                             <td>
-                                <pre><c:out value="${report.appeal_point}" /></pre>
+                                <pre><c:out value="${pet.appeal_point}" /></pre>
                             </td>
                     </tr>
             </tbody>
@@ -50,10 +58,10 @@
         <!-- 管理者表示 -->
         <c:if test="${sessionScope.login_user.admin_flag == 1}">
                 <p>
-                     <a href="<c:url value="/pets/edit?id=${pet.id}" />">ペット情報を更新する</a>
+                     <a id=update href="<c:url value="/pets/edit?id=${pet.id}" />">ペット情報を更新する</a>
                 </p>
                 <p>
-                     <a href="<c:url value="/pets/index" />">ペット 一覧ページに戻る</a>
+                     <a id=all_pets href="<c:url value="/pets/index" />">ペット 一覧ページに戻る</a>
                </p>
         </c:if>
 

@@ -17,7 +17,7 @@
 <br /><br />
 
 <label for="pet_image">ペットの画像</label><br />
-<input type="text" name="pet_image" value="${pet.pet_image}" />
+<input type="file" name="file" value="${pet.pet_image}" />
 <br /><br />
 
 <label for="date">誕生日</label><br />
