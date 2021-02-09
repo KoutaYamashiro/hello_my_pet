@@ -16,7 +16,7 @@
             <c:forEach var="pet" items="${pets}" varStatus="status">
                 <tr>
                     <th>画像</th>
-                    <td class="pet_image">仮<img src="${pet.pet_image}">
+                    <td class="pet_image">仮<img src="uploaded/${pet.pet_image}">
                 </tr>
                 <tr>
                     <th>種類</th>

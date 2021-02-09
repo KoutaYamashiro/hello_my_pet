@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Pet;
-import models.User;
 import utils.DBUtil;
 
 /**
@@ -36,22 +35,18 @@ public class TopPageIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        User login_user = (User)request.getSession().getAttribute("login_user");
-
         int page;
         try{
             page = Integer.parseInt(request.getParameter("page"));
         } catch(Exception e) {
             page = 1;
         }
-        List<Pet> pets = em.createNamedQuery("getMyAllPets", Pet.class)
-                                  .setParameter("user", login_user)
-                                  .setFirstResult(15 * (page - 1))
-                                  .setMaxResults(15)
+        List<Pet> pets = em.createNamedQuery("getAllPets", Pet.class)
+                                  .setFirstResult(10 * (page - 1))
+                                  .setMaxResults(10)
                                   .getResultList();
 
-        long pets_count = (long)em.createNamedQuery("getMyPetsCount", Long.class)
-                                     .setParameter("user", login_user)
+        long pets_count = (long)em.createNamedQuery("getPetsCount", Long.class)
                                      .getSingleResult();
 
         em.close();
