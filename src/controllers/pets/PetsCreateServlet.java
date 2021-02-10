@@ -52,7 +52,7 @@ public class PetsCreateServlet extends HttpServlet {
         Part part = request.getPart("file");
         //part(主にjsp)から送られてきたファイル名を取得
         String name = this.getFileName(part);
-        String fileName = getServletContext().getRealPath("/WEB-INF/uploaded") + "/" + name;
+        String fileName = getServletContext().getRealPath("/uploaded") + "/" + name;
         System.out.println("File Path : " + fileName);
         part.write(fileName);
 
@@ -82,7 +82,7 @@ public class PetsCreateServlet extends HttpServlet {
                 // アップロード先バケット名
                 bucketName,
                 // アップロード後のキー名
-                "upload/" + fileName,
+                "uploaded/" + name,
                 // ファイルの実体
                 file);
 

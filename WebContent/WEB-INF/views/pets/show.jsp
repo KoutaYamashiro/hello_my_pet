@@ -12,7 +12,7 @@
             <tbody class="row${status.count % 2}">
                     <tr>
                             <th>画像</th>
-                            <td class="pet_image">仮<img src="uploaded/${pet.pet_image}"></td>
+                            <td class="pet_image"><img src="http://localhost:8080/hello_my_pets/uploaded/${pet.pet_image}"></td>
                     </tr>
                     <tr>
                             <th>種類</th>
