@@ -16,7 +16,7 @@
                 <c:forEach var="pet" items="${pets}" varStatus="status">
                     <tr>
                         <th>画像</th>
-                        <td class="pet_image"><img src="https://yamashiro-test-20200114.s3-ap-northeast-1.amazonaws.com/uploaded/${pet.pet_image}">
+                        <td class="pet_image"><img src="https://yamashiro-test-20200114.s3-ap-northeast-1.amazonaws.com/uploaded/${pet.pet_image}"></td>
                     </tr>
                     <tr>
                         <th>種類</th>

@@ -13,10 +13,11 @@
         </div>
         <h2>Pets List</h2>
             <table id="pet_list">
+            <c:forEach var="pet" items="${pets}" varStatus="status">
             <tbody class="row${status.count % 2}">
                     <tr>
                             <th>画像 仮処置</th>
-                            <td class="pet_image"><c:out value="" /></td>
+                            <td class="pet_image"><img src="https://yamashiro-test-20200114.s3-ap-northeast-1.amazonaws.com/uploaded/${pet.pet_image}"></td>
                     </tr>
                     <tr>
                             <th>種類</th>
@@ -30,7 +31,7 @@
                     </tr>
                     <tr>
                             <th>いいね数</th>
-                            <td class="favorite"><c:out value="${pet.likes}" /></td>
+                            <td class="favorite"><c:out value="仮" /></td>
                     </tr>
                     <tr>
                             <th>価格</th>
@@ -38,18 +39,17 @@
                     </tr>
                     <tr>
                             <th>詳細</th>
-                            <td class="pet_price">
-                                    <c:choose>
-                                            <c:when test="${pet.delete_flag == 1}">
-                                                    （家族が決まりました）
-                                            </c:when>
-                                            <c:otherwise>
-                                                <a href="<c:url value='/pets/show?id=${pet.id}' />">詳細を表示</a>
-                                            </c:otherwise>
-                                    </c:choose>
-                            </td>
+                            <td class="delete_flag"><c:choose>
+                                <c:when test="${pet.delete_flag == 1}">
+                                    <a id=details href="<c:url value='/pets/show?id=${pet.id}' />">（家族が決まりました）詳細</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a id=details href="<c:url value='/pets/show?id=${pet.id}' />">詳細を表示</a>
+                                </c:otherwise>
+                            </c:choose></td>
                     </tr>
             </tbody>
+            </c:forEach>
         </table>
 
         <div id="pagination">

@@ -12,7 +12,7 @@
             <tbody class="row${status.count % 2}">
                     <tr>
                             <th>画像</th>
-                            <td class="pet_image"><img src="http://localhost:8080/hello_my_pets/uploaded/${pet.pet_image}"></td>
+                            <td class="pet_image"><img src="https://yamashiro-test-20200114.s3-ap-northeast-1.amazonaws.com/uploaded/${pet.pet_image}"></td>
                     </tr>
                     <tr>
                             <th>種類</th>
@@ -47,7 +47,7 @@
                             </td>
                     </tr>
             </tbody>
-        </table>
+        </table><br>
 
                 </c:when>
                     <c:otherwise>
@@ -72,7 +72,7 @@
                     <form method="POST" action="<c:url value='/favorits/create' />">
                         <button type="submit" name="favorits" value="${1}">いいね</button>
                     </form>
-                </c:if>
+                </c:if><br>
                 <!-- お問い合わせ　ボタンを追加 -->
                 <c:if test="${sessionScope.login_user.id != pet.user.id}">
                     <form method="POST" action="<c:url value='/contents/create' />">
