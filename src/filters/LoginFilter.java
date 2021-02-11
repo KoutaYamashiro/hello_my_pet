@@ -41,30 +41,30 @@ public class LoginFilter implements Filter {
         String servlet_path = ((HttpServletRequest)request).getServletPath();
 
         if(!servlet_path.matches("/css.*")) {       // CSSフォルダ内は認証処理から除外する
-            HttpSession session = ((HttpServletRequest)request).getSession();
 
+            HttpSession session = ((HttpServletRequest)request).getSession();
             // セッションスコープに保存されたユーザー（ログインユーザ）情報を取得
             User u = (User)session.getAttribute("login_user");
 
             if(!servlet_path.equals("/login")) {  // ログイン画面以外について
-                //ログインユーザーページについて
+                // ログインユーザーページについて
                 // 管理者のみがユーザー一覧ページを表示できるようにする
                 if(servlet_path.matches("/users/index") && u.getAdmin_flag() == 0) {
                     ((HttpServletResponse)response).sendRedirect(context_path + "/");
                     return;
                 }
                 // ログインユーザーは自身のプロフィールを表示できるようにする
-//                if(servlet_path.matches("/users/show") && u.getAdmin_flag() == 0) {      // u.equals(u)) ここでログインしているのが自分であると判定したい
+//                if(servlet_path.matches("/users/show") && u.getAdmin_flag() == 0) {
 //                    //自身のプロフィールページへ飛ぶ
-//                    ((HttpServletResponse)response).sendRedirect(servlet_path + "/");
+//                    ((HttpServletResponse)response).sendRedirect(context_path + "/users/show?id=" +  u.getId());
 //                    return;
 //                }
                 // ログインユーザーは自身のプロフィールを編集できるようにする
 //                if(servlet_path.matches("/users/edit") && u.getAdmin_flag() == 0) {
-//                    ((HttpServletResponse)response).sendRedirect(context_path + "/");
+//                  //自身のプロフィール編集画面へ飛ぶ
+//                    ((HttpServletResponse)response).sendRedirect(context_path + "/users/edit?id=" + u.getId());
 //                    return;
 //                }
-
                 //ペットページについて
                 // 管理者のみがペット一覧ページを表示できるようにする
                 if(servlet_path.matches("/pets/index") && u.getAdmin_flag() == 0) {

@@ -7,9 +7,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Table(name = "favorits")
+@NamedQueries({
+        @NamedQuery(
+                name = "getMyFavoritsCount",
+                query = "SELECT COUNT(1) FROM Favorits AS 1.pet = :pet "
+                ),
+        @NamedQuery(
+                name = "getMyAllFavorits",
+                query = "SELECT 1 FROM Favorits AS 1 WHERE 1.pet = pet ORDER BY 1.DESC"
+                )
+})
 @Entity
 public class Favorite {
     @Id

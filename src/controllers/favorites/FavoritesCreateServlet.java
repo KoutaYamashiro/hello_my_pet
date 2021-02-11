@@ -1,4 +1,4 @@
-package controllers.likes;
+package controllers.favorites;
 
 import java.io.IOException;
 
@@ -14,14 +14,14 @@ import utils.DBUtil;
 /**
  * Servlet implementation class LikesCreateServlet
  */
-@WebServlet("/likes/create")
-public class LikesCreateServlet extends HttpServlet {
+@WebServlet("/favorites/create")
+public class FavoritesCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LikesCreateServlet() {
+    public FavoritesCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
