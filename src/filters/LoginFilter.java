@@ -47,41 +47,31 @@ public class LoginFilter implements Filter {
             User u = (User)session.getAttribute("login_user");
 
             if(!servlet_path.equals("/login")) {  // ログイン画面以外について
-                // ログインユーザーページについて
+                // ユーザーページについて
                 // 管理者のみがユーザー一覧ページを表示できるようにする
-                if(servlet_path.matches("/users/index") && u.getAdmin_flag() == 0) {
+                if(servlet_path.matches("/users/index") && (u == null || u.getAdmin_flag() == 0)) {
                     ((HttpServletResponse)response).sendRedirect(context_path + "/");
                     return;
                 }
-                // ログインユーザーは自身のプロフィールを表示できるようにする
-//                if(servlet_path.matches("/users/show") && u.getAdmin_flag() == 0) {
-//                    //自身のプロフィールページへ飛ぶ
-//                    ((HttpServletResponse)response).sendRedirect(context_path + "/users/show?id=" +  u.getId());
+                // 未ログインユーザーはユーザー詳細、ユーザー更新ページを表示できない
+                if((servlet_path.matches("/users/show") || (servlet_path.matches("/users/edit"))) && u == null) {
+                    ((HttpServletResponse)response).sendRedirect(context_path + "/");
+                    return;
+                }
+                // ログインユーザーは自身のユーザー詳細、ユーザー更新ページのみ表示できる
+//                if((servlet_path.equals("/users/show?id=" + u.getId()) || (servlet_path.equals("/users/edit?id=" + u.getId())))
+//                        && u.getAdmin_flag() == 0) {
+//                    ((HttpServletResponse)response).sendRedirect(context_path + "/");
 //                    return;
 //                }
-                // ログインユーザーは自身のプロフィールを編集できるようにする
-//                if(servlet_path.matches("/users/edit") && u.getAdmin_flag() == 0) {
-//                  //自身のプロフィール編集画面へ飛ぶ
-//                    ((HttpServletResponse)response).sendRedirect(context_path + "/users/edit?id=" + u.getId());
-//                    return;
-//                }
-                //ペットページについて
-                // 管理者のみがペット一覧ページを表示できるようにする
-                if(servlet_path.matches("/pets/index") && u.getAdmin_flag() == 0) {
-                    ((HttpServletResponse)response).sendRedirect(context_path + "/");
-                    return;
-                }
-                // 管理者のみがペット新規登録ページを表示できるようにする
-                if(servlet_path.matches("/pets/new") && u.getAdmin_flag() == 0) {
-                    ((HttpServletResponse)response).sendRedirect(context_path + "/");
-                    return;
-                }
-                // 管理者のみがペット編集画面を表示できるようにする
-                if(servlet_path.matches("/pets/edit") && u.getAdmin_flag() == 0) {
-                    ((HttpServletResponse)response).sendRedirect(context_path + "/");
-                    return;
-                }
 
+                //ペットページについて
+                // 管理者のみがペット一覧を表示できるようにする
+                if((servlet_path.matches("/pets/index") || (servlet_path.matches("/pets/new") || (servlet_path.matches("/pets/edit"))))
+                        && (u == null || u.getAdmin_flag() == 0)) {
+                    ((HttpServletResponse)response).sendRedirect(context_path + "/");
+                    return;
+                }
 
             } else {  // ログイン画面について
                 // ログインしているのにログイン画面を表示させようとした場合は

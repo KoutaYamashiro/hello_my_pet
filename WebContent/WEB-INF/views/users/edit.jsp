@@ -4,7 +4,9 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:choose>
-            <c:when test="${user != null}">
+            <c:when
+               test="${user != null && sessionScope.login_user.admin_flag == 1 ||
+                            (sessionScope.login_user.admin_flag == 0 && sessionScope.login_user.id == user.id)}">
                 <h2>id : ${user.id} のプロフィール情報 編集ページ</h2>
                 <p>
                     ※パスワードは変更する場合のみ入力してください。<br />&nbsp;&nbsp;
@@ -13,8 +15,7 @@
                     <c:import url="_form.jsp" />
                 </form>
                 <p id=admin>
-                    ※管理者で登録するのは従業員のみです。<br />&nbsp;&nbsp;
-                    すべてのペット情報が編集できます。
+                    ※管理者で登録するのは従業員のみです。<br />&nbsp;&nbsp; すべてのペット情報が編集できます。
                 </p>
 
                 <p>
