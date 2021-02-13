@@ -74,13 +74,14 @@
                                 <input type="hidden" name="pet_id" value="${pet.id}">
                                 <button type="submit" name="favorite">いいね</button>
                         </form>
-                </td>
-                </c:when>
-                <c:otherwise>
-                         <form method="POST" action="<c:url value='/favorites/destroy' />">
+                        <form method="POST" action="<c:url value='/favorites/destroy' />">
                                 <input type="hidden" name="pet_id" value="${pet.id}">
                                 <button type="submit" name="favorite">いいね解除</button>
                         </form>
+                </td>
+                </c:when>
+                <c:otherwise>
+
                 </c:otherwise>
                 </c:choose><br>
                 <!-- お問い合わせ　ボタン -->

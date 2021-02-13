@@ -44,7 +44,7 @@ public class FavoritesDestroyServlet extends HttpServlet {
 
        // いいねリストの中から、いいね解除されるペットIDを取得
        Integer pet_id = 0;
-       pet_id = em.createNamedQuery("getDestroyFavorites", Integer.class)
+       pet_id = em.createNamedQuery("getDestroyPet", Integer.class)
                         .setParameter("login_user", u)
                         .setParameter("pet_id", p)
                         .getSingleResult();

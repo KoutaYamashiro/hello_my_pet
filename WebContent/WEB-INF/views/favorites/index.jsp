@@ -5,7 +5,7 @@
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <c:choose>
-            <c:when test="${pat_id != null}">
+            <c:when test="${pet_id != null}">
                 <h2>いいねしたペット</h2>
                 <table id="favorites_list">
                     <tbody>

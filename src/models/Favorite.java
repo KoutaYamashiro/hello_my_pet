@@ -11,7 +11,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Table(name = "favorites")       //followingId   user     followedId    pet
+@Table(name = "favorites")
 @NamedQueries({
         // いいねを解除するペットIDを取得
         @NamedQuery(
