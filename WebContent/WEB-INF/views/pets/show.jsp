@@ -68,21 +68,24 @@
         <!-- ユーザー表示 -->
         <c:if test="${sessionScope.login_user.admin_flag == 0}">
                 <!-- いいね　ボタンを追加 -->
-                <c:if test="${sessionScope.login_user.id != pet.user.id}">
-                    <form method="POST" action="<c:url value='/favorits/create' />">
-                        <button type="submit" name="favorits" value="${1}">いいね</button>
+                    <form method="POST" action="<c:url value='/favorites/create' />">
+                        <input type="hidden" name="pet_id" value="${pet.id}">
+                        <button type="submit" name="favorites">いいね</button>
                     </form>
-                </c:if><br>
+                    <form method="POST" action="<c:url value='/favorites/destroy' />">
+                        <input type="hidden" name="favorites" value="${pet_id}" />
+                        <button type="submit" name="favorites">いいね解除</button>
+                    </form>
+                    <br>
                 <!-- お問い合わせ　ボタンを追加 -->
-                <c:if test="${sessionScope.login_user.id != pet.user.id}">
                     <form method="POST" action="<c:url value='/contents/create' />">
-                        <button type="submit" name="favorits">✉この仔について問い合わせる</button>
+                        <input type="hidden" name="pet_id" value="${pet.id}">
+                        <button type="submit" name="contents">✉この仔について問い合わせる</button>
                     </form>
                     <p>※気に入った仔がいましたら、まずはフォームからご連絡ください。</p>
                     <p> 後日ご来店いただき、店頭でのご購入・お引き渡しとなります。</p>
                     <p>※メールは24時間受付中です。お気軽にお問い合わせください。</p>
-                </c:if>
-                <p><a href="<c:url value="　" />">お気に入りペット一覧ページに戻る</a></p>
+                <p><a href="<c:url value="/favorites/index" />">お気に入りペット一覧ページに戻る</a></p>
                 <p><a href="<c:url value="/pets/index" />">トップページに戻る</a></p>
         </c:if>
 

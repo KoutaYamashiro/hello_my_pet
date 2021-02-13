@@ -6,7 +6,7 @@
     <c:param name="content">
         <c:choose>
             <c:when
-                test="${user != null && sessionScope.login_user.admin_flag == 1 ||
+                test="${sessionScope.login_user.admin_flag == 1 ||
                             (sessionScope.login_user.admin_flag == 0 && sessionScope.login_user.id == user.id)}">
                 <h2>プロフィール情報 詳細ページ</h2>
                 <table>
