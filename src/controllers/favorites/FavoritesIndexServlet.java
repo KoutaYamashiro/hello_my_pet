@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Favorite;
 import models.Pet;
+import models.User;
 import utils.DBUtil;
 
 /**
@@ -35,7 +36,9 @@ public class FavoritesIndexServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
-        // リクエストパラメータから検索条件の取得、（JSPからuser_id, pet_idを取得）
+
+        // ログインユーザーのIDを取得
+        User u = (User) request.getSession().getAttribute("login_user");
 
         Pet p = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
 
@@ -46,25 +49,16 @@ public class FavoritesIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Favorite> favorites = em.createNamedQuery("getMyAllFavorites", Favorite.class)
-                                                  .setParameter("pet", p)
-                                                  .setFirstResult(10 * (page -1))
-                                                  .setMaxResults(10)
-                                                  .getResultList();
-
-        long favorites_count = (long) em.createNamedQuery("getMyFavoritesCount", Long.class)
-                                                    .setParameter("pet", p)
-                                                    .getSingleResult();
-
-        Integer petUrl = Integer.parseInt(request.getParameter("pet_id"));
+        List<Favorite> getMyFavorites = em.createNamedQuery("getMyAllFavorites", Favorite.class)
+                                                             .setParameter("pet", p)
+                                                             .setFirstResult(10 * (page -1))
+                                                             .setMaxResults(10)
+                                                             .getResultList();
 
         em.close();
 
-        request.setAttribute("favorites", favorites);
-        request.setAttribute("favorites_count", favorites_count);
+        request.setAttribute("getMyFavorites", getMyFavorites);
         request.setAttribute("page", page);
-        request.setAttribute("pat_id", p);
-        request.setAttribute("petUrl", petUrl);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/favorites/index.jsp");
         rd.forward(request, response);

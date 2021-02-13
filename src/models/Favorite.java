@@ -11,16 +11,24 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Table(name = "favorites")
+@Table(name = "favorites")       //followingId   user     followedId    pet
 @NamedQueries({
+        // いいねを解除するペットIDを取得
         @NamedQuery(
-                name = "getMyFavoritesCount",
-                query = "SELECT COUNT(f) FROM Favorite AS f WHERE f.pet = :pet "
-                ),
+                name= "getDestroyPet",
+                query = "SELECT f.id FROM Favorite f WHERE f.pet  = :pet_id AND f.user = :login_user"),
+        // いいねを解除するユーザーIDを取得
         @NamedQuery(
-                name = "getMyAllFavorites",
-                query = "SELECT f FROM Favorite AS f WHERE f.pet = :pet ORDER BY f.pet.id DESC"
-                )
+                name= "getDestroyUser",
+                query = "SELECT f.id FROM Favorite f WHERE f.user  = :login_user AND f.pet = :pet_id"),
+        // ログインユーザーのいいねしたペット一覧を取得
+        @NamedQuery(
+                name= "getMyFavorites",
+                query = "SELECT f FROM Favorite f, User u WHERE f.pet = :login_user AND u = f.user ORDER BY f.id DESC"),
+        // ログインユーザーのいいねしたペットカウントを取得
+        @NamedQuery(
+                name= "getMyFavoritesCount",
+                query = "SELECT COUNT(f) FROM  Favorite f, User u WHERE f.user = :login_user AND u = f.user")
 })
 @Entity
 public class Favorite {

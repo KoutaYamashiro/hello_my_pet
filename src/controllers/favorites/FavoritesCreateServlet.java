@@ -35,11 +35,13 @@ public class FavoritesCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // EntityManagerのオブジェクトを生成
         EntityManager em = DBUtil.createEntityManager();
-        // ペットのIDを1件取得する
+
+        Favorite f = new Favorite();
+
+        // いいねしたペットのIDを取得する
        Pet p = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
 
-       Favorite f = new Favorite();
-
+        // Favoritesテーブルに値をセット
        f.setUser((User) request.getSession().getAttribute("login_user"));
        f.setPet(p);
 

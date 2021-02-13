@@ -55,7 +55,7 @@
                     </c:otherwise>
         </c:choose>
 
-        <!-- 管理者表示 -->
+                <!-- 管理者表示 -->
         <c:if test="${sessionScope.login_user.admin_flag == 1}">
                 <p>
                      <a id=update href="<c:url value="/pets/edit?id=${pet.id}" />">ペット情報を更新する</a>
@@ -64,20 +64,26 @@
                      <a id=all_pets href="<c:url value="/pets/index" />">ペット 一覧ページに戻る</a>
                </p>
         </c:if>
-
-        <!-- ユーザー表示 -->
+                <!-- ユーザー表示 -->
         <c:if test="${sessionScope.login_user.admin_flag == 0}">
-                <!-- いいね　ボタンを追加 -->
-                    <form method="POST" action="<c:url value='/favorites/create' />">
-                        <input type="hidden" name="pet_id" value="${pet.id}">
-                        <button type="submit" name="favorites">いいね</button>
-                    </form>
-                    <form method="POST" action="<c:url value='/favorites/destroy' />">
-                        <input type="hidden" name="favorites" value="${pet_id}" />
-                        <button type="submit" name="favorites">いいね解除</button>
-                    </form>
-                    <br>
-                <!-- お問い合わせ　ボタンを追加 -->
+                <!-- いいね　ボタン -->
+                <c:choose>
+                <c:when test="${!favorites_count}">
+                <td class="favorite">
+                        <form method="POST" action="<c:url value='/favorites/create' />">
+                                <input type="hidden" name="pet_id" value="${pet.id}">
+                                <button type="submit" name="favorite">いいね</button>
+                        </form>
+                </td>
+                </c:when>
+                <c:otherwise>
+                         <form method="POST" action="<c:url value='/favorites/destroy' />">
+                                <input type="hidden" name="pet_id" value="${pet.id}">
+                                <button type="submit" name="favorite">いいね解除</button>
+                        </form>
+                </c:otherwise>
+                </c:choose><br>
+                <!-- お問い合わせ　ボタン -->
                     <form method="POST" action="<c:url value='/contents/create' />">
                         <input type="hidden" name="pet_id" value="${pet.id}">
                         <button type="submit" name="contents">✉この仔について問い合わせる</button>
