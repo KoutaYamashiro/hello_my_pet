@@ -81,7 +81,9 @@
                 </td>
                 </c:when>
                 <c:otherwise>
+                <td class="favorite">
 
+                </td>
                 </c:otherwise>
                 </c:choose><br>
                 <!-- お問い合わせ　ボタン -->

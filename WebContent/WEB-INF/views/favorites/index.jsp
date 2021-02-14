@@ -5,11 +5,11 @@
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <c:choose>
-            <c:when test="${pet_id != null}">
+            <c:when test="${getMyFavoritesCount != 0}">
                 <h2>いいねしたペット</h2>
                 <table id="favorites_list">
                     <tbody>
-                        <c:forEach var="Favorite" items="${favorites}" varStatus="status">
+                        <c:forEach var="Favorite" items="${getMyFavorites}" varStatus="status">
                             <tr class="row${status.count % 2}">
                                 <th>画像</th>
                                 <td class="pet_image"><img
@@ -45,6 +45,25 @@
                                         </c:otherwise>
                                     </c:choose></td>
                             </tr>
+                            <!-- いいね　ボタン -->
+                            <c:choose>
+                                    <c:when test="${!favorites_count}">
+                                    <td class="favorite">
+                                            <form method="POST" action="<c:url value='/favorites/create' />">
+                                                    <input type="hidden" name="pet_id" value="${pet.id}">
+                                                    <button type="submit" name="favorite">いいね</button>
+                                            </form>
+                                    </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                    <td class="favorite">
+                                            <form method="POST" action="<c:url value='/favorites/destroy' />">
+                                                    <input type="hidden" name="pet_id" value="${pet.id}">
+                                                    <button type="submit" name="favorite">いいね解除</button>
+                                            </form>
+                                    </td>
+                                    </c:otherwise>
+                              </c:choose><br>
                         </c:forEach>
                     </tbody>
                 </table>
@@ -66,7 +85,7 @@
                 </div>
             </c:when>
             <c:otherwise>
-                <h2>お探しのペットは見つかりませんでした。</h2>
+                <h2>いいねしたペットは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
         <p>

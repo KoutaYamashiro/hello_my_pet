@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Favorite;
+import models.Pet;
 import models.User;
 import utils.DBUtil;
 
@@ -39,6 +40,9 @@ public class FavoritesIndexServlet extends HttpServlet {
         // ログインユーザーのIDを取得
         User u = (User) request.getSession().getAttribute("login_user");
 
+        // いいねしたペットIDを取得
+        Pet p = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
+
         // ページネーション
         int page;
         try {
@@ -50,6 +54,7 @@ public class FavoritesIndexServlet extends HttpServlet {
         // ログインユーザーのいいねしたペット一覧を取得
         List<Favorite> getMyFavorites = em.createNamedQuery("getMyFavorites", Favorite.class)
                                                              .setParameter("login_user", u)
+                                                             .setParameter("pet_id", p)
                                                              .setFirstResult(10 * (page -1))
                                                              .setMaxResults(10)
                                                              .getResultList();
