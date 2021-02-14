@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Favorite;
 import models.Pet;
 import models.User;
 import utils.DBUtil;
@@ -41,9 +42,17 @@ public class FavoritesDestroyServlet extends HttpServlet {
         // いいねを解除するペットのIDを取得
        Pet p = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
 
+       // いいねリストの中から、いいね解除されるペットIDを取得
+       Integer pet_id = 0;
+       pet_id = em.createNamedQuery("getDestroyPet", Integer.class)
+                        .setParameter("login_user", u)
+                        .setParameter("pet_id", p)
+                        .getSingleResult();
+
+       Favorite f = em.find(Favorite.class, pet_id);
+
             em.getTransaction().begin();
-            em.remove(p);
-            em.remove(u);
+            em.remove(f);
             em.getTransaction().commit();
             em.close();
             request.getSession().setAttribute("flush", "いいねを解除しました。");

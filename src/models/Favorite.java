@@ -17,10 +17,10 @@ import javax.persistence.Table;
         @NamedQuery(
                 name= "getDestroyPet",
                 query = "SELECT f.id FROM Favorite f WHERE f.pet  = :pet_id AND f.user = :login_user"),
-        // いいねを解除するユーザーIDを取得
-        @NamedQuery(
-                name= "getDestroyUser",
-                query = "SELECT f.id FROM Favorite f WHERE f.user = :login_user AND f.pet = :pet"),
+//        // いいねを解除するユーザーIDを取得
+//        @NamedQuery(
+//                name= "getDestroyUser",
+//                query = "SELECT f.id FROM Favorite f WHERE f.user = :login_user AND f.pet = :pet"),
         // ペットのすべてのいいねをカウント
         @NamedQuery(
                 name= "getPetAllFavoritesCount",
