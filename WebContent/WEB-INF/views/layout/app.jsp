@@ -37,7 +37,7 @@
                     <c:otherwise>
                               <div id="user_name">
                                 <a href="<c:url value='/login' />">ログイン</a>&nbsp;&nbsp;
-                                <a href="<c:url value='/pets/new' />">新規登録</a>
+                                <a href="<c:url value='/users/new' />">新規登録</a>
                               </div>
                     </c:otherwise>
                 </c:choose>

@@ -58,12 +58,6 @@ public class LoginFilter implements Filter {
                     ((HttpServletResponse)response).sendRedirect(context_path + "/");
                     return;
                 }
-                // ログインユーザーは自身のユーザー詳細、ユーザー更新ページのみ表示できる
-//                if((servlet_path.equals("/users/show?id=" + u.getId()) || (servlet_path.equals("/users/edit?id=" + u.getId())))
-//                        && u.getAdmin_flag() == 0) {
-//                    ((HttpServletResponse)response).sendRedirect(context_path + "/");
-//                    return;
-//                }
 
                 //ペットページについて
                 // 管理者のみがペット一覧を表示できるようにする

@@ -38,14 +38,14 @@ public class FavoritesCreateServlet extends HttpServlet {
 
         Favorite f = new Favorite();
 
-        // いいねしたペットのIDを取得する
+        // いいねしたペットのIDを取得
        Pet p = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
 
-        // Favoritesテーブルに値をセット
+        // テーブルに値をセット
        f.setUser((User) request.getSession().getAttribute("login_user"));
        f.setPet(p);
 
-       // データベースを更新
+        // データベースを更新
         em.getTransaction().begin();
         em.persist(f);
         em.getTransaction().commit();

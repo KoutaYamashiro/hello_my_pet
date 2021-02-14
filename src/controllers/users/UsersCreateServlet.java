@@ -53,6 +53,14 @@ public class UsersCreateServlet extends HttpServlet {
                 );
             u.setAdmin_flag(Integer.parseInt(request.getParameter("admin_flag")));
 
+            // 島さんへ質問　　＊＊＊＊＊＊＊＊＊
+//            Integer admin_flag = new Integer(0);
+//            String af_str = request.getParameter("admin_flag");
+//            if(af_str != null && !af_str.equals("")) {
+//                admin_flag = Integer.parseInt(request.getParameter("admin_flag"));
+//            }
+//            u.setAdmin_flag(admin_flag);
+
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             u.setCreated_at(currentTime);
             u.setUpdated_at(currentTime);
@@ -72,10 +80,10 @@ public class UsersCreateServlet extends HttpServlet {
                 em.getTransaction().begin();
                 em.persist(u);
                 em.getTransaction().commit();
-                request.getSession().setAttribute("flush", "登録が完了しました。");
+                request.getSession().setAttribute("flush", "登録がありがとうございます！ログインをお願いします。");
                 em.close();
 
-                response.sendRedirect(request.getContextPath() + "/users/index");
+                response.sendRedirect(request.getContextPath() + "/login");
             }
         }
     }

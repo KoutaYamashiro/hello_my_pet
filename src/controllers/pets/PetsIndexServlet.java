@@ -34,17 +34,21 @@ public class PetsIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+        // ページネーション
         int page;
         try{
             page = Integer.parseInt(request.getParameter("page"));
         } catch(Exception e) {
             page = 1;
         }
+
+        // すべてのペット一覧を取得
         List<Pet> pets = em.createNamedQuery("getAllPets", Pet.class)
                                   .setFirstResult(10 * (page - 1))
                                   .setMaxResults(10)
                                   .getResultList();
 
+        // すべてのペット数をカウントする
         long pets_count = (long)em.createNamedQuery("getPetsCount", Long.class)
                                      .getSingleResult();
 

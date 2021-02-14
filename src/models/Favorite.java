@@ -28,15 +28,18 @@ import javax.persistence.Table;
         // ログインユーザー自身のいいねしたペット一覧を取得
         @NamedQuery(
                 name= "getMyFavorites",
-                query = "SELECT f FROM Favorite f, User u WHERE f.pet = :login_user AND u = f.user ORDER BY f.id DESC"),
+                query = "SELECT f FROM Favorite AS f WHERE f.user = :user ORDER BY f.id DESC"),
+                //query = "SELECT f FROM Favorite f, User u WHERE f.pet = :login_user AND u = f.user ORDER BY f.id DESC"),
         // ログインユーザー自身のいいねしたペットカウントを取得
         @NamedQuery(
                 name= "getMyFavoritesCount",
-                query = "SELECT COUNT(f) FROM  Favorite f, User u WHERE f.user = :login_user AND u = f.user"),
-        // ログインユーザーがすでにいいねしているペットのIDを取得
+                query = "SELECT COUNT(f) FROM Favorite AS f WHERE f.user = :user"),
+                //query = "SELECT COUNT(f) FROM  Favorite f, User u WHERE f.user = :login_user AND u = f.user"),
+        // ログインユーザーがすでにいいねしているペットかをチェックする
         @NamedQuery(
                 name = "checkMyFavorite",
-                query = "SELECT f.pet FROM Favorite f WHERE f.user = :login_user")
+                query = "SELECT f FROM Favorite AS f WHERE f.user = :user AND f.pet = :pet")
+                //query = "SELECT f.pet FROM Favorite f WHERE f.user = :login_user")
 })
 @Entity
 public class Favorite {
