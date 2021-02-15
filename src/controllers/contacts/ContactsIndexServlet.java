@@ -35,17 +35,21 @@ public class ContactsIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+        // ページネーション
         int page;
         try{
             page = Integer.parseInt(request.getParameter("page"));
         } catch(Exception e) {
             page = 1;
         }
+
+        // お問い合わせ内容取得
         List<Contact> contacts = em.createNamedQuery("getAllContacts", Contact.class)
                                   .setFirstResult(10 * (page - 1))
                                   .setMaxResults(10)
                                   .getResultList();
 
+        // お問い合わせ数カウント
         long contacts_count = (long)em.createNamedQuery("getContactsCount", Long.class)
                                      .getSingleResult();
 
@@ -54,10 +58,6 @@ public class ContactsIndexServlet extends HttpServlet {
         request.setAttribute("contacts", contacts);
         request.setAttribute("contacts_count", contacts_count);
         request.setAttribute("page", page);
-        if(request.getSession().getAttribute("flush") != null) {
-            request.setAttribute("flush", request.getSession().getAttribute("flush"));
-            request.getSession().removeAttribute("flush");
-        }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/contacts/index.jsp");
         rd.forward(request, response);

@@ -24,6 +24,14 @@ import javax.persistence.Table;
             name = "getContactsCount",
             query = "SELECT COUNT(c) FROM Contact AS c"
         ),
+        // ユーザー自身問い合わせ内容を取得
+        @NamedQuery(
+                name= "getMyContacts",
+                query = "SELECT c FROM Contact AS c WHERE c.user = :user ORDER BY c.id DESC"),
+        // ユーザー自身問い合わせをカウント
+        @NamedQuery(
+                name= "getMyContactsCount",
+                query = "SELECT COUNT(c) FROM Contact AS c WHERE c.user = :user")
     })
 
 @Entity
