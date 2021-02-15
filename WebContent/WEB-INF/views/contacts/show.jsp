@@ -22,8 +22,28 @@
                             <td><c:out value="${user.mail_address}" /></td>
                         </tr>
                         <tr>
-                            <th>登録日時</th>
+                            <th>問い合わせ日時</th>
                             <td><fmt:formatDate value="${contac.created_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                        </tr>
+                        <tr>
+                            <th>お問い合わせ内容</th>
+                            <td>
+                                <pre><c:out value="${contact.content}" /></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>返信日時</th>
+                            <td><fmt:formatDate value="${仮}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                        </tr>
+                        <tr>
+                            <th>返信者</th>
+                            <td><c:out value="${user.name}" /></td>
+                        </tr>
+                        <tr>
+                            <th>返信内容</th>
+                            <td>
+                                <pre><c:out value="${contact.content}" /></pre>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
