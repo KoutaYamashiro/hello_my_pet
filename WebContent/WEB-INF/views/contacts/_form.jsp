@@ -11,8 +11,9 @@
 </c:if>
 
 <label for="content">お問い合わせ内容</label><br />
-<textarea name="content" rows="10" cols="50">${report.content}</textarea>
+<textarea name="content" rows="10" cols="50">${contact.content}</textarea>
 <br /><br />
 
 <input type="hidden" name="_token" value="${_token}" />
+<input type="hidden" name="pet_id" value="${pet.id}">
 <button type="submit">問い合わせする</button>

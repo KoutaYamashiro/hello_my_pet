@@ -3,25 +3,32 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <h2>お問い合わせ　一覧</h2>
-        <table id="contact_list">
-            <tbody>
-                <tr>
-                    <th class="contact_id">お問い合わせID</th>
-                    <th class="contact_name">氏名</th>
-                    <th class="contact_created">お問い合わせ日時</th>
-                    <th class="contact_action">詳細</th>
-                </tr>
-                <c:forEach var="contact" items="${contacts}" varStatus="status">
-                    <tr class="row${status.count % 2}">
-                        <td class="contact_di"><c:out value="${contact.user.id}" /></td>
-                        <td class="contact_name"><c:out value="${contact.user.name}" /></td>
-                        <td class="contact_created"><fmt:formatDate value='${contact.created_at}' pattern='yyyy-MM-dd HH:mm:ss ' /></td>
-                        <td class="contact_action"><a href="<c:url value='/contacts/show?id=${contact.id}' />">詳細を表示</a></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+    <c:choose>
+            <c:when test="${contacts_count == 0}">
+                  <h3>お問い合わせ中のペットはいません。</h3>
+            </c:when>
+            <c:otherwise>
+                <h2>お問い合わせ　一覧</h2>
+                <table id="contact_list">
+                    <tbody>
+                        <tr>
+                            <th class="contact_id">お問い合わせID</th>
+                            <th class="contact_name">氏名</th>
+                            <th class="contact_created">お問い合わせ日時</th>
+                            <th class="contact_action">詳細</th>
+                        </tr>
+                        <c:forEach var="contact" items="${contacts}" varStatus="status">
+                            <tr class="row${status.count % 2}">
+                                <td class="contact_di"><c:out value="${contact.user.id}" /></td>
+                                <td class="contact_name"><c:out value="${user.name}" /></td>
+                                <td class="contact_created"><fmt:formatDate value='${contact.created_at}' pattern='yyyy-MM-dd HH:mm:ss ' /></td>
+                                <td class="contact_action"><a href="<c:url value='/contacts/show?id=${contact.id}' />">詳細を表示</a></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+             </c:otherwise>
+          </c:choose>
 
         <div id="pagination">
             （全 ${contacts_count} 件）<br />
@@ -36,7 +43,7 @@
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a href="<c:url value='/' />">トップページへ戻る</a></p>
+        <p><a id=top_page href="<c:url value='/' />">トップページへ戻る</a></p>
 
     </c:param>
 </c:import>

@@ -87,7 +87,7 @@
                 </c:otherwise>
                 </c:choose><br>
                 <!-- お問い合わせ　ボタン -->
-                    <form method="POST" action="<c:url value='/contents/create' />">
+                    <form method="POST" action="<c:url value='/contacts/new?id=${pet.id}' />">
                         <input type="hidden" name="pet_id" value="${pet.id}">
                         <button type="submit" name="contents">✉この仔について問い合わせる</button>
                     </form>

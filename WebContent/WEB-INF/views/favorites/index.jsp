@@ -68,7 +68,7 @@
             </c:otherwise>
         </c:choose>
         <p>
-            <a href="<c:url value="/" />">トップページに戻る</a>
+            <a id=top_page href="<c:url value="/" />">トップページに戻る</a>
         </p>
 
     </c:param>
