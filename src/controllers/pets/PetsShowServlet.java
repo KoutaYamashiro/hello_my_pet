@@ -51,11 +51,13 @@ public class PetsShowServlet extends HttpServlet {
                                                                     .getResultList();
 
             // セットしたされた情報と重複チェック
-            boolean favorite_check = checkMyFavorite.contains(pet);
+            boolean favoriteCheckFlag = checkMyFavorite.contains(login_user);
+
+            System.out.println("チェック" + favoriteCheckFlag + "です。");
 
             // 値をセット
             request.setAttribute("favoriteCheckFlag", checkMyFavorite);
-            request.setAttribute("favorite_check", favorite_check);
+            request.setAttribute("favoriteCheckFlag", favoriteCheckFlag);
             //フォロー判定ここまで
 
             em.close();
