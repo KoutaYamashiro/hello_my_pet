@@ -94,7 +94,7 @@ a#details {
     color: #84d6b8;
 }
 
-a.hello {
+a#hello {
     font-weight: bold;
     padding-left: 3%;
 }
@@ -183,7 +183,7 @@ select {
 
 #user_name {
     color: #ffffff;
-    width: 36%;
+    width: 80%;
     padding-right: 3%;
     text-align: right;
     display: inline-block;

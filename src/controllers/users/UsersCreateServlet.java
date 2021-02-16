@@ -41,8 +41,10 @@ public class UsersCreateServlet extends HttpServlet {
         if(_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
+            // ユーザーを生成
             User u = new User();
 
+            // 値をセット
             u.setName(request.getParameter("name"));
             u.setMail_address(request.getParameter("mail_address"));
             u.setPassword(
@@ -51,15 +53,16 @@ public class UsersCreateServlet extends HttpServlet {
                         (String)this.getServletContext().getAttribute("pepper")
                     )
                 );
-            u.setAdmin_flag(Integer.parseInt(request.getParameter("admin_flag")));
 
-            // 島さんへ質問　　＊＊＊＊＊＊＊＊＊
-//            Integer admin_flag = new Integer(0);
-//            String af_str = request.getParameter("admin_flag");
-//            if(af_str != null && !af_str.equals("")) {
-//                admin_flag = Integer.parseInt(request.getParameter("admin_flag"));
-//            }
-//            u.setAdmin_flag(admin_flag);
+            // ユーザー登録の場合は　ユーザー権限として　０　で登録
+            Integer admin_flag = new Integer(0);
+            String af_str = request.getParameter("admin_flag");
+            if(af_str != null && !af_str.equals("")) {
+                admin_flag = Integer.parseInt(request.getParameter("admin_flag"));
+            }
+            u.setAdmin_flag(admin_flag);
+
+            System.out.println("＊＊＊＊＊＊＊＊admin_flagチェック＊＊＊＊＊＊＊＊" + admin_flag);
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             u.setCreated_at(currentTime);

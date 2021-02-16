@@ -30,7 +30,8 @@
         </select>
     </c:when>
     <c:otherwise>
-           <input type="hidden" name="admin_flag" value="0" />
+           <!--  <input type="hidden" name="admin_flag" value="0" />
+           -->
     </c:otherwise>
 </c:choose>
 
