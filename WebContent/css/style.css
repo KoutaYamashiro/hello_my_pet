@@ -96,6 +96,7 @@ a#details {
 
 a.hello {
     font-weight: bold;
+    padding-left: 3%;
 }
 
 table, tr, th, td {
@@ -226,9 +227,9 @@ div#image {
     text-align: center;
 }
 
-div#image .cats {
-    width: 100%;
-    max-width: 900px;
+div#image .pets {
+    width: 70%;
+    max-width: 300px;
 }
 
 table#pet_list .bottom {

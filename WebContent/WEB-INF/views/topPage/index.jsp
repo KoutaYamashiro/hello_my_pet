@@ -9,14 +9,14 @@
             </div>
         </c:if>
         <div id="image">
-            <img class="cats" src="<c:url value='/images/mypets/tokage01.jpg' />">
+            <img class="pets" src="<c:url value='/images/mypets/tokage01.jpg' />">
         </div>
         <h2>Pets List</h2>
             <table id="pet_list">
             <c:forEach var="pet" items="${pets}" varStatus="status">
             <tbody class="row${status.count % 2}">
                     <tr>
-                            <th>画像 仮処置</th>
+                            <th>ペット写真</th>
                             <td class="pet_image"><img src="https://yamashiro-test-20200114.s3-ap-northeast-1.amazonaws.com/uploaded/${pet.pet_image}"></td>
                     </tr>
                     <tr>
@@ -26,7 +26,8 @@
                     <tr>
                             <th>誕生日</th>
                             <td class="birthday">
-                                 <fmt:formatDate value='${pet.birthday}' pattern='yyyy-MM-dd' />
+                                 <fmt:formatDate value='${pet.birthday}' pattern='yyyy年MM月dd日' />
+                                 生まれ
                             </td>
                     </tr>
                     <tr>
@@ -34,7 +35,7 @@
                             <td class="favorite"><c:out value="${favorites_count}" /></td>
                     </tr>
                     <tr>
-                            <th>価格</th>
+                            <th>生体価格</th>
                             <td class="pet_price"><c:out value="${pet.pet_price}" />円（税込み）</td>
                     </tr>
                     <tr>
@@ -54,7 +55,7 @@
 
         <div id="pagination">
             （全 ${pets_count} 件）<br />
-            <c:forEach var="i" begin="1" end="${((reports_count - 1) / 10) + 1}" step="1">
+            <c:forEach var="i" begin="1" end="${((pets_count - 1) / 10) + 1}" step="1">
                 <c:choose>
                     <c:when test="${i == page}">
                         <c:out value="${i}" />&nbsp;

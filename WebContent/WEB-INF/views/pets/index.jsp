@@ -15,7 +15,7 @@
             <tbody>
                 <c:forEach var="pet" items="${pets}" varStatus="status">
                     <tr>
-                        <th>画像</th>
+                        <th>ペット写真</th>
                         <td class="pet_image"><img src="https://yamashiro-test-20200114.s3-ap-northeast-1.amazonaws.com/uploaded/${pet.pet_image}"></td>
                     </tr>
                     <tr>
@@ -25,14 +25,14 @@
                     <tr>
                         <th>誕生日</th>
                         <td class="birthday"><fmt:formatDate value='${pet.birthday}'
-                                pattern='yyyy-MM-dd' /></td>
+                                pattern='yyyy年MM月dd日' />生まれ</td>
                     </tr>
                     <tr>
                         <th>いいね数</th>
-                        <td class="favorite"><c:out value="" />仮</td>
+                        <td class="favorite"><c:out value="${favorites_count}" /></td>
                     </tr>
                     <tr>
-                        <th>価格</th>
+                        <th>生体価格</th>
                         <td class="pet_price"><c:out value="${pet.pet_price}" />円（税込み）</td>
                     </tr>
                     <tr>

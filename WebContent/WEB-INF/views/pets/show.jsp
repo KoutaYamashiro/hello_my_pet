@@ -11,7 +11,7 @@
                  <table id="pet_list">
             <tbody class="row${status.count % 2}">
                     <tr>
-                            <th>画像</th>
+                            <th>ペット写真</th>
                             <td class="pet_image"><img src="https://yamashiro-test-20200114.s3-ap-northeast-1.amazonaws.com/uploaded/${pet.pet_image}"></td>
                     </tr>
                     <tr>
@@ -21,12 +21,13 @@
                     <tr>
                             <th>誕生日</th>
                             <td class="birthday">
-                                 <fmt:formatDate value='${pet.birthday}' pattern='yyyy-MM-dd' />
+                                 <fmt:formatDate value='${pet.birthday}' pattern='yyyy年MM月dd日' />
+                                 生まれ
                             </td>
                     </tr>
                     <tr>
                             <th>いいね数</th>
-                            <td class="favorites"><c:out value="仮" /></td>
+                            <td class="favorites"><c:out value="${favorites_count}" /></td>
                     </tr>
                     <tr>
                             <th>登録日時</th>
@@ -37,7 +38,7 @@
                             <td class="updated_at"><c:out value="${pet.updated_at}" /></td>
                     </tr>
                     <tr>
-                            <th>価格</th>
+                            <th>生体価格</th>
                             <td class="pet_price"><c:out value="${pet.pet_price}" />円（税込み）</td>
                     </tr>
                     <tr>
