@@ -67,25 +67,23 @@
                 <!-- ユーザー表示 -->
         <c:if test="${sessionScope.login_user.admin_flag == 0}">
                 <!-- いいね　ボタン -->
-                <c:choose>
-                <c:when test="${!favorites_count}">
+                <c:if test="${!favorite_count}">
                 <td class="favorite">
                         <form method="POST" action="<c:url value='/favorites/create' />">
                                 <input type="hidden" name="pet_id" value="${pet.id}">
                                 <button type="submit" name="favorite">いいね</button>
                         </form>
-                        <form method="POST" action="<c:url value='/favorites/destroy' />">
-                                <input type="hidden" name="pet_id" value="${pet.id}">
-                                <button type="submit" name="favorite">いいね解除</button>
-                        </form>
                 </td>
-                </c:when>
-                <c:otherwise>
                 <td class="favorite">
-
+                       <form method="POST" action="<c:url value='/favorites/destroy' />">
+                               <input type="hidden" name="pet_id" value="${pet.id}">
+                               <button type="submit" name="favorite">いいね解除</button>
+                       </form>
                 </td>
-                </c:otherwise>
-                </c:choose><br>
+                </c:if>
+                <c:if test="${favorite_count}">
+
+                </c:if><br>
                 <!-- お問い合わせ　ボタン -->
                     <form method="POST" action="<c:url value='/contacts/new?id=${pet.id}' />">
                         <input type="hidden" name="pet_id" value="${pet.id}">

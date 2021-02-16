@@ -18,10 +18,17 @@ import javax.persistence.Table;
 @Table(name = "pets")
 @NamedQueries({
     @NamedQuery(
+         // すべてのペット情報を取得
         name = "getAllPets",
         query = "SELECT p FROM Pet AS p ORDER BY p.id DESC"
     ),
     @NamedQuery(
+            // 情報を取得
+           name = "getMyPetUser",
+           query = "SELECT p.user FROM Pet AS p"
+       ),
+    @NamedQuery(
+        // すべてのペット数をカウント
         name = "getPetsCount",
         query = "SELECT COUNT(p) FROM Pet AS p"
     )

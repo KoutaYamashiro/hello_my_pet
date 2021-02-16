@@ -9,25 +9,28 @@ public class PetValidator {
     public static List<String> validate(Pet p) {
         List<String> errors = new ArrayList<String>();
 
-        String pet_breed_error = _validatePet_Breed(p.getPet_breed());
-        if(!pet_breed_error.equals("")) {
-            errors.add(pet_breed_error);
+        // 入力欄に空欄がないかチェック
+        String breed_error = _validatePet_Breed(p.getPet_breed());
+        if(!breed_error.equals("")) {
+            errors.add(breed_error);
         }
 
-        String pet_image_error = _validatePet_Image(p.getPet_image());
-        if(!pet_image_error.equals("")) {
-            errors.add(pet_image_error);
+        String image_error = _validatePet_Image(p.getPet_image());
+        if(!image_error.equals("")) {
+            errors.add(image_error);
         }
 
-        String pet_price_error = _validatePet_Price(p.getPet_price());
-        if(!pet_price_error.equals("")) {
-            errors.add(pet_price_error);
+        String price_error = _validatePet_Price(p.getPet_price());
+        if(!price_error.equals("")) {
+            errors.add(price_error);
         }
 
-        String appeal_point_error = _validateAppeal_Point(p.getAppeal_point());
-        if(!appeal_point_error.equals("")) {
-            errors.add(appeal_point_error);
+        String appeal_error = _validateAppeal_Point(p.getAppeal_point());
+        if(!appeal_error.equals("")) {
+            errors.add(appeal_error);
         }
+
+
 
         return errors;
     }

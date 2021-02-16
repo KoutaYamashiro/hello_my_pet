@@ -20,8 +20,9 @@
                             <a href="<c:url value='/pets/index' />">ペット一覧</a>&nbsp;&nbsp;
                             <a href="<c:url value='仮' />">お問い合わせ一覧</a>&nbsp;&nbsp;
                             <div id="user_name">
-                                <c:out value="${sessionScope.login_user.name}" />様
-                                <a href="<c:url value='/users/show?id=${login_user.id}' />">プロフィール</a>&nbsp;&nbsp;
+                                <a href="<c:url value='/users/show?id=${login_user.id}' />">
+                                    <c:out value="${sessionScope.login_user.name}" />様プロフィール
+                                </a>&nbsp;&nbsp;
                                 <a href="<c:url value='/logout' />">ログアウト</a>
                            </div>
                     </c:when>
@@ -29,9 +30,11 @@
                               <a href="<c:url value='/favorites/index' />">いいねしたペット一覧</a>&nbsp;&nbsp;
                               <a href="<c:url value='/contacts/index' />">お問い合わせ中</a>&nbsp;&nbsp;
                               <div id="user_name">
-                              <c:out value="${sessionScope.login_user.name}" />様
-                                  <a href="<c:url value='/users/show?id=${login_user.id}' />">プロフィール</a>&nbsp;&nbsp;
-                                  <a href="<c:url value='/logout' />">ログアウト</a>
+
+                                <a href="<c:url value='/users/show?id=${login_user.id}' />">
+                                    <c:out value="${sessionScope.login_user.name}" />様プロフィール
+                                </a>&nbsp;&nbsp;
+                                <a href="<c:url value='/logout' />">ログアウト</a>
                               </div>
                     </c:when>
                     <c:otherwise>

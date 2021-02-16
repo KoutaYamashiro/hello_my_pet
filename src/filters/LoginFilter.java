@@ -53,8 +53,20 @@ public class LoginFilter implements Filter {
                     ((HttpServletResponse)response).sendRedirect(context_path + "/");
                     return;
                 }
+
+                // 未ログインユーザについて
                 // 未ログインユーザーはユーザー詳細、ユーザー更新ページを表示できない
                 if((servlet_path.matches("/users/show") || (servlet_path.matches("/users/edit"))) && u == null) {
+                    ((HttpServletResponse)response).sendRedirect(context_path + "/");
+                    return;
+                }
+                // 未ログインユーザーはお問い合わせページ、返信ページを表示できない
+                if((servlet_path.matches("/contacts.* ") || (servlet_path.matches("/replies.* "))) && u == null) {
+                    ((HttpServletResponse)response).sendRedirect(context_path + "/");
+                    return;
+                }
+                // 未ログインユーザーはFavoritesページを表示できない
+                if(servlet_path.matches("/favorites.* ") && u == null) {
                     ((HttpServletResponse)response).sendRedirect(context_path + "/");
                     return;
                 }

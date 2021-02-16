@@ -14,18 +14,22 @@ import javax.persistence.Table;
 @Table(name = "Users")
 @NamedQueries({
     @NamedQuery(
+         // すべてのユーザー情報を取得
         name = "getAllUsers",
         query = "SELECT u FROM User AS u ORDER BY u.id DESC"
     ),
     @NamedQuery(
+            // すべてのユーザーをカウント
         name = "getUsersCount",
         query = "SELECT COUNT(u) FROM User AS u"
     ),
     @NamedQuery(
+         // メールアドレスがすでに登録されていないかチェック
         name = "checkRegisteredMail_address",
         query = "SELECT COUNT(u) FROM User AS u WHERE u.mail_address = :mail_address"
     ),
     @NamedQuery(
+            // ログイン時、メールアドレスとパスワードが正しいかをチェック
         name = "checkLoginMail_addressAndPassword",
         query = "SELECT u FROM User AS u WHERE u.delete_flag = 0 AND u.mail_address = :mail_address AND u.password = :pass"
     )

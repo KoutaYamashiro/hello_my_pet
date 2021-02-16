@@ -159,12 +159,12 @@ table#user_list td {
     padding: 10px 2%;
 }
 
-tr.row {
+tbody.row1 {
     background-color: #ffffff;
 }
 
-tr.row0 {
-    background-color: #ffffff;
+tbody.row0 {
+    background-color: #f2f2f2;
 }
 
 select {

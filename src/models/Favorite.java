@@ -16,30 +16,31 @@ import javax.persistence.Table;
         // いいねを解除するペットIDを取得
         @NamedQuery(
                 name= "getDestroyPet",
-                query = "SELECT f.id FROM Favorite f WHERE f.pet  = :pet_id AND f.user = :login_user"),
-//        // いいねを解除するユーザーIDを取得
-//        @NamedQuery(
-//                name= "getDestroyUser",
-//                query = "SELECT f.id FROM Favorite f WHERE f.user = :login_user AND f.pet = :pet"),
+                query = "SELECT f.id FROM Favorite f WHERE f.pet  = :pet AND f.user = :login_user"),
         // ペットのすべてのいいねをカウント
         @NamedQuery(
                 name= "getPetAllFavoritesCount",
                 query = "SELECT COUNT(f) FROM  Favorite f, Pet p WHERE f.pet = f.pet"),
-        // ログインユーザー自身のいいねしたペット一覧を取得
+        // ログインユーザー自身のいいねしたペットIDを取得
+//        @NamedQuery(
+//                name= "getMyAllFavorites",
+//                query = "SELECT f FROM Favorite AS f WHERE f.user = :user ORDER BY f.id DESC"),
+        // ログインユーザー自身のいいねしたペット情報を取得
         @NamedQuery(
-                name= "getMyFavorites",
-                query = "SELECT f FROM Favorite AS f WHERE f.user = :user ORDER BY f.id DESC"),
-                //query = "SELECT f FROM Favorite f, User u WHERE f.pet = :login_user AND u = f.user ORDER BY f.id DESC"),
+                name= "getMyAllFavorites",
+                query = "SELECT p FROM Pet p, Favorite f WHERE f.user = :user ORDER BY f.id DESC"),
         // ログインユーザー自身のいいねしたペットカウントを取得
         @NamedQuery(
                 name= "getMyFavoritesCount",
                 query = "SELECT COUNT(f) FROM Favorite AS f WHERE f.user = :user"),
-                //query = "SELECT COUNT(f) FROM  Favorite f, User u WHERE f.user = :login_user AND u = f.user"),
+        // ログインユーザー自身のいいねしたペット一覧情報を取得
+        @NamedQuery(
+                name = "getMyFavoritePets",
+                query = "SELECT p FROM Pet p, Favorite f WHERE f.user = :user AND p.id = f.pet.id ORDER BY f.id DESC"),
         // ログインユーザーがすでにいいねしているペットかをチェックする
         @NamedQuery(
                 name = "checkMyFavorite",
                 query = "SELECT f FROM Favorite AS f WHERE f.user = :user AND f.pet = :pet")
-                //query = "SELECT f.pet FROM Favorite f WHERE f.user = :login_user")
 })
 @Entity
 public class Favorite {

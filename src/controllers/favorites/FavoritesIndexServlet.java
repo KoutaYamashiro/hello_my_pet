@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Favorite;
+import models.Pet;
 import models.User;
 import utils.DBUtil;
 
@@ -36,38 +36,43 @@ public class FavoritesIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        // ログインユーザーのIDを取得
-        User login_user = (User) request.getSession().getAttribute("login_user");
+        // ログインユーザーを取得
+        User login_user = (User)request.getSession().getAttribute("login_user");
 
-        // ペットのIDを取得
-        //Pet pet_details = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
+        // ペット情報を取得
 
         // ページネーション
         int page;
-        try {
+        try{
             page = Integer.parseInt(request.getParameter("page"));
-        } catch (Exception e) {
+        } catch(Exception e) {
             page = 1;
         }
 
-        // ログインユーザーのいいねしたペット一覧を取得
-        List<Favorite> favorite_pets = em.createNamedQuery("getMyFavorites", Favorite.class)
-                                                             .setParameter("user", login_user)
-//                                                             .setParameter("pet", pet_details)
-                                                             .setFirstResult(10 * (page -1))
-                                                             .setMaxResults(10)
-                                                             .getResultList();
+        // いいねしたペットを取得
+        List<Pet> favorite_pets = em.createNamedQuery("getMyFavoritePets", Pet.class)
+                                  .setParameter("user", login_user)
+                                  .setFirstResult(10 * (page - 1))
+                                  .setMaxResults(10)
+                                  .getResultList();
 
-        // ログインユーザーのいいねしたペット数を取得
+        // ユーザーがいいねしたペットをカウント
         long pets_count = (long)em.createNamedQuery("getMyFavoritesCount", Long.class)
-                                                    .setParameter("user", login_user)
-                                                    .getSingleResult();
+                                     .setParameter("user", login_user)
+                                     .getSingleResult();
 
         em.close();
 
+        // 値をセット
         request.setAttribute("favorite_pets", favorite_pets);
         request.setAttribute("pets_count", pets_count);
         request.setAttribute("page", page);
+
+        // flushがあった場合のみ表示
+        if(request.getSession().getAttribute("flush") != null) {
+            request.setAttribute("flush", request.getSession().getAttribute("flush"));
+            request.getSession().removeAttribute("flush");
+        }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/favorites/index.jsp");
         rd.forward(request, response);

@@ -43,13 +43,13 @@ public class FavoritesDestroyServlet extends HttpServlet {
        Pet p = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
 
        // いいねリストの中から、いいね解除されるペットIDを取得
-       Integer pet_id = 0;
-       pet_id = em.createNamedQuery("getDestroyPet", Integer.class)
+       Integer pet = 0;
+       pet = em.createNamedQuery("getDestroyPet", Integer.class)
                         .setParameter("login_user", u)
-                        .setParameter("pet_id", p)
+                        .setParameter("pet", p)
                         .getSingleResult();
 
-       Favorite f = em.find(Favorite.class, pet_id);
+       Favorite f = em.find(Favorite.class, pet);
 
             em.getTransaction().begin();
             em.remove(f);
