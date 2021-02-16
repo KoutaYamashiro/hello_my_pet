@@ -32,7 +32,7 @@ import javax.persistence.Table;
         // ログインユーザーがすでにいいねしているペットかをチェックする
         @NamedQuery(
                 name = "checkMyFavorite",
-                query = "SELECT f FROM Favorite AS f WHERE f.user = :user AND f.pet = :pet")
+                query = "SELECT f FROM Favorite f WHERE f.user = :user AND f.pet = :pet")
 })
 @Entity
 public class Favorite {

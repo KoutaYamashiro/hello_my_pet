@@ -43,20 +43,19 @@ public class PetsShowServlet extends HttpServlet {
             // ペットIDを取得
             Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("id")));
 
+
             // フォロー判定　ユーザーとペット情報をセット
             List<Favorite> checkMyFavorite = em.createNamedQuery("checkMyFavorite", Favorite.class)
-                                                          .setParameter("user", login_user)
-                                                          .setParameter("pet", pet)
-                                                          .getResultList();
+                                                                    .setParameter("user", login_user)
+                                                                    .setParameter("pet", pet)
+                                                                    .getResultList();
 
             // セットしたされた情報と重複チェック
             boolean favorite_check = checkMyFavorite.contains(pet);
 
-            System.out.println("確認" + checkMyFavorite);
-
             // 値をセット
-            request.setAttribute("checkMyFavorite", checkMyFavorite);
-            request.setAttribute("favorite_count", favorite_check);
+            request.setAttribute("favoriteCheckFlag", checkMyFavorite);
+            request.setAttribute("favorite_check", favorite_check);
             //フォロー判定ここまで
 
             em.close();
