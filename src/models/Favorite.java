@@ -17,26 +17,18 @@ import javax.persistence.Table;
         @NamedQuery(
                 name= "getDestroyPet",
                 query = "SELECT f.id FROM Favorite f WHERE f.pet  = :pet AND f.user = :login_user"),
-        // ペットのすべてのいいねをカウント
+        // ペットごとのいいねをカウント
         @NamedQuery(
                 name= "getPetAllFavoritesCount",
-                query = "SELECT COUNT(f) FROM  Favorite f, Pet p WHERE f.pet = f.pet"),
-        // ログインユーザー自身のいいねしたペットIDを取得
-//        @NamedQuery(
-//                name= "getMyAllFavorites",
-//                query = "SELECT f FROM Favorite AS f WHERE f.user = :user ORDER BY f.id DESC"),
-        // ログインユーザー自身のいいねしたペット情報を取得
-        @NamedQuery(
-                name= "getMyAllFavorites",
-                query = "SELECT p FROM Pet p, Favorite f WHERE f.user = :user ORDER BY f.id DESC"),
-        // ログインユーザー自身のいいねしたペットカウントを取得
-        @NamedQuery(
-                name= "getMyFavoritesCount",
-                query = "SELECT COUNT(f) FROM Favorite AS f WHERE f.user = :user"),
-        // ログインユーザー自身のいいねしたペット一覧情報を取得
+                query = "SELECT COUNT(f) FROM  Favorite f, Pet p WHERE p.id = f.pet.id"),
+        // ログインユーザーのいいねしたペット一覧情報を取得
         @NamedQuery(
                 name = "getMyFavoritePets",
                 query = "SELECT p FROM Pet p, Favorite f WHERE f.user = :user AND p.id = f.pet.id ORDER BY f.id DESC"),
+        // ログインユーザーのいいねしたペット数を取得
+        @NamedQuery(
+                name= "getMyFavoritesCount",
+                query = "SELECT COUNT(f) FROM Favorite AS f WHERE f.user = :user"),
         // ログインユーザーがすでにいいねしているペットかをチェックする
         @NamedQuery(
                 name = "checkMyFavorite",

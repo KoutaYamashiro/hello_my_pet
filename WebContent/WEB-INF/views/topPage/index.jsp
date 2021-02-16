@@ -31,7 +31,7 @@
                     </tr>
                     <tr>
                             <th>いいね数</th>
-                            <td class="favorite"><c:out value="仮" /></td>
+                            <td class="favorite"><c:out value="${favorites_count}" /></td>
                     </tr>
                     <tr>
                             <th>価格</th>

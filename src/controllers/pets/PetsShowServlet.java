@@ -52,6 +52,8 @@ public class PetsShowServlet extends HttpServlet {
             // セットしたされた情報と重複チェック
             boolean favorite_check = checkMyFavorite.contains(pet);
 
+            System.out.println("確認" + checkMyFavorite);
+
             // 値をセット
             request.setAttribute("checkMyFavorite", checkMyFavorite);
             request.setAttribute("favorite_count", favorite_check);
