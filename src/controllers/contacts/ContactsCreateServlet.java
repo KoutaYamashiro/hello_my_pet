@@ -37,21 +37,22 @@ public class ContactsCreateServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 自動生成トークン取得
+        // トークン取得
         String _token = (String)request.getParameter("_token");
 
         if(_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
+
             //   新しいお問い合わせを生成
             Contact c = new Contact();
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
             // 問い合わせするペットのIDを取得
-            Pet p = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
+            Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("id")));
 
             // Contactテーブルに値をセット
             c.setUser((User)request.getSession().getAttribute("login_user"));
-            c.setPet(p);
+            c.setPet(pet);
             c.setContent(request.getParameter("content"));
             c.setCreated_at(currentTime);
 

@@ -29,7 +29,7 @@
                     </tr>
                     <tr>
                         <th>いいね数</th>
-                        <td class="favorite"><c:out value="${favorites_count}" /></td>
+                        <td class="favorite"><c:out value="${favoritesCount}" /></td>
                     </tr>
                     <tr>
                         <th>生体価格</th>

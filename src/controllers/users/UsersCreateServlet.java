@@ -54,7 +54,7 @@ public class UsersCreateServlet extends HttpServlet {
                     )
                 );
 
-            // ユーザー登録の場合は　ユーザー権限として　０　で登録
+            // ユーザー登録の場合は　０　で登録するための処理記載
             Integer admin_flag = new Integer(0);
             String af_str = request.getParameter("admin_flag");
             if(af_str != null && !af_str.equals("")) {

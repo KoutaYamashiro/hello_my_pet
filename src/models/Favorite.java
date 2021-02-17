@@ -19,8 +19,8 @@ import javax.persistence.Table;
                 query = "SELECT f.id FROM Favorite f WHERE f.pet  = :pet AND f.user = :login_user"),
         // ペットごとのいいねをカウント
         @NamedQuery(
-                name= "getPetAllFavoritesCount",
-                query = "SELECT COUNT(f) FROM  Favorite f, Pet p WHERE p.id = f.pet.id"),
+                name= "getPetFavoritesCount",
+                query = "SELECT COUNT(p) FROM  Pet p, Favorite f WHERE f.pet  = :pet"),
         // ログインユーザーのいいねしたペット一覧情報を取得
         @NamedQuery(
                 name = "getMyFavoritePets",

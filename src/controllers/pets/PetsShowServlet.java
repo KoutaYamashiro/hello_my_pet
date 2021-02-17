@@ -37,12 +37,12 @@ public class PetsShowServlet extends HttpServlet {
       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             EntityManager em = DBUtil.createEntityManager();
 
-            //  ログインユーザーIDを取得
+            //  ログインユーザーのIDを取得
             User login_user = (User) request.getSession().getAttribute("login_user");
 
-            // ペットIDを取得
+            // 詳細を見るペットのIDを取得
             Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("id")));
-
+            System.out.println("＊＊＊ペットID＊＊＊" + pet);
 
             // フォロー判定　ユーザーとペット情報をセット
             List<Favorite> checkMyFavorite = em.createNamedQuery("checkMyFavorite", Favorite.class)
@@ -50,13 +50,20 @@ public class PetsShowServlet extends HttpServlet {
                                                                     .setParameter("pet", pet)
                                                                     .getResultList();
 
-            // セットしたされた情報と重複チェック
-            boolean favoriteCheckFlag = checkMyFavorite.contains(login_user);
+            // ペットのいいね数を取得
+            long favoritesCount = (long)em.createNamedQuery("getPetFavoritesCount", Long.class)
+                                                             .setParameter("pet", pet)
+                                                             .getSingleResult();
+            System.out.println("＊＊＊チェックfavoritesCount＊＊＊" + favoritesCount);
 
-            System.out.println("チェック" + favoriteCheckFlag + "です。");
+
+            // セットしたされた情報と重複チェック
+            Boolean favoriteCheckFlag = !checkMyFavorite.contains(login_user);
+            System.out.println("＊＊＊チェックfavoriteCheckFlag＊＊＊" + favoriteCheckFlag);
 
             // 値をセット
             request.setAttribute("favoriteCheckFlag", checkMyFavorite);
+            request.setAttribute("favoritesCount", favoritesCount);
             request.setAttribute("favoriteCheckFlag", favoriteCheckFlag);
             //フォロー判定ここまで
 

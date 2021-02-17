@@ -28,13 +28,13 @@ public class FavoriteValidator {
         // すでにいいねされているペットID、ユーザーIDの重複チェック
         if(favoriteCheckFlag) {
             EntityManager em = DBUtil.createEntityManager();
-            long favorites_count = (long)em.createNamedQuery("checkMyFavorite", Long.class)
+            long favoritesCount = (long)em.createNamedQuery("checkMyFavorite", Long.class)
                                                             .setParameter("user", user)
                                                             .setParameter("pet", pet)
                                                             .getSingleResult();
 
             em.close();
-            if(favorites_count > 0) {
+            if(favoritesCount > 0) {
                 return "すでにペットにいいねしています。";
             }
         }

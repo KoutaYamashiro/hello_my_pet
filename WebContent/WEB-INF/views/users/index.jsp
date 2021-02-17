@@ -51,12 +51,12 @@
                         <c:out value="${i}" />&nbsp;
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='/users/index?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
+                        <a id=pages href="<c:url value='/users/index?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a id=new_user href="<c:url value='/users/new' />">管理者　新規登録</a></p>
+        <p><a id=new_user href="<c:url value='/users/new' />">新規登録</a></p>
 
     </c:param>
 </c:import>

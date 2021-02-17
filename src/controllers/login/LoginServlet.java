@@ -59,6 +59,7 @@ public class LoginServlet extends HttpServlet {
 
         User u = null;
 
+        // 値がセットされている場合
         if(mail_address != null && !mail_address.equals("") && plain_pass != null && !plain_pass.equals("")) {
             EntityManager em = DBUtil.createEntityManager();
 

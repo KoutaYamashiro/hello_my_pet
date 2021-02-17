@@ -43,25 +43,27 @@ public class TopPageIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        // 最大件数と開始位置を指定してペット情報を取得
+        // 最大件数と開始位置を指定して全てのペット情報を取得
         List<Pet> pets = em.createNamedQuery("getAllPets", Pet.class)
                                       .setFirstResult(10 * (page - 1))
                                       .setMaxResults(10)
                                       .getResultList();
 
-        // 全ペット数を取得
-        long pets_count = (long)em.createNamedQuery("getPetsCount", Long.class)
+        // 全てのペット数を取得
+        long petsCount = (long)em.createNamedQuery("getPetsCount", Long.class)
                                                    .getSingleResult();
 
         // ペットごとのいいね数を取得
-        long favorites_count = (long)em.createNamedQuery("getPetAllFavoritesCount", Long.class)
-                                                         .getSingleResult();
+//        long favoritesCount = (long)em.createNamedQuery("getPetFavoritesCount", Long.class)
+//                                                         .getSingleResult();
+//
+//        System.out.println("＊＊＊favoritesCountチェック＊＊＊" + favoritesCount);
 
         em.close();
 
         request.setAttribute("pets", pets);
-        request.setAttribute("favorites_count", favorites_count);     // いいね数
-        request.setAttribute("pets_count", pets_count);                 // 全ペット数
+//        request.setAttribute("favoritesCount", favoritesCount);     // いいね数
+        request.setAttribute("petsCount", petsCount);                 // 全ペット数
         request.setAttribute("page", page);                                  // ページ数
 
         if(request.getSession().getAttribute("flush") != null) {

@@ -39,9 +39,9 @@ public class ContactsNewServlet extends HttpServlet {
         Contact  c = new Contact();
 
         // 問い合わせするペットのIDを取得
-        Pet p = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
+        Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("id")));
         // 値をセット
-        c.setPet(p);
+        c.setPet(pet);
 
         request.setAttribute("contact", c);
 
