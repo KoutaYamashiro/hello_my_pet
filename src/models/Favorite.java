@@ -16,7 +16,7 @@ import javax.persistence.Table;
         // いいねを解除するペットIDを取得
         @NamedQuery(
                 name= "getDestroyPet",
-                query = "SELECT f.id FROM Favorite f WHERE f.pet  = :pet AND f.user = :login_user"),
+                query = "SELECT f.id FROM Favorite AS f WHERE f.pet  = :pet AND f.user = :login_user"),
         // ペットごとのいいねをカウント
         @NamedQuery(
                 name= "getPetFavoritesCount",
@@ -24,15 +24,15 @@ import javax.persistence.Table;
         // ログインユーザーのいいねしたペット一覧情報を取得
         @NamedQuery(
                 name = "getMyFavoritePets",
-                query = "SELECT p FROM Pet p, Favorite f WHERE f.user = :user AND p.id = f.pet.id ORDER BY f.id DESC"),
+                query = "SELECT p FROM Pet AS p, Favorite AS f WHERE f.user = :user AND p.id = f.pet.id ORDER BY f.id DESC"),
         // ログインユーザーのいいねしたペット数を取得
         @NamedQuery(
                 name= "getMyFavoritesCount",
                 query = "SELECT COUNT(f) FROM Favorite AS f WHERE f.user = :user"),
         // ログインユーザーがすでにいいねしているペットかをチェックする
         @NamedQuery(
-                name = "checkMyFavorite",
-                query = "SELECT f FROM Favorite f WHERE f.user = :user AND f.pet = :pet")
+                name = "checkMyFavoriteCount",
+                query = "SELECT COUNT(f) FROM Favorite AS f WHERE f.user = :user AND f.pet  = :pet")
 })
 @Entity
 public class Favorite {

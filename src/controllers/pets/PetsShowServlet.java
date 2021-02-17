@@ -1,7 +1,6 @@
 package controllers.pets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Favorite;
 import models.Pet;
 import models.User;
 import utils.DBUtil;
@@ -44,27 +42,23 @@ public class PetsShowServlet extends HttpServlet {
             Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("id")));
             System.out.println("＊＊＊ペットID＊＊＊" + pet);
 
-            // フォロー判定　ユーザーとペット情報をセット
-            List<Favorite> checkMyFavorite = em.createNamedQuery("checkMyFavorite", Favorite.class)
-                                                                    .setParameter("user", login_user)
-                                                                    .setParameter("pet", pet)
-                                                                    .getResultList();
+            // セットしたされた情報の重複チェック
+            long checkMyFavoriteCount = (long)em.createNamedQuery("checkMyFavoriteCount", Long.class)
+                                                            .setParameter("user", login_user)
+                                                            .setParameter("pet", pet)
+                                                            .getSingleResult();
+            System.out.println("＊＊＊チェックcheckMyFavoriteCount＊＊＊" + checkMyFavoriteCount);
 
-            // ペットのいいね数を取得
+         // ペットのいいね数を取得
             long favoritesCount = (long)em.createNamedQuery("getPetFavoritesCount", Long.class)
                                                              .setParameter("pet", pet)
                                                              .getSingleResult();
             System.out.println("＊＊＊チェックfavoritesCount＊＊＊" + favoritesCount);
 
-
-            // セットしたされた情報と重複チェック
-            Boolean favoriteCheckFlag = !checkMyFavorite.contains(login_user);
-            System.out.println("＊＊＊チェックfavoriteCheckFlag＊＊＊" + favoriteCheckFlag);
-
             // 値をセット
-            request.setAttribute("favoriteCheckFlag", checkMyFavorite);
+//            request.setAttribute("favoriteCheckFlag", checkMyFavorite);
             request.setAttribute("favoritesCount", favoritesCount);
-            request.setAttribute("favoriteCheckFlag", favoriteCheckFlag);
+            request.setAttribute("checkMyFavoriteCount", checkMyFavoriteCount);
             //フォロー判定ここまで
 
             em.close();

@@ -53,16 +53,9 @@ public class TopPageIndexServlet extends HttpServlet {
         long petsCount = (long)em.createNamedQuery("getPetsCount", Long.class)
                                                    .getSingleResult();
 
-        // ペットごとのいいね数を取得
-//        long favoritesCount = (long)em.createNamedQuery("getPetFavoritesCount", Long.class)
-//                                                         .getSingleResult();
-//
-//        System.out.println("＊＊＊favoritesCountチェック＊＊＊" + favoritesCount);
-
         em.close();
 
         request.setAttribute("pets", pets);
-//        request.setAttribute("favoritesCount", favoritesCount);     // いいね数
         request.setAttribute("petsCount", petsCount);                 // 全ペット数
         request.setAttribute("page", page);                                  // ページ数
 

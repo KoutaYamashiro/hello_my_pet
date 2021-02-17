@@ -55,8 +55,8 @@
         </table>
 
         <div id="pagination">
-            （全 ${pets_count} 件）<br />
-            <c:forEach var="i" begin="1" end="${((pets_count - 1) / 10) + 1}" step="1">
+            （全 ${petsCount} 件）<br />
+            <c:forEach var="i" begin="1" end="${((petsCount - 1) / 10) + 1}" step="1">
                 <c:choose>
                     <c:when test="${i == page}">
                         <c:out value="${i}" />&nbsp;

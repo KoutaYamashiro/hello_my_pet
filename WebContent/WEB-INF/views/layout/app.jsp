@@ -21,7 +21,7 @@
                         </h1>
                         &nbsp;&nbsp;&nbsp; <a href="<c:url value='/users/index' />">ユーザー一覧</a>&nbsp;&nbsp;
                         <a href="<c:url value='/pets/index' />">ペット一覧</a>&nbsp;&nbsp; <a
-                            href="<c:url value='仮' />">お問い合わせ一覧</a>&nbsp;&nbsp;
+                            href="<c:url value='/contacts/index' />">お問い合わせ一覧</a>&nbsp;&nbsp;
                         <div id="user_name">
                             <a href="<c:url value='/users/show?id=${login_user.id}' />">
                                 <c:out value="${sessionScope.login_user.name}" />様プロフィール

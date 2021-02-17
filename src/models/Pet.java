@@ -72,7 +72,7 @@ public class Pet {
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
 
-    // 多対多のモデリング付加
+    // ペットへいいねしたユーザーカウント　多対多のモデリング付加
     @ManyToMany(mappedBy = "favotitePets", fetch = FetchType.EAGER)
     List<User> favoritedUsers;
 

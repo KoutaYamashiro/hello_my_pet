@@ -68,8 +68,8 @@
         <!-- ユーザー表示 -->
         <c:if test="${sessionScope.login_user.admin_flag == 0}">
             <!-- いいね　ボタン -->
-            <c:choose>
-                <c:when test="${favoriteCheckFlag = true}">
+                <c:choose>
+                <c:when test="${checkMyFavoriteCount == 0}">
                     <td class="favorite">
                         <form method="POST" action="<c:url value='/favorites/create' />">
                             <input type="hidden" name="pet_id" value="${pet.id}">
@@ -77,15 +77,13 @@
                         </form>
                     </td>
                 </c:when>
-                <c:when test="${favoriteCheckFlag = false}">
+                <c:otherwise>
                     <td class="favorite">
                         <form method="POST" action="<c:url value='/favorites/destroy' />">
                             <input type="hidden" name="pet_id" value="${pet.id}">
                             <button type="submit" name="favorite">いいね解除</button>
                         </form>
                     </td>
-                </c:when>
-                <c:otherwise>
                 </c:otherwise>
             </c:choose>
             <c:if test="${favorite_count}">
