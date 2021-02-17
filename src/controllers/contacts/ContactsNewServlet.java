@@ -44,6 +44,7 @@ public class ContactsNewServlet extends HttpServlet {
         c.setPet(pet);
 
         request.setAttribute("contact", c);
+        request.setAttribute("pet", pet);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/contacts/new.jsp");
         rd.forward(request, response);

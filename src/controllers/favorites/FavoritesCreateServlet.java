@@ -41,11 +41,11 @@ public class FavoritesCreateServlet extends HttpServlet {
         Favorite f = new Favorite();
 
         // いいねしたペットのIDを取得
-        Pet p = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
+        Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
 
         // テーブルに値をセット
         f.setUser((User) request.getSession().getAttribute("login_user"));
-        f.setPet(p);
+        f.setPet(pet);
 
         // すでにいいねしたペットの場合はエラーとなる
 //        List<String> error = FavoriteValidator.validate(f, true);

@@ -2,14 +2,17 @@ package models;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -69,9 +72,24 @@ public class Pet {
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
 
+    // 多対多のモデリング付加
+    @ManyToMany(mappedBy = "favotitePets", fetch = FetchType.EAGER)
+    List<User> favoritedUsers;
+
     public Integer getId() {
         return id;
     }
+
+
+    public List<User> getFavoritedUsers() {
+        return favoritedUsers;
+    }
+
+
+    public void setFavoritedUsers(List<User> favoritedUsers) {
+        this.favoritedUsers = favoritedUsers;
+    }
+
 
     public void setId(Integer id) {
         this.id = id;

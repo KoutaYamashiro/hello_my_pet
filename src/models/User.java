@@ -1,12 +1,17 @@
 package models;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -62,8 +67,22 @@ public class User {
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
 
+    // 多対多のモデリング所有
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "favorites", joinColumns = @JoinColumn(name = "user_id"),
+                      inverseJoinColumns = @JoinColumn(name = "pet_id"))
+    List<Pet> favotitePets;
+
     public Integer getId() {
         return id;
+    }
+
+    public List<Pet> getFavotitePets() {
+        return favotitePets;
+    }
+
+    public void setFavotitePets(List<Pet> favotitePets) {
+        this.favotitePets = favotitePets;
     }
 
     public String getMail_address() {

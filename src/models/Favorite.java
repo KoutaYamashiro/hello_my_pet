@@ -20,7 +20,7 @@ import javax.persistence.Table;
         // ペットごとのいいねをカウント
         @NamedQuery(
                 name= "getPetFavoritesCount",
-                query = "SELECT COUNT(p) FROM  Pet p, Favorite f WHERE f.pet  = :pet"),
+                query = "SELECT COUNT(f) FROM Favorite AS f WHERE f.pet  = :pet"),
         // ログインユーザーのいいねしたペット一覧情報を取得
         @NamedQuery(
                 name = "getMyFavoritePets",

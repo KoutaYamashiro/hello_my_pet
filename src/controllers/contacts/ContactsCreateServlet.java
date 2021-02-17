@@ -37,14 +37,13 @@ public class ContactsCreateServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // トークン取得
-        String _token = (String)request.getParameter("_token");
-
-        if(_token != null && _token.equals(request.getSession().getId())) {
-            EntityManager em = DBUtil.createEntityManager();
+            // EntityManagerのオブジェクトを生成
+           EntityManager em = DBUtil.createEntityManager();
 
             //   新しいお問い合わせを生成
             Contact c = new Contact();
+
+            //  時間を生成
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
             // 問い合わせするペットのIDを取得
@@ -57,7 +56,6 @@ public class ContactsCreateServlet extends HttpServlet {
             c.setCreated_at(currentTime);
 
             List<String> errors = ContactValidator.validate(c);
-
             // エラーがある場合
             if(errors.size() > 0) {
                 em.close();
@@ -69,17 +67,16 @@ public class ContactsCreateServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/contacts/new.jsp");
                 rd.forward(request, response);
             } else {
+                // データベースを更新
                 em.getTransaction().begin();
                 em.persist(c);
                 em.getTransaction().commit();
                 em.close();
                 request.getSession().setAttribute("flush", "お問い合わせしました！返信をお待ち下さい。");
-
+                // トップページへリダイレクト
                 response.sendRedirect(request.getContextPath() + "/contacts/index");
             }
         }
-    }
-
 }
 
 
