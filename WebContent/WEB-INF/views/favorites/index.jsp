@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <c:choose>
@@ -30,7 +31,7 @@
                             </tr>
                             <tr>
                                 <th>いいね数</th>
-                                <td class="favorite"><c:out value="${favoritesCount}" /></td>
+                                <td class="favorite"><c:out value="${fn:length(pet.favoritedUsers)}" /></td>
                             </tr>
                             <tr>
                                 <th>生体価格</th>
