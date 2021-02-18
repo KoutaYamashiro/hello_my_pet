@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Contact;
+import models.User;
 import utils.DBUtil;
 
 /**
@@ -35,6 +36,9 @@ public class ContactsIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+        // ログインユーザーを取得
+        User login_user = (User)request.getSession().getAttribute("login_user");
+
         // ページネーション
         int page;
         try{
@@ -49,15 +53,29 @@ public class ContactsIndexServlet extends HttpServlet {
                                   .setMaxResults(10)
                                   .getResultList();
 
+        // お問い合わせしたユーザー情報を取得
+//        List<User> userName = em.createNamedQuery("getContactedUsers", User.class)
+//                                                .setParameter("contacts", contacts)
+//                                                .getResultList();
+
         // お問い合わせ数カウント
         long contacts_count = (long)em.createNamedQuery("getContactsCount", Long.class)
                                      .getSingleResult();
 
         em.close();
 
+        // 値をセット
+//        request.setAttribute("userName", userName);
+        request.setAttribute("login_user", login_user);
         request.setAttribute("contacts", contacts);
         request.setAttribute("contacts_count", contacts_count);
         request.setAttribute("page", page);
+
+        // flushがあった場合のみ表示
+        if(request.getSession().getAttribute("flush") != null) {
+            request.setAttribute("flush", request.getSession().getAttribute("flush"));
+            request.getSession().removeAttribute("flush");
+        }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/contacts/index.jsp");
         rd.forward(request, response);

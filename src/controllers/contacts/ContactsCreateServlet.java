@@ -47,7 +47,7 @@ public class ContactsCreateServlet extends HttpServlet {
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
             // 問い合わせするペットのIDを取得
-            Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("id")));
+            Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
 
             // Contactテーブルに値をセット
             c.setUser((User)request.getSession().getAttribute("login_user"));

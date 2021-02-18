@@ -47,18 +47,8 @@ public class FavoritesCreateServlet extends HttpServlet {
         f.setUser((User) request.getSession().getAttribute("login_user"));
         f.setPet(pet);
 
-        // すでにいいねしたペットの場合はエラーとなる
-//        List<String> error = FavoriteValidator.validate(f, true);
-//        if (error.size() > 0) {
-//            em.close();
-
             request.setAttribute("_token", request.getSession().getId());
             request.setAttribute("favorite", f);
-//            request.setAttribute("error", error);
-
-//            RequestDispatcher rd = request.getRequestDispatcher("/");
-//            rd.forward(request, response);
-//        } else {
 
             // データベースを更新
             em.getTransaction().begin();

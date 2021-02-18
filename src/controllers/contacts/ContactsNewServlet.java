@@ -36,6 +36,7 @@ public class ContactsNewServlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
+        // 問い合わせを生成
         Contact  c = new Contact();
 
         // 問い合わせするペットのIDを取得

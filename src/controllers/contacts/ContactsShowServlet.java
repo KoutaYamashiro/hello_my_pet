@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Contact;
+import models.User;
 import utils.DBUtil;
 
 /**
@@ -34,10 +35,16 @@ public class ContactsShowServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+        // ログインユーザーを取得
+        User login_user = (User)request.getSession().getAttribute("login_user");
+
+        // お問い合わせを取得
         Contact c = em.find(Contact.class, Integer.parseInt(request.getParameter("id")));
 
         em.close();
 
+        // 値をセット
+        request.setAttribute("login_user", login_user);
         request.setAttribute("contact", c);
         request.setAttribute("_token", request.getSession().getId());
 

@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name = "Users")
 @NamedQueries({
     @NamedQuery(
-         // すべてのユーザー情報を取得
+         // 全てのユーザー情報を取得
         name = "getAllUsers",
         query = "SELECT u FROM User AS u ORDER BY u.id DESC"
     ),
@@ -32,6 +32,11 @@ import javax.persistence.Table;
          // メールアドレスがすでに登録されていないかチェック
         name = "checkRegisteredMail_address",
         query = "SELECT COUNT(u) FROM User AS u WHERE u.mail_address = :mail_address"
+    ),
+    @NamedQuery(
+            // お問い合わせをした全てのユーザー情報を取得
+            name = "getContactedUsers",
+            query = "SELECT u FROM User AS u, Contact AS c WHERE u.id = c.user.id"
     ),
     @NamedQuery(
             // ログイン時、メールアドレスとパスワードが正しいかをチェック
@@ -67,7 +72,7 @@ public class User {
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
 
-    // 多対多のモデリング所有
+    // favotitePets 多対多のモデリング所有
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "favorites", joinColumns = @JoinColumn(name = "user_id"),
                       inverseJoinColumns = @JoinColumn(name = "pet_id"))
