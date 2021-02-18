@@ -34,7 +34,7 @@
                         </tr>
                         <tr>
                             <th>更新日時</th>
-                            <td><fmt:formatDate value="${pet.created_at}" pattern="yyyy年MM月dd日 HH:mm" /></td>
+                            <td><fmt:formatDate value="${pet.updated_at}" pattern="yyyy年MM月dd日 HH:mm" /></td>
                         </tr>
                         <tr>
                             <th>生体価格</th>

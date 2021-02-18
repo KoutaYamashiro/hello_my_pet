@@ -39,8 +39,6 @@ public class FavoritesIndexServlet extends HttpServlet {
         // ログインユーザーを取得
         User login_user = (User)request.getSession().getAttribute("login_user");
 
-        // ペット情報を取得
-
         // ページネーション
         int page;
         try{

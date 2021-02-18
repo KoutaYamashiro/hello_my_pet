@@ -8,7 +8,7 @@
         <c:choose>
             <c:when
                 test="${sessionScope.login_user.admin_flag == 1 ||
-                            (sessionScope.login_user.admin_flag == 0 && sessionScope.login_user.id == contact.user_id)}">
+                            (sessionScope.login_user.admin_flag == 0 && sessionScope.login_user.id == user.id)}">
                 <h2>お問い合わせ 一覧</h2>
                 <table id="contact_list">
                     <tbody>

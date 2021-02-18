@@ -33,12 +33,12 @@
                         <tr>
                             <th>登録日時</th>
                             <td><fmt:formatDate value="${user.created_at}"
-                                    pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                                    pattern="yyyy年MM月dd日 HH:mm" /></td>
                         </tr>
                         <tr>
                             <th>更新日時</th>
                             <td><fmt:formatDate value="${user.updated_at}"
-                                    pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                                    pattern="yyyy年MM月dd日 HH:mm" /></td>
                         </tr>
                     </tbody>
                 </table>
