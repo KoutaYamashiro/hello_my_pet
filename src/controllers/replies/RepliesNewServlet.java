@@ -39,7 +39,7 @@ public class RepliesNewServlet extends HttpServlet {
         // 返信を生成
         Reply r = new Reply();
 
-        // 問い合わせIDを取得
+        // 返信する問い合わせのIDを取得
         Contact contact = em.find(Contact.class, Integer.parseInt(request.getParameter("id")));
         // 値をセット
         r.setContact(contact);

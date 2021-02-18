@@ -40,7 +40,7 @@
                         </tr>
                         <tr>
                             <th>返信日時</th>
-                            <td><fmt:formatDate value="${仮}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                            <td><fmt:formatDate value="${仮}" pattern="yyyy年MM月dd日 HH:mm" /></td>
                         </tr>
                         <tr>
                             <th>返信者</th>
@@ -61,8 +61,7 @@
                         </form>
                   </c:if>
                   <c:if test="${sessionScope.login_user.admin_flag == 1}">
-                        <form method="POST" action="<c:url value='/replies/new?id=${contact.pet.id}' />">
-                            <input type="hidden" name="pet_id" value="${contact.pet.id}">
+                        <form method="POST" action="<c:url value='/replies/new?id=${contact.id}' />">
                             <input type="hidden" name="pet_id" value="${contact.id}">
                             <button type="submit" name="contents">問い合わせに返信する</button>
                         </form>
