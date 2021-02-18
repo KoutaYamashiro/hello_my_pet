@@ -15,5 +15,5 @@
 <br /><br />
 
 <input type="hidden" name="_token" value="${_token}" />
-<input type="hidden" name="pet_id" value="${contact.id}">
+<input type="hidden" name="contact_id" value="${contact.id}">
 <button type="submit">返信</button>

@@ -12,18 +12,11 @@
                         </tr>
                         <tr>
                             <th>名前</th>
-                            <c:choose>
-                                    <c:when test="${sessionScope.login_user.admin_flag == 0}">
-                                          <td class="user_name"><c:out value="${login_user.name}" /></td>
-                                    </c:when>
-                                    <c:otherwise>
-                                           <td class="user_name"><c:out value="${user.name}" /></td>
-                                    </c:otherwise>
-                                </c:choose>
+                            <td class="user_name"><c:out value="${user.name}" /></td>
                         </tr>
                         <tr>
                             <th>メールアドレス</th>
-                            <td><c:out value="${login_user.mail_address}" /></td>
+                            <td><c:out value="${user.mail_address}" /></td>
                         </tr>
                         <tr>
                             <th>問い合わせ日時</th>

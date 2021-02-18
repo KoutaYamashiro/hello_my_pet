@@ -40,16 +40,16 @@
                         </tr>
                         <tr>
                             <th>返信日時</th>
-                            <td><fmt:formatDate value="${仮}" pattern="yyyy年MM月dd日 HH:mm" /></td>
+                            <td><fmt:formatDate value="${replies.created_at}" pattern="yyyy年MM月dd日 HH:mm" /></td>
                         </tr>
                         <tr>
                             <th>返信者</th>
-                            <td><c:out value="${仮}" /></td>
+                            <td><c:out value="${send_user.name}" /></td>
                         </tr>
                         <tr>
                             <th>返信内容</th>
                             <td>
-                                <pre><c:out value="${仮}" /></pre>
+                                <pre><c:out value="${replies.content}" /></pre>
                             </td>
                         </tr>
                     </tbody>

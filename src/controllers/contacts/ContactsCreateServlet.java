@@ -73,7 +73,7 @@ public class ContactsCreateServlet extends HttpServlet {
                 em.getTransaction().commit();
                 em.close();
                 request.getSession().setAttribute("flush", "お問い合わせしました！返信をお待ち下さい。");
-                // トップページへリダイレクト
+                // お問い合わせ一覧へリダイレクト
                 response.sendRedirect(request.getContextPath() + "/contacts/index");
             }
         }
