@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Contact;
+import models.Reply;
 import models.User;
 import utils.DBUtil;
 
@@ -39,13 +40,17 @@ public class ContactsShowServlet extends HttpServlet {
         User login_user = (User)request.getSession().getAttribute("login_user");
 
         // お問い合わせを取得
-        Contact c = em.find(Contact.class, Integer.parseInt(request.getParameter("id")));
+        Contact contact = em.find(Contact.class, Integer.parseInt(request.getParameter("id")));
+
+        // 返信情報を取得
+        Reply reply =   em.find(Reply.class, Integer.parseInt(request.getParameter("id")));
 
         em.close();
 
         // 値をセット
         request.setAttribute("login_user", login_user);
-        request.setAttribute("contact", c);
+        request.setAttribute("contact", contact);
+        request.setAttribute("reply", reply);
         request.setAttribute("_token", request.getSession().getId());
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/contacts/show.jsp");

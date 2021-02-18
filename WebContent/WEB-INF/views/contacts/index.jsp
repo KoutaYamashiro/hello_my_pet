@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:choose>
             <c:when
                 test="${sessionScope.login_user.admin_flag == 1 ||
-                            (sessionScope.login_user.admin_flag == 0 && sessionScope.login_user.id == contact.user.id)}">
+                            (sessionScope.login_user.admin_flag == 0 && sessionScope.login_user.id == contact.user_id)}">
                 <h2>お問い合わせ 一覧</h2>
                 <table id="contact_list">
                     <tbody>
@@ -22,10 +23,11 @@
                                 <td class="contact_di"><c:out value="${contact.id}" /></td>
                                 <c:choose>
                                     <c:when test="${sessionScope.login_user.admin_flag == 0}">
-                                          <td class="user_name"><c:out value="${login_user.name}" /></td>
+                                        <td class="user_name"><c:out value="${login_user.name}" /></td>
                                     </c:when>
                                     <c:otherwise>
-                                           <td class="user_name"><c:out value="${user.name}" /></td>
+                                        <td class="user_name"><c:out
+                                                value="${fn:length(pet.contactedUsers)}" /></td>
                                     </c:otherwise>
                                 </c:choose>
                                 <td class="contact_created"><fmt:formatDate
@@ -45,24 +47,42 @@
             </c:otherwise>
         </c:choose>
 
-        <div id="pagination">
-            （全 ${contacts_count} 件）<br />
-            <c:forEach var="i" begin="1" end="${((contacts_count - 1) / 10) + 1}"
-                step="1">
-                <c:choose>
-                    <c:when test="${i == page}">
-                        <c:out value="${i}" />&nbsp;
-                    </c:when>
-                    <c:otherwise>
-                        <a href="<c:url value='/contacts/index?page=${i}' />"><c:out
-                                value="${i}" /></a>&nbsp;
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </div>
+            <c:if test="${sessionScope.login_user.admin_flag == 1}">
+                <div id="pagination">
+                    （全 ${contacts_count} 件）<br />
+                    <c:forEach var="i" begin="1"
+                        end="${((contacts_count - 1) / 10) + 1}" step="1">
+                        <c:choose>
+                            <c:when test="${i == page}">
+                                <c:out value="${i}" />&nbsp;
+                                </c:when>
+                            <c:otherwise>
+                                <a href="<c:url value='/contacts/index?page=${i}' />"><c:out
+                                        value="${i}" /></a>&nbsp;
+                                </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </div>
+            </c:if>
+            <c:if test="${sessionScope.login_user.admin_flag == 0 && sessionScope.login_user.id == contact.user_id}">
+                <div id="pagination">
+                    （全 ${my_contacts_count} 件）<br />
+                    <c:forEach var="i" begin="1"
+                        end="${((my_contacts_count - 1) / 10) + 1}" step="1">
+                        <c:choose>
+                            <c:when test="${i == page}">
+                                <c:out value="${i}" />&nbsp;
+                                </c:when>
+                            <c:otherwise>
+                                <a href="<c:url value='/contacts/index?page=${i}' />"><c:out
+                                        value="${i}" /></a>&nbsp;
+                                </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </div>
+             </c:if>
         <p>
             <a id=top_page href="<c:url value='/' />">トップページへ戻る</a>
         </p>
-
     </c:param>
 </c:import>

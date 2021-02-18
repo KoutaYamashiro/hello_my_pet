@@ -56,7 +56,11 @@
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a id=new_user href="<c:url value='/users/new' />">新規登録</a></p>
-
+        <p>
+            <a id=new_user href="<c:url value='/users/new' />">新規登録</a>
+       </p>
+        <p>
+            <a id=top_page href="<c:url value='/' />">トップページへ戻る</a>
+        </p>
     </c:param>
 </c:import>

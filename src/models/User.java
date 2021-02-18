@@ -72,15 +72,34 @@ public class User {
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
 
-    // favotitePets 多対多のモデリング所有
+    // いいね 多対多のモデリング所有
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "favorites", joinColumns = @JoinColumn(name = "user_id"),
-                      inverseJoinColumns = @JoinColumn(name = "pet_id"))
+    @JoinTable(name = "favorites",
+                       joinColumns = @JoinColumn(name = "user_id"),
+                       inverseJoinColumns = @JoinColumn(name = "pet_id"))
     List<Pet> favotitePets;
+
+    // 問い合わせ 多対多のモデリング所有
+    @ManyToMany
+    @JoinTable(name = "contacts",
+                       joinColumns = @JoinColumn(name = "user_id"),
+                       inverseJoinColumns = @JoinColumn(name = "pet_id"))
+    List<Pet> contactPets;
 
     public Integer getId() {
         return id;
     }
+
+
+    public List<Pet> getContactPets() {
+        return contactPets;
+    }
+
+
+    public void setContactPets(List<Pet> contactPets) {
+        this.contactPets = contactPets;
+    }
+
 
     public List<Pet> getFavotitePets() {
         return favotitePets;

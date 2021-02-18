@@ -28,8 +28,9 @@
              <option value="1"<c:if test="${user.admin_flag == 1}"> selected</c:if>>管理者</option>
              <option value="0"<c:if test="${user.admin_flag == 0}"> selected</c:if>>ユーザー</option>
    </select>
-   <p>※管理者権限で登録するとペット登録・編集が可能</p>
-   <p>　従業員のみ登録</p>
+   <p id=admin>
+        ※管理者で登録するのは従業員のみです。<br />&nbsp;&nbsp; すべてのペット情報が編集できます。
+   </p>
 </c:if>
 
 <input type="hidden" name="_token" value="${_token}" />

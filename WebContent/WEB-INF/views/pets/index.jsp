@@ -56,17 +56,20 @@
                 step="1">
                 <c:choose>
                     <c:when test="${i == page}">
-                        <c:out value="${i}" />&nbsp;</c:when>
+                        <c:out value="${i}" />&nbsp;
+                    </c:when>
                     <c:otherwise>
-                        <a href="<c:url value='/pets/index?page=${i}' />"><c:out
-                                value="${i}" /></a>&nbsp;</c:otherwise>
+                        <a href="<c:url value='/pets/index?page=${i}' />">
+                        <c:out value="${i}" /></a>&nbsp;
+                    </c:otherwise>
                 </c:choose>
             </c:forEach>
         </div>
-        <br />
-
         <p>
             <a id=new_pet href="<c:url value='/pets/new' />">新規ペット登録</a>
+        </p>
+        <p>
+            <a id=top_page href="<c:url value='/' />">トップページへ戻る</a>
         </p>
     </c:param>
 </c:import>

@@ -17,18 +17,20 @@ import javax.persistence.Table;
 @Table(name= "contacts")
 @NamedQueries({
     @NamedQuery(
+            // 全ての問い合わせを取得
             name = "getAllContacts",
             query = "SELECT c FROM Contact AS c ORDER BY c.id DESC"
         ),
         @NamedQuery(
+             // 全ての問い合わせをカウント
             name = "getContactsCount",
             query = "SELECT COUNT(c) FROM Contact AS c"
         ),
-        // ユーザー自身問い合わせ内容を取得
+        // ログインユーザー自身問い合わせ内容を取得
         @NamedQuery(
                 name= "getMyContacts",
                 query = "SELECT c FROM Contact AS c WHERE c.user = :user ORDER BY c.id DESC"),
-        // ユーザー自身問い合わせをカウント
+        // ログインユーザー自身問い合わせをカウント
         @NamedQuery(
                 name= "getMyContactsCount",
                 query = "SELECT COUNT(c) FROM Contact AS c WHERE c.user = :user")

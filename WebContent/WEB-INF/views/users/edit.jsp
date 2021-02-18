@@ -14,10 +14,6 @@
                 <form method="POST" action="<c:url value='/users/update' />">
                     <c:import url="_form.jsp" />
                 </form>
-                <p id=admin>
-                    ※管理者で登録するのは従業員のみです。<br />&nbsp;&nbsp; すべてのペット情報が編集できます。
-                </p>
-
                 <p>
                     <a id=destroy href="#" onclick="confirmDestroy();">退会する</a>
                 </p>

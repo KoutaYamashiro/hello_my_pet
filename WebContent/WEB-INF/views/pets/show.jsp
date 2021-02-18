@@ -30,11 +30,11 @@
                         </tr>
                         <tr>
                             <th>登録日時</th>
-                            <td class="created_at"><c:out value="${pet.created_at}" /></td>
+                            <td><fmt:formatDate value="${pet.created_at}" pattern="yyyy年MM月dd日 HH:mm" /></td>
                         </tr>
                         <tr>
                             <th>更新日時</th>
-                            <td class="updated_at"><c:out value="${pet.updated_at}" /></td>
+                            <td><fmt:formatDate value="${pet.created_at}" pattern="yyyy年MM月dd日 HH:mm" /></td>
                         </tr>
                         <tr>
                             <th>生体価格</th>
@@ -42,13 +42,12 @@
                         </tr>
                         <tr>
                             <th>アピールポイント</th>
-                            <td><pre>
-                                    <c:out value="${pet.appeal_point}" />
-                                </pre></td>
+                            <td>
+                                <pre><c:out value="${pet.appeal_point}" /></pre>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-                <br>
 
             </c:when>
             <c:otherwise>
@@ -66,7 +65,7 @@
             </p>
         </c:if>
         <!-- ユーザー表示 -->
-        <c:if test="${sessionScope.login_user.admin_flag == 0}">
+        <c:if test="${sessionScope.login_user.admin_flag == 0}"><br />
             <!-- いいね　ボタン -->
                 <c:choose>
                 <c:when test="${checkMyFavoriteCount == 0}">

@@ -53,20 +53,20 @@ public class ContactsIndexServlet extends HttpServlet {
                                   .setMaxResults(10)
                                   .getResultList();
 
-        // お問い合わせしたユーザー情報を取得
-//        List<User> userName = em.createNamedQuery("getContactedUsers", User.class)
-//                                                .setParameter("contacts", contacts)
-//                                                .getResultList();
-
         // お問い合わせ数カウント
         long contacts_count = (long)em.createNamedQuery("getContactsCount", Long.class)
+                                     .getSingleResult();
+
+        // ユーザーがお問い合わせした数をカウント
+        long my_contacts_count = (long)em.createNamedQuery("getMyContactsCount", Long.class)
+                                     .setParameter("user", login_user)
                                      .getSingleResult();
 
         em.close();
 
         // 値をセット
-//        request.setAttribute("userName", userName);
         request.setAttribute("login_user", login_user);
+        request.setAttribute("my_contacts_count", my_contacts_count);
         request.setAttribute("contacts", contacts);
         request.setAttribute("contacts_count", contacts_count);
         request.setAttribute("page", page);
