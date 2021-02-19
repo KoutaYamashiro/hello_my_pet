@@ -14,19 +14,27 @@
                             <th class="contact_id">お問い合わせID</th>
                             <th class="contact_name">氏名</th>
                             <th class="contact_created">お問い合わせ日時</th>
+                            <th class="contact_content">お問い合わせ内容</th>
+                            <th class="reply_created">返信日時</th>
+                            <th class="reply_content">返信内容</th>
                             <th class="contact_action">詳細</th>
                         </tr>
                         <c:forEach var="contact" items="${contacts}" varStatus="status">
-                            <tr class="row${status.count % 2}">
-                                <td class="contact_di"><c:out value="${contact.id}" /></td>
-                                <td class="user_name"><c:out value="${login_user.name}" /></td>
-                                <td class="contact_created"><fmt:formatDate
-                                        value='${contact.created_at}' pattern='yyyy年MM月dd日 HH:mm' />
-                                </td>
-                                <td class="contact_action"><a id=details
-                                    href="<c:url value='/contacts/show?id=${contact.id}' />">詳細を表示
-                                </a></td>
-                            </tr>
+                        <tr class="row${status.count % 2}">
+                            <td class="contact_di"><c:out value="${contact.id}" /></td>
+                            <td class="user_name"><c:out value="${login_user.name}" /></td>
+                            <td class="contact_created">
+                                <fmt:formatDate value='${contact.created_at}' pattern='yyyy年MM月dd日 HH:mm' />
+                            </td>
+                            <td class="contact_content"><c:out value="${contact.content}" /></td>
+                            <td class="reply_created">
+                                <fmt:formatDate value='${rpliy.created_at}' pattern='yyyy年MM月dd日 HH:mm' />
+                            </td>
+                            <td class="reply_content"><c:out value="${rpliy.content}" /></td>
+                            <td class="contact_action">
+                                <a id=details href="<c:url value='/contacts/show?id=${contact.id}' />">詳細を表示</a>
+                            </td>
+                        </tr>
                         </c:forEach>
                     </tbody>
                 </table>
