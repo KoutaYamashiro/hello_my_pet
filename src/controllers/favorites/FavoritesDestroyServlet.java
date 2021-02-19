@@ -37,7 +37,7 @@ public class FavoritesDestroyServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // ログインユーザーのIDを取得
-        User u = (User) request.getSession().getAttribute("login_user");
+        User login_user = (User) request.getSession().getAttribute("login_user");
 
         // いいねを解除するペットのIDを取得
        Pet p = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
@@ -45,7 +45,7 @@ public class FavoritesDestroyServlet extends HttpServlet {
        // いいねリストの中から、いいね解除されるペットIDを取得
        Integer pet = 0;
        pet = em.createNamedQuery("getDestroyPet", Integer.class)
-                        .setParameter("login_user", u)
+                        .setParameter("user", login_user)
                         .setParameter("pet", p)
                         .getSingleResult();
 

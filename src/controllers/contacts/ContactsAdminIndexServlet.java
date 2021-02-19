@@ -1,4 +1,4 @@
-package controllers.favorites;
+package controllers.contacts;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,21 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Pet;
+import models.Contact;
 import models.User;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class LikesIndexServlet
+ * Servlet implementation class ContactsAdminIndexServlet
  */
-@WebServlet("/favorites/index")
-public class FavoritesIndexServlet extends HttpServlet {
+@WebServlet("/contacts/admin")
+public class ContactsAdminIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FavoritesIndexServlet() {
+    public ContactsAdminIndexServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,23 +47,22 @@ public class FavoritesIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        // ユーザーがいいねしたペットを取得
-        List<Pet> favorite_pets = em.createNamedQuery("getMyFavoritePets", Pet.class)
-                                  .setParameter("user", login_user)
+        // お問い合わせ内容取得
+        List<Contact> contacts = em.createNamedQuery("getAllContacts", Contact.class)
                                   .setFirstResult(10 * (page - 1))
                                   .setMaxResults(10)
                                   .getResultList();
 
-        // ユーザーがいいねしたペットをカウント
-        long pets_count = (long)em.createNamedQuery("getMyFavoritesCount", Long.class)
-                                     .setParameter("user", login_user)
+        // お問い合わせ数カウント
+        long contacts_count = (long)em.createNamedQuery("getContactsCount", Long.class)
                                      .getSingleResult();
 
         em.close();
 
         // 値をセット
-        request.setAttribute("favorite_pets", favorite_pets);
-        request.setAttribute("pets_count", pets_count);
+        request.setAttribute("login_user", login_user);
+        request.setAttribute("contacts", contacts);
+        request.setAttribute("contacts_count", contacts_count);
         request.setAttribute("page", page);
 
         // flushがあった場合のみ表示
@@ -72,18 +71,7 @@ public class FavoritesIndexServlet extends HttpServlet {
             request.getSession().removeAttribute("flush");
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/favorites/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/contacts/admin.jsp");
         rd.forward(request, response);
     }
-
 }
-
-
-
-
-
-
-
-
-
-

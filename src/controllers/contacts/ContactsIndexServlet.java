@@ -47,36 +47,25 @@ public class ContactsIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        // お問い合わせ内容取得
-        List<Contact> contacts = em.createNamedQuery("getAllContacts", Contact.class)
-                                  .setFirstResult(10 * (page - 1))
-                                  .setMaxResults(10)
-                                  .getResultList();
-
-        // お問い合わせ数カウント
-        long contacts_count = (long)em.createNamedQuery("getContactsCount", Long.class)
-                                     .getSingleResult();
-
         // ユーザーがお問い合わせした内容取得
-        List<Contact> my_contacts = em.createNamedQuery("getMyContacts", Contact.class)
-                                  .setParameter("login_user", login_user)
+        List<Contact> contact_pets = em.createNamedQuery("getMyContacts", Contact.class)
+                                  .setParameter("user", login_user)
                                   .setFirstResult(10 * (page - 1))
                                   .setMaxResults(10)
                                   .getResultList();
+        System.out.println("*** 取得チェック***" + contact_pets);
 
         // ユーザーがお問い合わせした数をカウント
-        long my_contacts_count = (long)em.createNamedQuery("getMyContactsCount", Long.class)
-                                     .setParameter("login_user", login_user)
+        long contacts_count = (long)em.createNamedQuery("getMyContactsCount", Long.class)
+                                     .setParameter("user", login_user)
                                      .getSingleResult();
+        System.out.println("*** カウントチェック***" + contacts_count);
 
         em.close();
 
         // 値をセット
-        request.setAttribute("login_user", login_user);
-        request.setAttribute("contacts", contacts);
+        request.setAttribute("contact_pets", contact_pets);
         request.setAttribute("contacts_count", contacts_count);
-        request.setAttribute("my_contacts", my_contacts);
-        request.setAttribute("my_contacts_count", my_contacts_count);
         request.setAttribute("page", page);
 
         // flushがあった場合のみ表示

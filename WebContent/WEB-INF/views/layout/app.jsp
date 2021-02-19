@@ -18,14 +18,15 @@
                     <div id="header_menu">
                         <h1>
                             <a id="hello" href="<c:url value='/' />">ハロー！My ペット</a>
-                        </h1>
-                        &nbsp;&nbsp;&nbsp; <a href="<c:url value='/users/index' />">ユーザー一覧</a>&nbsp;&nbsp;
-                        <a href="<c:url value='/pets/index' />">ペット一覧</a>&nbsp;&nbsp; <a
-                            href="<c:url value='/contacts/index' />">お問い合わせ一覧</a>&nbsp;&nbsp;
+                        </h1>&nbsp;&nbsp;&nbsp;
+                        <a href="<c:url value='/users/index' />">ユーザー一覧</a>&nbsp;&nbsp;
+                        <a href="<c:url value='/pets/index' />">ペット一覧</a>&nbsp;&nbsp;
+                        <a href="<c:url value='/contacts/admin' />">お問い合わせ一覧</a>&nbsp;&nbsp;
                         <div id="user_name">
                             <a href="<c:url value='/users/show?id=${login_user.id}' />">
                                 <c:out value="${sessionScope.login_user.name}" />様プロフィール
-                            </a>&nbsp;&nbsp; <a href="<c:url value='/logout' />">ログアウト</a>
+                            </a>&nbsp;&nbsp;
+                            <a href="<c:url value='/logout' />">ログアウト</a>
                         </div>
                     </div>
                 </c:when>
@@ -35,13 +36,14 @@
                     <div id="header_menu">
                         <h1>
                             <a id="hello" href="<c:url value='/' />">ハロー！My ペット</a>
-                        </h1>
-                        &nbsp;&nbsp;&nbsp; <a href="<c:url value='/favorites/index' />">いいねしたペット一覧</a>&nbsp;&nbsp;
+                        </h1>&nbsp;&nbsp;&nbsp;
+                        <a href="<c:url value='/favorites/index' />">いいねしたペット一覧</a>&nbsp;&nbsp;
                         <a href="<c:url value='/contacts/index' />">お問い合わせ中</a>&nbsp;&nbsp;
                         <div id="user_name">
                             <a href="<c:url value='/users/show?id=${login_user.id}' />">
                                 <c:out value="${sessionScope.login_user.name}" />様プロフィール
-                            </a>&nbsp;&nbsp; <a href="<c:url value='/logout' />">ログアウト</a>
+                            </a>&nbsp;&nbsp;
+                            <a href="<c:url value='/logout' />">ログアウト</a>
                         </div>
                     </div>
                 </c:when>

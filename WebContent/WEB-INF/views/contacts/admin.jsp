@@ -6,10 +6,7 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
         <c:choose>
-            <c:when test="${contacts_count == 0}">
-                  <h3>お問い合わせは見つかりませんでした。</h3>
-            </c:when>
-            <c:otherwise>
+            <c:when test="${sessionScope.login_user.admin_flag == 1}">
                 <h2>お問い合わせ 一覧</h2>
                 <table id="contact_list">
                     <tbody>
@@ -23,34 +20,39 @@
                             <tr class="row${status.count % 2}">
                                 <td class="contact_di"><c:out value="${contact.id}" /></td>
                                 <td class="user_name"><c:out value="${login_user.name}" /></td>
-                                <td class="contact_created">
-                                    <fmt:formatDate value='${contact.created_at}' pattern='yyyy年MM月dd日 HH:mm' />
+                                <td class="contact_created"><fmt:formatDate
+                                        value='${contact.created_at}' pattern='yyyy年MM月dd日 HH:mm' />
                                 </td>
-                                <td class="contact_action">
-                                    <a id=details href="<c:url value='/contacts/show?id=${contact.id}' />">詳細を表示</a>
-                                </td>
+                                <td class="contact_action"><a id=details
+                                    href="<c:url value='/contacts/show?id=${contact.id}' />">詳細を表示
+                                </a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
+            </c:when>
+            <c:otherwise>
+                <h3>お問い合わせ中のペットはいません。</h3>
+            </c:otherwise>
+        </c:choose>
 
+        <c:if test="${sessionScope.login_user.admin_flag == 1}">
             <div id="pagination">
-                （全 ${my_con_count} 件）<br />
+                （全 ${contacts_count} 件）<br />
                 <c:forEach var="i" begin="1"
-                    end="${((my_con_count - 1) / 10) + 1}" step="1">
+                    end="${((contacts_count - 1) / 10) + 1}" step="1">
                     <c:choose>
                         <c:when test="${i == page}">
                             <c:out value="${i}" />&nbsp;
-                        </c:when>
+                                </c:when>
                         <c:otherwise>
-                            <a href="<c:url value='/contacts/index?page=${i}' />">
-                                <c:out value="${i}" /></a>&nbsp;
-                        </c:otherwise>
+                            <a href="<c:url value='/contacts/admin?page=${i}' />"><c:out
+                                    value="${i}" /></a>&nbsp;
+                                </c:otherwise>
                     </c:choose>
                 </c:forEach>
             </div>
-        </c:otherwise>
-    </c:choose>
+        </c:if>
         <p>
             <a id=top_page href="<c:url value='/' />">トップページへ戻る</a>
         </p>
