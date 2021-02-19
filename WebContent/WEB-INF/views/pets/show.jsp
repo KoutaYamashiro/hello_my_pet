@@ -99,10 +99,10 @@
             <p>後日ご来店いただき、店頭でのご購入・お引き渡しとなります。</p>
             <p>※メールは24時間受付中です。お気軽にお問い合わせください。</p>
             <p>
-                <a href="<c:url value="/favorites/index" />">お気に入りペット一覧ページに戻る</a>
+                <a id=index href="<c:url value="/favorites/index" />">お気に入りペット一覧ページに戻る</a>
             </p>
             <p>
-                <a href="<c:url value="/pets/index" />">トップページに戻る</a>
+                <a id=index href="<c:url value="/pets/index" />">トップページに戻る</a>
             </p>
         </c:if>
 

@@ -49,14 +49,13 @@ public class PetsShowServlet extends HttpServlet {
                                                             .getSingleResult();
             System.out.println("＊＊＊チェックcheckMyFavoriteCount＊＊＊" + checkMyFavoriteCount);
 
-         // ペットのいいね数を取得
+            // ペットのいいね数を取得
             long favoritesCount = (long)em.createNamedQuery("getPetFavoritesCount", Long.class)
                                                              .setParameter("pet", pet)
                                                              .getSingleResult();
             System.out.println("＊＊＊チェックfavoritesCount＊＊＊" + favoritesCount);
 
             // 値をセット
-//            request.setAttribute("favoriteCheckFlag", checkMyFavorite);
             request.setAttribute("favoritesCount", favoritesCount);
             request.setAttribute("checkMyFavoriteCount", checkMyFavoriteCount);
             //フォロー判定ここまで

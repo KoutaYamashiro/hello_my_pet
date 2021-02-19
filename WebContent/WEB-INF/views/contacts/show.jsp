@@ -40,7 +40,7 @@
                         </tr>
                         <tr>
                             <th>返信日時</th>
-                            <td><fmt:formatDate value="${replies.created_at}" pattern="yyyy年MM月dd日 HH:mm" />仮</td>
+                            <td><fmt:formatDate value="${reply.created_at}" pattern="yyyy年MM月dd日 HH:mm" />仮</td>
                         </tr>
                         <tr>
                             <th>返信者</th>
@@ -49,7 +49,7 @@
                         <tr>
                             <th>返信内容</th>
                             <td>
-                                <pre><c:out value="仮${replies.content}" /></pre>
+                                <pre><c:out value="仮${reply.content}" /></pre>
                             </td>
                         </tr>
                     </tbody>
@@ -71,7 +71,7 @@
                     <h2>お問い合わせは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
-        <p><a href="<c:url value='/pets/show?id=${contact.pet.id}' />">問い合わせペット詳細</a></p>
-        <p><a href="<c:url value="/contacts/index" />">問い合わせ一覧に戻る</a></p>
+        <p><a id=show_pet href="<c:url value='/pets/show?id=${contact.pet.id}' />">問い合わせペット詳細</a></p>
+        <p><a id=index href="<c:url value="/contacts/index" />">問い合わせ一覧に戻る</a></p>
     </c:param>
 </c:import>

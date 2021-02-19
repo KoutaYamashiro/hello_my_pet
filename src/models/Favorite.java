@@ -17,7 +17,7 @@ import javax.persistence.Table;
         @NamedQuery(
                 name= "getDestroyPet",
                 query = "SELECT f.id FROM Favorite AS f WHERE f.pet  = :pet AND f.user = :user"),
-        // ペットごとのいいねをカウント
+        // 閲覧ペットのいいねをカウント
         @NamedQuery(
                 name= "getPetFavoritesCount",
                 query = "SELECT COUNT(f) FROM Favorite AS f WHERE f.pet  = :pet"),
