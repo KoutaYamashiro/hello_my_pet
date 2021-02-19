@@ -28,7 +28,7 @@ import javax.persistence.Table;
         ),
         // ログインユーザーの問い合わせ一覧情報を取得
         @NamedQuery(
-                name= "getMyContacts",
+                name= "getMyAllContacts",
                 query = "SELECT c FROM Contact AS c WHERE c.user = :user ORDER BY c.id DESC"),
         // ログインユーザーの問い合わせをカウント
         @NamedQuery(

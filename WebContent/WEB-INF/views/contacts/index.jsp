@@ -5,11 +5,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <c:choose>
-            <c:when test="${contacts_count == 0}">
-                  <h3>お問い合わせは見つかりませんでした。</h3>
-            </c:when>
-            <c:otherwise>
+             <c:if test="${flush != null}">
+                    <div id="flush_success">
+                        <c:out value="${flush}"></c:out>
+                    </div>
+             </c:if>
                 <h2>お問い合わせ 一覧</h2>
                 <table id="contact_list">
                     <tbody>
@@ -35,9 +35,9 @@
                 </table>
 
             <div id="pagination">
-                （全 ${my_con_count} 件）<br />
+                （全 ${contacts_count} 件）<br />
                 <c:forEach var="i" begin="1"
-                    end="${((my_con_count - 1) / 10) + 1}" step="1">
+                    end="${((contacts_count - 1) / 10) + 1}" step="1">
                     <c:choose>
                         <c:when test="${i == page}">
                             <c:out value="${i}" />&nbsp;
@@ -49,8 +49,6 @@
                     </c:choose>
                 </c:forEach>
             </div>
-        </c:otherwise>
-    </c:choose>
         <p>
             <a id=top_page href="<c:url value='/' />">トップページへ戻る</a>
         </p>

@@ -27,7 +27,6 @@ public class ContactsIndexServlet extends HttpServlet {
      */
     public ContactsIndexServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -48,14 +47,14 @@ public class ContactsIndexServlet extends HttpServlet {
         }
 
         // ユーザーがお問い合わせした内容取得
-        List<Contact> contact_pets = em.createNamedQuery("getMyContacts", Contact.class)
+        List<Contact> contacts = em.createNamedQuery("getMyAllContacts", Contact.class)
                                   .setParameter("user", login_user)
                                   .setFirstResult(10 * (page - 1))
                                   .setMaxResults(10)
                                   .getResultList();
-        System.out.println("*** 取得チェック***" + contact_pets);
+        System.out.println("*** 取得チェック***" + contacts);
 
-        // ユーザーがお問い合わせした数をカウント
+        // ユーザーのお問い合わせ数をカウント
         long contacts_count = (long)em.createNamedQuery("getMyContactsCount", Long.class)
                                      .setParameter("user", login_user)
                                      .getSingleResult();
@@ -64,7 +63,7 @@ public class ContactsIndexServlet extends HttpServlet {
         em.close();
 
         // 値をセット
-        request.setAttribute("contact_pets", contact_pets);
+        request.setAttribute("contacts", contacts);
         request.setAttribute("contacts_count", contacts_count);
         request.setAttribute("page", page);
 
