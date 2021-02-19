@@ -35,14 +35,18 @@ public class PetsEditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+        // 該当のIDのペット情報1件のみをデータベースから取得
         Pet p = em.find(Pet.class, Integer.parseInt(request.getParameter("id")));
 
         em.close();
 
         User login_user = (User)request.getSession().getAttribute("login_user");
         if(p != null && login_user.getId() == p.getUser().getId()) {
+
+            // ペット情報とセッションIDをリクエストスコープに登録
             request.setAttribute("pet", p);
             request.setAttribute("_token", request.getSession().getId());
+            // ペットIDをセッションスコープに登録
             request.getSession().setAttribute("pet_id", p.getId());
         }
 

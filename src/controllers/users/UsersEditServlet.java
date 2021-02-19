@@ -34,12 +34,15 @@ public class UsersEditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+        // ユーザーIDを1件のみデータベースから取得
         User u = em.find(User.class, Integer.parseInt(request.getParameter("id")));
 
         em.close();
 
+        // ユーザー情報とセッションIDをリクエストスコープに登録
         request.setAttribute("user", u);
         request.setAttribute("_token", request.getSession().getId());
+        // ユーザーIDをセッションスコープに登録
         request.getSession().setAttribute("user_id", u.getId());
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/edit.jsp");
