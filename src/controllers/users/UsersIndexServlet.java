@@ -35,15 +35,19 @@ public class UsersIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+        // 開くページ数を取得（デフォルトは1ページ目）
         int page = 1;
         try{
             page = Integer.parseInt(request.getParameter("page"));
         } catch (NumberFormatException u) { }
+
+         // 最大件数と開始位置を指定してメッセージを取得
          List<User> users = em.createNamedQuery("getAllUsers", User.class)
                  .setFirstResult(10 * (page - 1))
                  .setMaxResults(10)
                  .getResultList();
 
+         // 全件数を取得
          long users_count = (long)em.createNamedQuery("getUsersCount", Long.class)
                  .getSingleResult();
 

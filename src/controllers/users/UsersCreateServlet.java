@@ -69,10 +69,12 @@ public class UsersCreateServlet extends HttpServlet {
             u.setUpdated_at(currentTime);
             u.setDelete_flag(0);
 
+            //バリデーションを実行してエラーがあったら新規登録のフォームに戻る
             List<String> errors = UserValidator.validate(u, true, true);
             if(errors.size() > 0) {
                 em.close();
 
+                // フォームに初期値を設定、さらにエラーメッセージを送る
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("user", u);
                 request.setAttribute("errors", errors);
@@ -80,12 +82,14 @@ public class UsersCreateServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/new.jsp");
                 rd.forward(request, response);
             } else {
+                // データベースに保存
                 em.getTransaction().begin();
                 em.persist(u);
                 em.getTransaction().commit();
                 request.getSession().setAttribute("flush", "登録がありがとうございます！ログインをお願いします。");
                 em.close();
 
+                // ログインページにリダイレクト
                 response.sendRedirect(request.getContextPath() + "/login");
             }
         }

@@ -12,7 +12,7 @@
         </c:if>
         <c:choose>
             <c:when test="${contacts_count == 0}">
-                    お問い合わせ中の内容はありません。
+                    お問い合わせ中の内容はありませんでした。
             </c:when>
             <c:otherwise>
                 <h2>お問い合わせ 一覧</h2>

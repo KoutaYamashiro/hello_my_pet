@@ -34,10 +34,12 @@ public class UsersShowServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+        // 該当IDのユーザーを1件のみをデータベースから取得
         User u = em.find(User.class, Integer.parseInt(request.getParameter("id")));
 
         em.close();
 
+        // メッセージデータをリクエストスコープにセットしてshow.jspを呼び出す
         request.setAttribute("user", u);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/show.jsp");

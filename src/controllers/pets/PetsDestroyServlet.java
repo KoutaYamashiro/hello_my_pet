@@ -35,8 +35,12 @@ public class PetsDestroyServlet extends HttpServlet {
         if(_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
+            // セッションスコープからペットのIDを取得して
+            // 該当のIDのペット1件のみをデータベースから取得
             Pet p = em.find(Pet.class, (Integer)(request.getSession().getAttribute("pet_id")));
+
             p.setDelete_flag(1);
+            // 更新日時のみ上書き
             p.setUpdated_at(new Timestamp(System.currentTimeMillis()));
 
             em.getTransaction().begin();
@@ -44,6 +48,7 @@ public class PetsDestroyServlet extends HttpServlet {
             em.close();
             request.getSession().setAttribute("flush", "削除が完了しました。");
 
+            // indexページへリダイレクト
             response.sendRedirect(request.getContextPath() + "/pets/index");
         }
     }

@@ -68,13 +68,15 @@ public class UsersUpdateServlet extends HttpServlet {
 
             u.setName(request.getParameter("name"));
             u.setAdmin_flag(Integer.parseInt(request.getParameter("admin_flag")));
-            u.setUpdated_at(new Timestamp(System.currentTimeMillis()));
+            u.setUpdated_at(new Timestamp(System.currentTimeMillis()));     // 更新日時のみ上書き
             u.setDelete_flag(0);
 
+            // バリデーションを実行してエラーがあったら編集画面のフォームに戻る
             List<String> errors = UserValidator.validate(u, mail_addressDuplicateCheckFlag, passwordCheckFlag);
             if(errors.size() > 0) {
                 em.close();
 
+                // フォームに初期値を設定、さらにエラーメッセージを送る
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("user", u);
                 request.setAttribute("errors", errors);
@@ -82,13 +84,14 @@ public class UsersUpdateServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/edit.jsp");
                 rd.forward(request, response);
             } else {
+                // データベースを更新
                 em.getTransaction().begin();
                 em.getTransaction().commit();
                 em.close();
                 request.getSession().setAttribute("flush", "更新が完了しました。");
-
+                // セッションスコープ上の不要になったデータを削除
                 request.getSession().removeAttribute("user_id");
-
+                // indexページへリダイレクト
                 response.sendRedirect(request.getContextPath() + "/users/index");
             }
         }
