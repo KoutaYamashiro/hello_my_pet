@@ -77,22 +77,22 @@ public class Pet {
     List<User> favoritedUsers;
 
     // お問い合わせ  多対多のモデリング付加
-    @ManyToMany(mappedBy = "contactPets")
-    List<User> contactedUsers;
+//    @ManyToMany(mappedBy = "contactPets", fetch = FetchType.EAGER)
+//    List<User> contactedUsers;
 
     public Integer getId() {
         return id;
     }
 
 
-    public List<User> getContactedUsers() {
-        return contactedUsers;
-    }
-
-
-    public void setContactedUsers(List<User> contactedUsers) {
-        this.contactedUsers = contactedUsers;
-    }
+//    public List<User> getContactedUsers() {
+//        return contactedUsers;
+//    }
+//
+//
+//    public void setContactedUsers(List<User> contactedUsers) {
+//        this.contactedUsers = contactedUsers;
+//    }
 
 
     public List<User> getFavoritedUsers() {

@@ -2,6 +2,7 @@ package models;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -80,25 +81,42 @@ public class User {
     List<Pet> favotitePets;
 
     // 問い合わせ 多対多のモデリング所有
-    @ManyToMany
-    @JoinTable(name = "contacts",
-                       joinColumns = @JoinColumn(name = "user_id"),
-                       inverseJoinColumns = @JoinColumn(name = "pet_id"))
-    List<Pet> contactPets;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "contacts",
+//                       joinColumns = @JoinColumn(name = "user_id"),
+//                       inverseJoinColumns = @JoinColumn(name = "pet_id"))
+//    List<Pet> contactPets;
+
+    // 返信 多対多のモデリング所有
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "replies",
+                       joinColumns = @JoinColumn(name = "send_user_id"),
+                       inverseJoinColumns = @JoinColumn(name = "contacts_id"))
+    Set<Contact> replyContacsUsers;
 
     public Integer getId() {
         return id;
     }
 
 
-    public List<Pet> getContactPets() {
-        return contactPets;
+    public Set<Contact> getReplyContacs() {
+        return replyContacsUsers;
     }
 
 
-    public void setContactPets(List<Pet> contactPets) {
-        this.contactPets = contactPets;
+    public void setReplyContacs(Set<Contact> replyContacs) {
+        this.replyContacsUsers = replyContacs;
     }
+
+
+//    public List<Pet> getContactPets() {
+//        return contactPets;
+//    }
+//
+//
+//    public void setContactPets(List<Pet> contactPets) {
+//        this.contactPets = contactPets;
+//    }
 
 
     public List<Pet> getFavotitePets() {

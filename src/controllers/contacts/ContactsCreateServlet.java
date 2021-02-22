@@ -43,6 +43,9 @@ public class ContactsCreateServlet extends HttpServlet {
             //   新しいお問い合わせを生成
             Contact c = new Contact();
 
+            // null回避としてのインスタンスを生成
+//            request.setAttribute("reply", new Reply());
+
             //  時間を生成
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 

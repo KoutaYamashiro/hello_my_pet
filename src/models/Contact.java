@@ -1,14 +1,17 @@
 package models;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -17,7 +20,7 @@ import javax.persistence.Table;
 @Table(name= "contacts")
 @NamedQueries({
     @NamedQuery(
-            // 全ての問い合わせを取得
+            // 全ての問い合わせに関する情報を取得
             name = "getAllContacts",
             query = "SELECT c FROM Contact AS c ORDER BY c.id DESC"
         ),
@@ -51,6 +54,10 @@ public class Contact {
         @JoinColumn(name= "pet_id", nullable = false)
         private Pet pet;
 
+//        @ManyToOne
+//        @JoinColumn(name = "replies_id")
+//        private Reply reply;
+
         @Lob
         @Column(name= "content", nullable = false)
         private String content;
@@ -58,9 +65,29 @@ public class Contact {
         @Column(name= "created_at", nullable = false)
         private Timestamp created_at;
 
+        // 返信  多対多のモデリング付加
+        @ManyToMany(mappedBy = "replyContacsUsers", fetch = FetchType.EAGER)
+        Set<User> ContactRepliesUsers;
+
         public Integer getId() {
             return id;
         }
+
+      public Set<User> getContactRepliesUsers() {
+      return ContactRepliesUsers;
+  }
+
+  public void setContactRepliesUsers(Set<User> contactRepliesUsers) {
+      ContactRepliesUsers = contactRepliesUsers;
+  }
+
+//        public Reply getReply() {
+//            return reply;
+//        }
+//
+//        public void setReply(Reply reply) {
+//            this.reply = reply;
+//        }
 
         public void setId(Integer id) {
             this.id = id;

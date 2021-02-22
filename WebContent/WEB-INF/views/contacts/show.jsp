@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <c:choose>
@@ -15,14 +16,7 @@
                         </tr>
                         <tr>
                             <th>名前</th>
-                            <c:choose>
-                                    <c:when test="${sessionScope.login_user.admin_flag == 0}">
-                                          <td class="user_name"><c:out value="${login_user.name}" /></td>
-                                    </c:when>
-                                    <c:otherwise>
-                                           <td class="user_name"><c:out value="仮${user.name}" /></td>
-                                    </c:otherwise>
-                                </c:choose>
+                            <td class="user_name"><c:out value="${contact.user.name}" /></td>
                         </tr>
                         <tr>
                             <th>メールアドレス</th>
@@ -40,7 +34,7 @@
                         </tr>
                         <tr>
                             <th>返信日時</th>
-                            <td><fmt:formatDate value="${reply.created_at}" pattern="yyyy年MM月dd日 HH:mm" />仮</td>
+                            <td><fmt:formatDate value="${contact.reply.created_at}" pattern="yyyy年MM月dd日 HH:mm" />仮</td>
                         </tr>
                         <tr>
                             <th>返信者</th>
