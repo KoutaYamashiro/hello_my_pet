@@ -10,9 +10,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Table(name = "replies")
+@NamedQueries({
+    @NamedQuery(
+            // 全ての返信を取得
+            name = "getAllReplies",
+            query = "SELECT r FROM Reply AS r ORDER BY r.id DESC"
+        ),
+    @NamedQuery(
+            // 全ての返信をカウント
+            name = "getRepliesCount",
+            query = "SELECT COUNT(r) FROM Reply AS r"
+    )
+})
 @Entity
 public class Reply {
     @Id

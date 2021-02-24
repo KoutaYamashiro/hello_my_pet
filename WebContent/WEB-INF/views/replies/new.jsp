@@ -12,11 +12,11 @@
                         </tr>
                         <tr>
                             <th>名前</th>
-                            <td class="user_name"><c:out value="${user.name}" /></td>
+                            <td class="user_name"><c:out value="${contact.user.name}" /></td>
                         </tr>
                         <tr>
                             <th>メールアドレス</th>
-                            <td><c:out value="${user.mail_address}" /></td>
+                            <td><c:out value="${contact.user.mail_address}" /></td>
                         </tr>
                         <tr>
                             <th>問い合わせ日時</th>
@@ -30,16 +30,16 @@
                         </tr>
                         <tr>
                             <th>返信日時</th>
-                            <td><fmt:formatDate value="${仮}" pattern="yyyy年MM月dd日 HH:mm" /></td>
+                            <td><fmt:formatDate value="${reply.created_at}" pattern="yyyy年MM月dd日 HH:mm" /></td>
                         </tr>
                         <tr>
                             <th>返信者</th>
-                            <td><c:out value="${仮}" /></td>
+                            <td><c:out value="${reply.user.name}" /></td>
                         </tr>
                         <tr>
                             <th>返信内容</th>
                             <td>
-                                <pre><c:out value="${仮}" /></pre>
+                                <pre><c:out value="${reply.content}" /></pre>
                             </td>
                         </tr>
                     </tbody>

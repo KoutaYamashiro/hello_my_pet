@@ -22,7 +22,7 @@
                         <c:forEach var="contact" items="${contacts}" varStatus="status">
                         <tr class="row${status.count % 2}">
                             <td class="contact_di"><c:out value="${contact.id}" /></td>
-                            <td class="user_name"><c:out value="${login_user.name}" /></td>
+                            <td class="user_name"><c:out value="${contact.user.name}" /></td>
                             <td class="contact_created">
                                 <fmt:formatDate value='${contact.created_at}' pattern='yyyy年MM月dd日 HH:mm' />
                             </td>

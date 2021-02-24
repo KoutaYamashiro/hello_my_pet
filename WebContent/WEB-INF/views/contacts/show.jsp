@@ -20,7 +20,7 @@
                                           <td class="user_name"><c:out value="${login_user.name}" /></td>
                                     </c:when>
                                     <c:otherwise>
-                                           <td class="user_name"><c:out value="仮${user.name}" /></td>
+                                           <td class="user_name"><c:out value="${contact.user.name}" /></td>
                                     </c:otherwise>
                                 </c:choose>
                         </tr>
@@ -40,16 +40,16 @@
                         </tr>
                         <tr>
                             <th>返信日時</th>
-                            <td><fmt:formatDate value="${reply.created_at}" pattern="yyyy年MM月dd日 HH:mm" />仮</td>
+                            <td><fmt:formatDate value="${reply.created_at}" pattern="yyyy年MM月dd日 HH:mm" /></td>
                         </tr>
                         <tr>
                             <th>返信者</th>
-                            <td><c:out value="仮${send_user.name}" /></td>
+                            <td><c:out value="${reply.user.name}" /></td>
                         </tr>
                         <tr>
                             <th>返信内容</th>
                             <td>
-                                <pre><c:out value="仮${reply.content}" /></pre>
+                                <pre><c:out value="${reply.content}" /></pre>
                             </td>
                         </tr>
                     </tbody>

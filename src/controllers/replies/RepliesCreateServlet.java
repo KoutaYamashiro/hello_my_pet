@@ -35,20 +35,12 @@ public class RepliesCreateServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.getWriter().append("Served at: ").append(request.getContextPath());
-    }
-
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // EntityManagerのオブジェクトを生成
         EntityManager em = DBUtil.createEntityManager();
 
-        // 返信を生成
+        // 新しい返信を生成
         Reply r = new Reply();
 
         //  時間を生成
@@ -70,7 +62,7 @@ public class RepliesCreateServlet extends HttpServlet {
             em.close();
 
             request.setAttribute("_token", request.getSession().getId());
-            request.setAttribute("report", r);
+            request.setAttribute("reply", r);
             request.setAttribute("errors", errors);
 
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/replies/new.jsp");
