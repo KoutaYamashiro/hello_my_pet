@@ -37,45 +37,49 @@ public class RepliesCreateServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // EntityManagerのオブジェクトを生成
-        EntityManager em = DBUtil.createEntityManager();
+        String _token = (String) request.getParameter("_token");
+        if (_token != null && _token.equals(request.getSession().getId())) {
+            // EntityManagerのオブジェクトを生成
+            EntityManager em = DBUtil.createEntityManager();
 
-        // 新しい返信を生成
-        Reply r = new Reply();
+            // 新しい返信を生成
+            Reply r = new Reply();
 
-        //  時間を生成
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+            //  時間を生成
+            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
-        // 返信する問い合わせのIDを取得
-        Contact contact = em.find(Contact.class, Integer.parseInt(request.getParameter("contact_id")));
+            // 返信する問い合わせのIDを取得
+            Contact contact = em.find(Contact.class, Integer.parseInt(request.getParameter("contact_id")));
 
-        // テーブルに値をセット
-        r.setUser((User) request.getSession().getAttribute("login_user"));
-        r.setContent(request.getParameter("content"));
-        r.setContact(contact);
-        r.setCreated_at(currentTime);
+            // テーブルに値をセット
+            r.setUser((User) request.getSession().getAttribute("login_user"));
+            r.setContent(request.getParameter("content"));
+            r.setContact(contact);
+            r.setCreated_at(currentTime);
 
-        List<String> errors = ReplyValidator.validate(r);
+            List<String> errors = ReplyValidator.validate(r);
 
-        // エラーがある場合
-        if (errors.size() > 0) {
-            em.close();
+            // エラーがある場合
+            if (errors.size() > 0) {
+                em.close();
 
-            request.setAttribute("_token", request.getSession().getId());
-            request.setAttribute("reply", r);
-            request.setAttribute("errors", errors);
+                request.setAttribute("_token", request.getSession().getId());
+                request.setAttribute("reply", r);
 
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/replies/new.jsp");
-            rd.forward(request, response);
-        } else {
-            // データベースを更新
-            em.getTransaction().begin();
-            em.persist(r);
-            em.getTransaction().commit();
-            em.close();
-            request.getSession().setAttribute("flush", "問い合わせに返信しました。");
-            // お問い合わせ一覧へリダイレクト
-            response.sendRedirect(request.getContextPath() + "/contacts/index");
+                request.setAttribute("errors", errors);
+
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/replies/new.jsp");
+                rd.forward(request, response);
+            } else {
+                // データベースを更新
+                em.getTransaction().begin();
+                em.persist(r);
+                em.getTransaction().commit();
+                em.close();
+                request.getSession().setAttribute("flush", "問い合わせに返信しました。");
+                // お問い合わせ一覧へリダイレクト
+                response.sendRedirect(request.getContextPath() + "/contacts/index");
+            }
         }
     }
 }

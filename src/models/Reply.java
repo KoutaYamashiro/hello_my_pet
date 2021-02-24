@@ -16,16 +16,24 @@ import javax.persistence.Table;
 
 @Table(name = "replies")
 @NamedQueries({
+ // 全ての返信を取得
     @NamedQuery(
-            // 全ての返信を取得
             name = "getAllReplies",
             query = "SELECT r FROM Reply AS r ORDER BY r.id DESC"
         ),
+    // 全ての返信をカウント
     @NamedQuery(
-            // 全ての返信をカウント
             name = "getRepliesCount",
             query = "SELECT COUNT(r) FROM Reply AS r"
-    )
+        ),
+    // ログインユーザーへの返信一覧情報を取得
+    @NamedQuery(
+            name= "getMyAllReplies",
+            query = "SELECT r FROM Reply AS r WHERE r.user = :user ORDER BY r.id DESC"),
+    // ログインユーザーへの返信をカウント
+    @NamedQuery(
+            name= "getMyRepliesCount",
+            query = "SELECT COUNT(r) FROM Reply AS r WHERE r.user = :user")
 })
 @Entity
 public class Reply {

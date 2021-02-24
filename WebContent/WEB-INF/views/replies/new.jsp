@@ -50,7 +50,7 @@
             <c:import url="_form.jsp" />
         </form>
 
-        <p><a href="<c:url value='/pets/show' />">問い合わせペット詳細</a></p>
-        <p><a href="<c:url value='/contacts/show' />">問い合わせ詳細に戻る</a></p>
+        <p><a id=show_pet  href="<c:url value='/pets/show?id=${contact.pet.id}' />">問い合わせペット詳細</a></p>
+        <p><a id=show_contact href="<c:url value='/contacts/show' />">問い合わせ詳細に戻る</a></p>
     </c:param>
 </c:import>

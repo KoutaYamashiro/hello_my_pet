@@ -11,7 +11,7 @@
 </c:if>
 
 <label for="content">返信内容</label><br />
-<textarea name="content" rows="10" cols="50">${replies.content}</textarea>
+<textarea name="content" rows="10" cols="50">${reply.content}</textarea>
 <br /><br />
 
 <input type="hidden" name="_token" value="${_token}" />
