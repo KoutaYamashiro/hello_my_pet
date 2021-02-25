@@ -36,9 +36,9 @@
                                     <pre><c:out value="${contact.content}" /></pre>
                                 </td>
                                 <td class="reply_created">
-                                    <fmt:formatDate value='${rpliy.created_at}' pattern='yyyy年MM月dd日 HH:mm' />
+                                    <fmt:formatDate value='${contact.replies[0].created_at}' pattern='yyyy年MM月dd日 HH:mm' />
                                 </td>
-                                <td class="reply_content"><c:out value="${rpliy.content}" /></td>
+                                <td class="reply_content"><c:out value="${contact.replies[0].content}" /></td>
                                 <td class="contact_action"><a id=details
                                     href="<c:url value='/contacts/show?id=${contact.id}' />">詳細を表示</a>
                                 </td>

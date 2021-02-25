@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,7 +47,8 @@ public class Reply {
     @JoinColumn(name = "send_user_id", nullable = false)
     private User user;
 
-    @ManyToOne
+    // 問い合わせ
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "contacts_id", nullable = false)
     private Contact contact;
 
