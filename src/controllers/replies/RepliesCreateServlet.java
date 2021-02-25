@@ -78,7 +78,7 @@ public class RepliesCreateServlet extends HttpServlet {
                 em.close();
                 request.getSession().setAttribute("flush", "問い合わせに返信しました。");
                 // お問い合わせ一覧へリダイレクト
-                response.sendRedirect(request.getContextPath() + "/contacts/index");
+                response.sendRedirect(request.getContextPath() + "/contacts/admin");
             }
         }
     }
