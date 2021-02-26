@@ -11,9 +11,9 @@
             <c:otherwise>
                 <h2>いいねしたペット</h2>
                 <table id="favorites_list">
-                    <tbody>
                         <c:forEach var="pet" items="${favorite_pets}" varStatus="status">
-                            <tr class="row${status.count % 2}">
+                        <tbody class="row${status.count % 2}">
+                            <tr>
                                 <th>ペット写真</th>
                                 <td class="pet_image">
                                     <img src="https://yamashiro-test-20200114.s3-ap-northeast-1.amazonaws.com/uploaded/${pet.pet_image}">

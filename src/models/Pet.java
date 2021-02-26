@@ -2,7 +2,6 @@ package models;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -77,24 +76,9 @@ public class Pet {
     @ManyToMany(mappedBy = "favotitePets", fetch = FetchType.EAGER)
     Set<User> favoritedUsers;
 
-    // お問い合わせ  多対多のモデリング付加
-    @ManyToMany(mappedBy = "contactPets")
-    List<User> contactedUsers;
-
     public Integer getId() {
         return id;
     }
-
-
-    public List<User> getContactedUsers() {
-        return contactedUsers;
-    }
-
-
-    public void setContactedUsers(List<User> contactedUsers) {
-        this.contactedUsers = contactedUsers;
-    }
-
 
     public Set<User> getFavoritedUsers() {
         return favoritedUsers;

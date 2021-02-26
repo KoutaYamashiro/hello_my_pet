@@ -9,9 +9,6 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <div id="image">
-            <img class="pets" src="<c:url value='/images/mypets/tokage01.jpg' />">
-        </div>
         <h2>Pets List</h2>
             <table id="pet_list">
             <c:forEach var="pet" items="${pets}" varStatus="status">

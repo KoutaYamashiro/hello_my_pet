@@ -38,20 +38,22 @@
                                 <pre><c:out value="${contact.content}" /></pre>
                             </td>
                         </tr>
-                        <tr>
-                            <th>返信日時</th>
-                            <td><fmt:formatDate value="${contact.replies[0].created_at}" pattern="yyyy年MM月dd日 HH:mm" /></td>
-                        </tr>
-                        <tr>
-                            <th>返信者</th>
-                            <td><c:out value="${contact.replies[0].user.name}" /></td>
-                        </tr>
-                        <tr>
-                            <th>返信内容</th>
-                            <td>
-                                <pre><c:out value="${contact.replies[0].content}" /></pre>
-                            </td>
-                        </tr>
+                        <c:forEach var="reply" items="${contact.replies}" varStatus="status">
+                                   <tr>
+                                       <th>返信日時</th>
+                                       <td><fmt:formatDate value="${contact.replies[0].created_at}" pattern="yyyy年MM月dd日 HH:mm" /></td>
+                                   </tr>
+                                   <tr>
+                                       <th>返信者</th>
+                                       <td><c:out value="${contact.replies[0].user.name}" /></td>
+                                   </tr>
+                                   <tr>
+                                       <th>返信内容</th>
+                                       <td>
+                                           <pre><c:out value="${contact.replies[0].content}" /></pre>
+                                       </td>
+                                   </tr>
+                        </c:forEach>
                     </tbody>
                 </table><br />
                     <c:if test="${sessionScope.login_user.id == contact.user.id}">

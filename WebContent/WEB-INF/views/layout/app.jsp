@@ -63,6 +63,9 @@
             </c:choose>
 
         </div>
+        <div id="image">
+            <img class="pets" src="<c:url value='/images/mypets/tokage01.jpg' />">
+        </div>
         <div id="content">${param.content}</div>
         <div id="footer">by Kota Yamashiro.</div>
     </div>
