@@ -3,7 +3,7 @@
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
                 <h2>id : ${pet.id}のペット情報　編集ページ</h2>
-                <form method="POST" action="<c:url value='/pets/update' />">
+                <form method="POST" enctype="multipart/form-data" action="<c:url value='/pets/update' />">
                     <c:import url="_form.jsp" />
                 </form>
                 <p><a href="#" onclick="confirmDestroy();">このペットは家族が決まりました。</a></p>

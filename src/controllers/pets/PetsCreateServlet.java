@@ -31,7 +31,7 @@ import utils.DBUtil;
  * Servlet implementation class PetsCreateServlet
  */
 @WebServlet("/pets/create")
-@MultipartConfig
+@MultipartConfig// 画像アップ機能時は必ず必要
 public class PetsCreateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -86,48 +86,65 @@ public class PetsCreateServlet extends HttpServlet {
                 // ファイルの実体
                 file);
 
+         // String型の _tokenにパラメーターの_tokenを代入する
         String _token = (String) request.getParameter("_token");
+        // _tokenがnullではなく、且つセッションIDと等しいならば
         if (_token != null && _token.equals(request.getSession().getId())) {
+            // DAOインスタンスの生成
             EntityManager em = DBUtil.createEntityManager();
-
+            // Petのインスタンスを生成
             Pet p = new Pet();
-
+            // 変数pに現在ログインしているユーザーの情報をセットする
             p.setUser((User) request.getSession().getAttribute("login_user"));
 
             Date birthday = new Date(System.currentTimeMillis());
 
+            // 変数pに画像名をセットする
             p.setPet_image(name);
+            // 変数pに入力したペット種類をセットする
             p.setPet_breed(request.getParameter("pet_breed"));
+            // 変数pに入力した生体価格をセットする
             p.setPet_price(request.getParameter("pet_price"));
+            // 変数pに選択した誕生日をセットする
             p.setBirthday(birthday);
+            // 変数pに入力した生体価格をセットする
             p.setAppeal_point(request.getParameter("appeal_point"));
+            // 変数pにDelete_flag０をセットする
             p.setDelete_flag(0);
 
+            // 現在日時を取得して変数pに作成日時、更新日時にセットする
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             p.setCreated_at(currentTime);
             p.setUpdated_at(currentTime);
 
+            // バリデーター の呼び出し
             List<String> errors = PetValidator.validate(p);
+            // errorsリストに1つでも追加されていたら
             if (errors.size() > 0) {
+                // DAOの破棄
                 em.close();
-
+                // リクエストスコープに各データをセット
                 request.setAttribute("_token", request.getSession().getId());
-                request.setAttribute("report", p);
+                request.setAttribute("pet", p);
                 request.setAttribute("errors", errors);
-
+                // 画面遷移
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/pets/new.jsp");
                 rd.forward(request, response);
             } else {
+                // データベースに保存する
                 em.getTransaction().begin();
                 em.persist(p);
                 em.getTransaction().commit();
                 em.close();
+                // セッションスコープにフラッシュメッセージをセットする
                 request.getSession().setAttribute("flush", "登録が完了しました。");
+                // 画面遷移
                 response.sendRedirect(request.getContextPath() + "/pets/index");
             }
         }
     }
 
+    // 拡張子を変えずに、ランダムな名前のファイルを生成する
     private String getFileName(Part part) {
         String name = null;
         for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
