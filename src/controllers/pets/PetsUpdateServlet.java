@@ -31,7 +31,7 @@ import utils.DBUtil;
  * Servlet implementation class PetsUpdateServlet
  */
 @WebServlet("/pets/update")
-@MultipartConfig
+@MultipartConfig// 画像アップ機能時は必ず必要
 public class PetsUpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -87,35 +87,46 @@ public class PetsUpdateServlet extends HttpServlet {
                 // ファイルの実体
                 file);
 
+        // String型の _tokenにパラメーターの_tokenを代入する
         String _token = (String) request.getParameter("_token");
+        // _tokenがnullではなく、且つセッションIDと等しいならば
         if (_token != null && _token.equals(request.getSession().getId())) {
+            // DAOインスタンスの生成
             EntityManager em = DBUtil.createEntityManager();
 
             // セッションスコープからペットのIDを取得して
             // 該当のIDのペット情報1件のみをデータベースから取得
             Pet p = em.find(Pet.class, (Integer) (request.getSession().getAttribute("pet_id")));
 
+            // 変数pに現在ログインしているユーザーの情報をセットする
             p.setUser((User) request.getSession().getAttribute("login_user"));
-
-            // フォームの内容を各フィールドに上書き
+            // 変数pに画像名をセットする
             p.setPet_image(name);
+            // 変数pに入力したペット種類をセットする
             p.setPet_breed(request.getParameter("pet_breed"));
+            // 変数pに選択した誕生日をセットする
             p.setBirthday(Date.valueOf(request.getParameter("birthday")));
+            // 変数pに入力した生体価格をセットする
             p.setPet_price(request.getParameter("pet_price"));
+            // 変数pに入力した内容をセットする
             p.setAppeal_point(request.getParameter("appeal_point"));
+            // 変数pにDelete_flag０をセットする
             p.setDelete_flag(0);
-            // 更新日時のみ上書き
+            //  変数pに更新日時のみ上書き
             p.setUpdated_at(new Timestamp(System.currentTimeMillis()));
 
+            // バリデーター の呼び出し
             List<String> errors = PetValidator.validate(p);
+            // errorsリストに1つでも追加されていたら
             if (errors.size() > 0) {
+                // DAOの破棄
                 em.close();
 
                 // ペット情報とセッションID、エラー情報をリクエストスコープに登録
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("pet", p);
                 request.setAttribute("errors", errors);
-
+                // 画面遷移
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/pets/edit.jsp");
                 rd.forward(request, response);
             } else {
@@ -123,7 +134,7 @@ public class PetsUpdateServlet extends HttpServlet {
                 em.getTransaction().begin();
                 em.getTransaction().commit();
                 em.close();
-
+                // セッションスコープにフラッシュメッセージをセットする
                 request.getSession().setAttribute("flush", "更新が完了しました。");
                 // セッションスコープ上の不要になったデータを削除
                 request.getSession().removeAttribute("pet_id");
@@ -132,7 +143,7 @@ public class PetsUpdateServlet extends HttpServlet {
             }
         }
     }
-
+    // 拡張子を変えずに、ランダムな名前のファイルを生成する
     private String getFileName(Part part) {
         String name = null;
         for (String dispotion : part.getHeader("Content-Disposition").split(";")) {

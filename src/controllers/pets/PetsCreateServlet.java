@@ -107,7 +107,7 @@ public class PetsCreateServlet extends HttpServlet {
             p.setPet_price(request.getParameter("pet_price"));
             // 変数pに選択した誕生日をセットする
             p.setBirthday(birthday);
-            // 変数pに入力した生体価格をセットする
+            // 変数pに入力した内容をセットする
             p.setAppeal_point(request.getParameter("appeal_point"));
             // 変数pにDelete_flag０をセットする
             p.setDelete_flag(0);
