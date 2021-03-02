@@ -33,57 +33,51 @@ public class FavoritesIndexServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // DAOインスタンスの生成
         EntityManager em = DBUtil.createEntityManager();
 
         // ログインユーザーを取得
-        User login_user = (User)request.getSession().getAttribute("login_user");
+        User login_user = (User) request.getSession().getAttribute("login_user");
 
         // ページネーション
         int page;
-        try{
+        try {
             page = Integer.parseInt(request.getParameter("page"));
-        } catch(Exception e) {
+        } catch (Exception e) {
             page = 1;
         }
 
         // ユーザーがいいねしたペットを取得
         List<Pet> favorite_pets = em.createNamedQuery("getMyFavoritePets", Pet.class)
-                                  .setParameter("user", login_user)
-                                  .setFirstResult(10 * (page - 1))
-                                  .setMaxResults(10)
-                                  .getResultList();
+                .setParameter("user", login_user)
+                .setFirstResult(10 * (page - 1))
+                .setMaxResults(10)
+                .getResultList();
 
         // ユーザーがいいねしたペットをカウント
-        long pets_count = (long)em.createNamedQuery("getMyFavoritesCount", Long.class)
-                                     .setParameter("user", login_user)
-                                     .getSingleResult();
-
+        long pets_count = (long) em.createNamedQuery("getMyFavoritesCount", Long.class)
+                .setParameter("user", login_user)
+                .getSingleResult();
+        // DAOの破棄
         em.close();
 
-        // 値をセット
+        // リクエストスコープに各データをセット
         request.setAttribute("favorite_pets", favorite_pets);
         request.setAttribute("pets_count", pets_count);
         request.setAttribute("page", page);
 
-        // flushがあった場合のみ表示
-        if(request.getSession().getAttribute("flush") != null) {
+        // セッションスコープにフラッシュメッセージがあるならば
+        if (request.getSession().getAttribute("flush") != null) {
+            // リクエストスコープにエラーメッセージをセットする
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
+            // リクエストスコープのエラーメッセージを削除
             request.getSession().removeAttribute("flush");
         }
-
+        // 画面遷移
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/favorites/index.jsp");
         rd.forward(request, response);
     }
 
 }
-
-
-
-
-
-
-
-
-
-

@@ -37,27 +37,30 @@ public class FavoritesCreateServlet extends HttpServlet {
         // EntityManagerのオブジェクトを生成
         EntityManager em = DBUtil.createEntityManager();
 
-        // いいねを生成
+        // Favoriteのインスタンスを生成
         Favorite f = new Favorite();
 
         // いいねしたペットのIDを取得
         Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
 
-        // テーブルに値をセット
+        // 変数fに現在ログインしているユーザー情報をセットする
         f.setUser((User) request.getSession().getAttribute("login_user"));
+        // 変数fに取得したペット情報をセットする
         f.setPet(pet);
 
-            request.setAttribute("_token", request.getSession().getId());
-            request.setAttribute("favorite", f);
+        request.setAttribute("_token", request.getSession().getId());
+        request.setAttribute("favorite", f);
 
-            // データベースを更新
-            em.getTransaction().begin();
-            em.persist(f);
-            em.getTransaction().commit();
-            em.close();
-            request.getSession().setAttribute("flush", "いいねしました。");
-            // トップページへリダイレクト
-            response.sendRedirect(request.getContextPath() + "/");
-        }
+        // データベースに保存
+        em.getTransaction().begin();
+        em.persist(f);
+        em.getTransaction().commit();
+        // DAOの破棄
+        em.close();
+        // セッションスコープにフラッシュメッセージをセットする
+        request.getSession().setAttribute("flush", "いいねしました。");
+        // トップページへリダイレクト
+        response.sendRedirect(request.getContextPath() + "/");
     }
+}
 //}

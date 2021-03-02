@@ -32,16 +32,19 @@ public class UsersShowServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // DAOインスタンスの生成
         EntityManager em = DBUtil.createEntityManager();
 
         // 該当IDのユーザーを1件のみをデータベースから取得
         User u = em.find(User.class, Integer.parseInt(request.getParameter("id")));
 
+        // DAOの破棄
         em.close();
 
-        // メッセージデータをリクエストスコープにセットしてshow.jspを呼び出す
+        // リクエストスコープにuserのデータをセット
         request.setAttribute("user", u);
 
+        // 画面遷移
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/show.jsp");
         rd.forward(request, response);
     }

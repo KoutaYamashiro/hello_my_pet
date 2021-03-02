@@ -31,16 +31,18 @@ public class RepliesShowServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // DAOインスタンスの生成
         EntityManager em = DBUtil.createEntityManager();
-
+        // 返信の情報を取得
         Reply r = em.find(Reply.class, Integer.parseInt(request.getParameter("id")));
-
+        // DAOの破棄
         em.close();
-
+        // リクエストスコープに各データをセット
         request.setAttribute("reply", r);
         request.setAttribute("_token", request.getSession().getId());
-
+        // 画面遷移
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/contacts/show.jsp");
         rd.forward(request, response);
     }
@@ -48,8 +50,8 @@ public class RepliesShowServlet extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doGet(request, response);
     }
 

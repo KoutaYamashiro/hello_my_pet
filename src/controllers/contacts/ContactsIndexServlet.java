@@ -32,47 +32,49 @@ public class ContactsIndexServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // DAOインスタンスの生成
         EntityManager em = DBUtil.createEntityManager();
 
-        // ログインユーザーを取得
-        User login_user = (User)request.getSession().getAttribute("login_user");
+        // セッションスコープから login_user 情報を抜き出す
+        User login_user = (User) request.getSession().getAttribute("login_user");
 
         // ページネーション
         int page;
-        try{
+        try {
             page = Integer.parseInt(request.getParameter("page"));
-        } catch(Exception e) {
+        } catch (Exception e) {
             page = 1;
         }
 
-        // ユーザーがお問い合わせした内容取得
+        // ユーザーがお問い合わせした一覧を表示する
         List<Contact> contacts = em.createNamedQuery("getMyAllContacts", Contact.class)
-                                  .setParameter("user", login_user)
-                                  .setFirstResult(10 * (page - 1))
-                                  .setMaxResults(10)
-                                  .getResultList();
-        System.out.println("*** 取得チェック***" + contacts);
+                .setParameter("user", login_user)
+                .setFirstResult(10 * (page - 1))
+                .setMaxResults(10)
+                .getResultList();
 
         // ユーザーのお問い合わせ数をカウント
-        long contacts_count = (long)em.createNamedQuery("getMyContactsCount", Long.class)
-                                     .setParameter("user", login_user)
-                                     .getSingleResult();
-        System.out.println("*** カウントチェック***" + contacts_count);
-
+        long contacts_count = (long) em.createNamedQuery("getMyContactsCount", Long.class)
+                .setParameter("user", login_user)
+                .getSingleResult();
+        // DAOの破棄
         em.close();
 
-        // 値をセット
+        // リクエストスコープに各データをセット
         request.setAttribute("contacts", contacts);
         request.setAttribute("contacts_count", contacts_count);
         request.setAttribute("page", page);
 
-        // flushがあった場合のみ表示
-        if(request.getSession().getAttribute("flush") != null) {
+        // セッションスコープにエラーメッセージがあるならば
+        if (request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
+            // エラーメッセージを削除
             request.getSession().removeAttribute("flush");
         }
 
+        // 画面遷移
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/contacts/index.jsp");
         rd.forward(request, response);
     }

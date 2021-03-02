@@ -36,53 +36,52 @@ public class ContactsCreateServlet extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            // EntityManagerのオブジェクトを生成
-           EntityManager em = DBUtil.createEntityManager();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // EntityManagerのオブジェクトを生成
+        EntityManager em = DBUtil.createEntityManager();
 
-            //   新しいお問い合わせを生成
-            Contact c = new Contact();
+        // Contactのインスタンスを生成
+        Contact c = new Contact();
 
-            // null回避としてのインスタンスを生成
-//            request.setAttribute("reply", new Reply());
+        // 問い合わせするペットのIDを取得
+        Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
 
-            //  時間を生成
-            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        // 変数cに現在ログインしているユーザーの情報をセットする
+        c.setUser((User) request.getSession().getAttribute("login_user"));
+        // 変数cにペット情報をセットする
+        c.setPet(pet);
+        // 変数cに入力した内容をセットする
+        c.setContent(request.getParameter("content"));
 
-            // 問い合わせするペットのIDを取得
-            Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("pet_id")));
+        // 現在日時を取得して変数pに作成日時にセットする
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        c.setCreated_at(currentTime);
 
-            // Contactテーブルに値をセット
-            c.setUser((User)request.getSession().getAttribute("login_user"));
-            c.setPet(pet);
-            c.setContent(request.getParameter("content"));
-            c.setCreated_at(currentTime);
-
-            List<String> errors = ContactValidator.validate(c);
-            // エラーがある場合
-            if(errors.size() > 0) {
-                em.close();
-
-                request.setAttribute("_token", request.getSession().getId());
-                request.setAttribute("contact", c);
-                request.setAttribute("errors", errors);
-
-                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/contacts/new.jsp");
-                rd.forward(request, response);
-            } else {
-                // データベースを更新
-                em.getTransaction().begin();
-                em.persist(c);
-                em.getTransaction().commit();
-                em.close();
-                request.getSession().setAttribute("flush", "お問い合わせしました！返信をお待ち下さい。");
-                // お問い合わせ一覧へリダイレクト
-                response.sendRedirect(request.getContextPath() + "/contacts/index");
-            }
+        // バリデーター の呼び出し
+        List<String> errors = ContactValidator.validate(c);
+        // errorsリストに1つでも追加されていたら
+        if (errors.size() > 0) {
+            // DAOの破棄
+            em.close();
+            // リクエストスコープに各データをセット
+            request.setAttribute("_token", request.getSession().getId());
+            request.setAttribute("contact", c);
+            request.setAttribute("errors", errors);
+            // 画面遷移
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/contacts/new.jsp");
+            rd.forward(request, response);
+        } else {
+            // データベースに保存する
+            em.getTransaction().begin();
+            em.persist(c);
+            em.getTransaction().commit();
+            // DAOの破棄
+            em.close();
+            // セッションスコープにフラッシュメッセージをセットする
+            request.getSession().setAttribute("flush", "お問い合わせしました！返信をお待ち下さい。");
+            // 画面遷移
+            response.sendRedirect(request.getContextPath() + "/contacts/index");
         }
+    }
 }
-
-
-
-
-

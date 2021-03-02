@@ -36,9 +36,11 @@ public class UsersCreateServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // String型の _tokenにパラメーターの_tokenを代入する
         String _token = (String)request.getParameter("_token");
-
+        // _tokenがnullではなく、且つセッションIDと等しいならば
         if(_token != null && _token.equals(request.getSession().getId())) {
+            // DAOインスタンスの生成
             EntityManager em = DBUtil.createEntityManager();
 
             // Userインスタンスの生成

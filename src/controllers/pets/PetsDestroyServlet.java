@@ -30,14 +30,14 @@ public class PetsDestroyServlet extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String _token = (String)request.getParameter("_token");
-        if(_token != null && _token.equals(request.getSession().getId())) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String _token = (String) request.getParameter("_token");
+        if (_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
-            // セッションスコープからペットのIDを取得して
-            // 該当のIDのペット1件のみをデータベースから取得
-            Pet p = em.find(Pet.class, (Integer)(request.getSession().getAttribute("pet_id")));
+            // Petインスタンスを生成し、変数pに現在見ているPetの情報をセットする
+            Pet p = em.find(Pet.class, (Integer) (request.getSession().getAttribute("pet_id")));
 
             p.setDelete_flag(1);
             // 更新日時のみ上書き
@@ -46,9 +46,10 @@ public class PetsDestroyServlet extends HttpServlet {
             em.getTransaction().begin();
             em.getTransaction().commit();
             em.close();
+            // セッションスコープにフラッシュメッセージをセットする
             request.getSession().setAttribute("flush", "登録を変更しました。");
 
-            // indexページへリダイレクト
+            // 画面遷移
             response.sendRedirect(request.getContextPath() + "/pets/index");
         }
     }

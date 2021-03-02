@@ -33,37 +33,31 @@ public class ContactsShowServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // DAOインスタンスの生成
         EntityManager em = DBUtil.createEntityManager();
 
         // ログインユーザーを取得
-        User login_user = (User)request.getSession().getAttribute("login_user");
+        User login_user = (User) request.getSession().getAttribute("login_user");
 
         // お問い合わせを取得
         Contact contact = em.find(Contact.class, Integer.parseInt(request.getParameter("id")));
 
         // 返信情報を取得
-        Reply reply =   em.find(Reply.class, Integer.parseInt(request.getParameter("id")));
-
+        Reply reply = em.find(Reply.class, Integer.parseInt(request.getParameter("id")));
+        // DAOの破棄
         em.close();
 
-        // 値をセット
+        // リクエストスコープに各データをセット
         request.setAttribute("login_user", login_user);
         request.setAttribute("contact", contact);
         request.setAttribute("reply", reply);
         request.setAttribute("_token", request.getSession().getId());
 
+        // 画面遷移
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/contacts/show.jsp");
         rd.forward(request, response);
     }
 
 }
-
-
-
-
-
-
-
-
-

@@ -32,9 +32,12 @@ public class PetsNewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("_token", request.getSession().getId());
 
+        // Petのインスタンスを生成
         Pet p = new Pet();
+        // リクエストスコープにデータをセット
         request.setAttribute("pet", p);
 
+        // 画面遷移
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/pets/new.jsp");
         rd.forward(request, response);
     }

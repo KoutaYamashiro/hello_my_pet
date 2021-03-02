@@ -31,19 +31,20 @@ public class PetsEditServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        // 該当のIDのペット情報1件のみをデータベースから取得
+        // Petインスタンスを生成し、変数pに現在見ているPetの情報をセットする
         Pet p = em.find(Pet.class, Integer.parseInt(request.getParameter("id")));
 
         em.close();
 
-            // ペット情報とセッションIDをリクエストスコープに登録
-            request.setAttribute("pet", p);
-            request.setAttribute("_token", request.getSession().getId());
-            // ペットIDをセッションスコープに登録
-            request.getSession().setAttribute("pet_id", p.getId());
+        // ペット情報とセッションIDをリクエストスコープに登録
+        request.setAttribute("pet", p);
+        request.setAttribute("_token", request.getSession().getId());
+        // ペットIDをセッションスコープに登録
+        request.getSession().setAttribute("pet_id", p.getId());
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/pets/edit.jsp");
         rd.forward(request, response);

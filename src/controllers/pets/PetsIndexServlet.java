@@ -32,6 +32,7 @@ public class PetsIndexServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // DAOインスタンスの生成
         EntityManager em = DBUtil.createEntityManager();
 
         // ページネーション
@@ -51,17 +52,20 @@ public class PetsIndexServlet extends HttpServlet {
         // すべてのペット数をカウントする
         long pets_count = (long)em.createNamedQuery("getPetsCount", Long.class)
                                      .getSingleResult();
-
+        // DAOの破棄
         em.close();
 
+        // リクエストスコープに各データをセット
         request.setAttribute("pets", pets);
         request.setAttribute("pets_count", pets_count);
         request.setAttribute("page", page);
+
         if(request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
         }
 
+        // 画面遷移
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/pets/index.jsp");
         rd.forward(request, response);
     }

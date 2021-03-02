@@ -31,7 +31,7 @@ import utils.DBUtil;
  * Servlet implementation class PetsUpdateServlet
  */
 @WebServlet("/pets/update")
-@MultipartConfig// 画像アップ機能時は必ず必要
+@MultipartConfig // 画像アップ機能時は必ず必要
 public class PetsUpdateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -94,8 +94,7 @@ public class PetsUpdateServlet extends HttpServlet {
             // DAOインスタンスの生成
             EntityManager em = DBUtil.createEntityManager();
 
-            // セッションスコープからペットのIDを取得して
-            // 該当のIDのペット情報1件のみをデータベースから取得
+            // Petインスタンスを生成し、変数pに現在見ているPetの情報をセットする
             Pet p = em.find(Pet.class, (Integer) (request.getSession().getAttribute("pet_id")));
 
             // 変数pに現在ログインしているユーザーの情報をセットする
@@ -143,6 +142,7 @@ public class PetsUpdateServlet extends HttpServlet {
             }
         }
     }
+
     // 拡張子を変えずに、ランダムな名前のファイルを生成する
     private String getFileName(Part part) {
         String name = null;

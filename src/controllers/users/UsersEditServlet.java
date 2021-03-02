@@ -32,11 +32,12 @@ public class UsersEditServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // DAOインスタンスの生成
         EntityManager em = DBUtil.createEntityManager();
 
         // ユーザーIDを1件のみデータベースから取得
         User u = em.find(User.class, Integer.parseInt(request.getParameter("id")));
-
+        // DAOの破棄
         em.close();
 
         // ユーザー情報とセッションIDをリクエストスコープに登録
@@ -45,6 +46,7 @@ public class UsersEditServlet extends HttpServlet {
         // ユーザーIDをセッションスコープに登録
         request.getSession().setAttribute("user_id", u.getId());
 
+        // 画面遷移
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/edit.jsp");
         rd.forward(request, response);
     }

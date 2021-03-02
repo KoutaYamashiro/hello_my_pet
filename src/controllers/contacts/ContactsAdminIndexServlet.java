@@ -33,44 +33,48 @@ public class ContactsAdminIndexServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // DAOインスタンスの生成
         EntityManager em = DBUtil.createEntityManager();
 
         // ログインユーザーを取得
-        User login_user = (User)request.getSession().getAttribute("login_user");
+        User login_user = (User) request.getSession().getAttribute("login_user");
 
         // ページネーション
         int page;
-        try{
+        try {
             page = Integer.parseInt(request.getParameter("page"));
-        } catch(Exception e) {
+        } catch (Exception e) {
             page = 1;
         }
 
         // お問い合わせ内容取得
         List<Contact> contacts = em.createNamedQuery("getAllContacts", Contact.class)
-                                  .setFirstResult(10 * (page - 1))
-                                  .setMaxResults(10)
-                                  .getResultList();
+                .setFirstResult(10 * (page - 1))
+                .setMaxResults(10)
+                .getResultList();
 
         // お問い合わせ数カウント
-        long contacts_count = (long)em.createNamedQuery("getContactsCount", Long.class)
-                                     .getSingleResult();
-
+        long contacts_count = (long) em.createNamedQuery("getContactsCount", Long.class)
+                .getSingleResult();
+        // DAOの破棄
         em.close();
 
-        // 値をセット
+        // リクエストスコープに各データをセット
         request.setAttribute("login_user", login_user);
         request.setAttribute("contacts", contacts);
         request.setAttribute("contacts_count", contacts_count);
         request.setAttribute("page", page);
 
-        // flushがあった場合のみ表示
-        if(request.getSession().getAttribute("flush") != null) {
+        // セッションスコープにフラッシュメッセージがあるならば
+        if (request.getSession().getAttribute("flush") != null) {
+            // リクエストスコープにフラッシュメッセージをセットする
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
+            // リクエストスコープのフラッシュメッセージを削除
             request.getSession().removeAttribute("flush");
         }
-
+        // 画面遷移
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/contacts/admin.jsp");
         rd.forward(request, response);
     }

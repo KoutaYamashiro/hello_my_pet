@@ -32,41 +32,41 @@ public class PetsShowServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-      protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            EntityManager em = DBUtil.createEntityManager();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        EntityManager em = DBUtil.createEntityManager();
 
-            //  ログインユーザーのIDを取得
-            User login_user = (User) request.getSession().getAttribute("login_user");
+        // Userインスタンスを生成し、変数uに現在ログインしているuser情報をセットする
+        User login_user = (User) request.getSession().getAttribute("login_user");
 
-            // 詳細を見るペットのIDを取得
-            Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("id")));
-            System.out.println("＊＊＊ペットID＊＊＊" + pet);
+        // 詳細を見るペットのIDを取得
+        Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("id")));
 
-            // セットしたされた情報の重複チェック
-            long checkMyFavoriteCount = (long)em.createNamedQuery("checkMyFavoriteCount", Long.class)
-                                                            .setParameter("user", login_user)
-                                                            .setParameter("pet", pet)
-                                                            .getSingleResult();
-            System.out.println("＊＊＊チェックcheckMyFavoriteCount＊＊＊" + checkMyFavoriteCount);
+        // セットしたされた情報の重複チェック
+        long checkMyFavoriteCount = (long) em.createNamedQuery("checkMyFavoriteCount", Long.class)
+                .setParameter("user", login_user)
+                .setParameter("pet", pet)
+                .getSingleResult();
 
-            // ペットのいいね数を取得
-            long favoritesCount = (long)em.createNamedQuery("getPetFavoritesCount", Long.class)
-                                                             .setParameter("pet", pet)
-                                                             .getSingleResult();
-            System.out.println("＊＊＊チェックfavoritesCount＊＊＊" + favoritesCount);
+        // ペットのいいね数を取得
+        long favoritesCount = (long) em.createNamedQuery("getPetFavoritesCount", Long.class)
+                .setParameter("pet", pet)
+                .getSingleResult();
 
-            // 値をセット
-            request.setAttribute("favoritesCount", favoritesCount);
-            request.setAttribute("checkMyFavoriteCount", checkMyFavoriteCount);
-            //フォロー判定ここまで
+        // 値をセット
+        request.setAttribute("favoritesCount", favoritesCount);
+        request.setAttribute("checkMyFavoriteCount", checkMyFavoriteCount);
+        //フォロー判定ここまで
 
-            em.close();
+        // DAOの破棄
+        em.close();
 
-            request.setAttribute("pet", pet);
-            request.setAttribute("_token", request.getSession().getId());
-
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/pets/show.jsp");
-            rd.forward(request, response);
-        }
+        // リクエストスコープに各データをセット
+        request.setAttribute("pet", pet);
+        request.setAttribute("_token", request.getSession().getId());
+        // 画面遷移
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/pets/show.jsp");
+        rd.forward(request, response);
+    }
 
 }

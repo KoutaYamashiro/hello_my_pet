@@ -33,6 +33,7 @@ public class UsersIndexServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // DAOインスタンスの生成
         EntityManager em = DBUtil.createEntityManager();
 
         // 開くページ数を取得（デフォルトは1ページ目）
@@ -51,16 +52,20 @@ public class UsersIndexServlet extends HttpServlet {
          long users_count = (long)em.createNamedQuery("getUsersCount", Long.class)
                  .getSingleResult();
 
+         // DAOの破棄
          em.close();
 
+         // リクエストスコープに各データをセット
          request.setAttribute("users", users);
          request.setAttribute("users_count", users_count);
          request.setAttribute("page", page);
+
          if(request.getSession().getAttribute("flush") != null) {
              request.setAttribute("flush", request.getSession().getAttribute("flush"));
              request.getSession().removeAttribute("flush");
          }
 
+         // 画面遷移
          RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/index.jsp");
          rd.forward(request, response);
      }

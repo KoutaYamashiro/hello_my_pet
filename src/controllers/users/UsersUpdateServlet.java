@@ -36,10 +36,13 @@ public class UsersUpdateServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // String型の _tokenにパラメーターの_tokenを代入する
         String _token = (String)request.getParameter("_token");
+        // _tokenがnullではなく、且つセッションIDと等しいならば
         if(_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
+            // 該当のIDのuserをデータベースから取得
             User u = em.find(User.class, (Integer)(request.getSession().getAttribute("user_id")));
 
             // 現在の値と異なるメールアドレスが入力されていたら
@@ -66,7 +69,9 @@ public class UsersUpdateServlet extends HttpServlet {
                         );
             }
 
+            // 変数uに入力した名前をセットする
             u.setName(request.getParameter("name"));
+            // 変数uに選択された権限をセットする
             u.setAdmin_flag(Integer.parseInt(request.getParameter("admin_flag")));
             u.setUpdated_at(new Timestamp(System.currentTimeMillis()));     // 更新日時のみ上書き
             u.setDelete_flag(0);

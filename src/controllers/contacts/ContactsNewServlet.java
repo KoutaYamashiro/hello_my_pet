@@ -31,22 +31,25 @@ public class ContactsNewServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // CSRF対策
         request.setAttribute("_token", request.getSession().getId());
-
+        // DAOインスタンスの生成
         EntityManager em = DBUtil.createEntityManager();
 
-        // 問い合わせを生成
-        Contact  c = new Contact();
-
+        // Contactクラスの生成
+        Contact c = new Contact();
         // 問い合わせするペットのIDを取得
         Pet pet = em.find(Pet.class, Integer.parseInt(request.getParameter("id")));
-        // 値をセット
+        // ペット情報をセット
         c.setPet(pet);
 
+        // リクエストスコープに各データをセット
         request.setAttribute("contact", c);
         request.setAttribute("pet", pet);
 
+        // 画面遷移
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/contacts/new.jsp");
         rd.forward(request, response);
     }
@@ -54,7 +57,8 @@ public class ContactsNewServlet extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doGet(request, response);
     }
 

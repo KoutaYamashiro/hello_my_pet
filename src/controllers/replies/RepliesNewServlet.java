@@ -31,22 +31,26 @@ public class RepliesNewServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // CSRF対策
         request.setAttribute("_token", request.getSession().getId());
-
+        // DAOインスタンスの生成
         EntityManager em = DBUtil.createEntityManager();
 
-        // 返信を生成
+        // Replyクラスの生成
         Reply r = new Reply();
 
         // 返信する問い合わせのIDを取得
         Contact contact = em.find(Contact.class, Integer.parseInt(request.getParameter("id")));
-        // 値をセット
+        // Contactをセット
         r.setContact(contact);
 
+        // リクエストスコープに各データをセット
         request.setAttribute("reply", r);
         request.setAttribute("contact", contact);
 
+        // 画面遷移
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/replies/new.jsp");
         rd.forward(request, response);
     }
@@ -54,7 +58,8 @@ public class RepliesNewServlet extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doGet(request, response);
     }
 

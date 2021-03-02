@@ -22,8 +22,10 @@ hello_my_petは以下の機能を実装しています。
 
 サイトマップ
 https://gyazo.com/04282344478715e62c5121dc2bf144dc
+
 データベース図 データベース図
 https://gyazo.com/5ecc88d769fd71e0082e20717f5a003d
+
 ワイヤーフレーム
 https://cacoo.com/diagrams/Gap9Rw6gbDWEfs4K/E3B1F
 
