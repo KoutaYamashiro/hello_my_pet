@@ -22,25 +22,25 @@ import javax.persistence.Table;
 @Table(name= "contacts")
 @NamedQueries({
     @NamedQuery(
-            // 全ての問い合わせに関する情報を取得
+            // 全ての問い合わせを表示する
             name = "getAllContacts",
             query = "SELECT c FROM Contact AS c ORDER BY c.id DESC"
         ),
         @NamedQuery(
-             // 全ての問い合わせをカウント
+             // 全ての問い合わせを数える
             name = "getContactsCount",
             query = "SELECT COUNT(c) FROM Contact AS c"
         ),
-        // ログインユーザーの問い合わせ一覧情報を取得
+        // ログインユーザーの問い合わせ一覧を表示する
         @NamedQuery(
                 name= "getMyAllContacts",
                 query = "SELECT c FROM Contact AS c WHERE c.user = :user ORDER BY c.id DESC"),
-        // ログインユーザーの問い合わせをカウント
+        // ログインユーザーの問い合わせを数える
         @NamedQuery(
                 name= "getMyContactsCount",
                 query = "SELECT COUNT(c) FROM Contact AS c WHERE c.user = :user")
     })
-
+//エンティティ
 @Entity
 public class Contact {
         @Id
@@ -48,10 +48,12 @@ public class Contact {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
 
+        // Userモデルと多対一で結びつく
         @ManyToOne
         @JoinColumn(name= "user_id", nullable = false)
         private User user;
 
+        // Petモデルと多対一で結びつく
         @ManyToOne
         @JoinColumn(name= "pet_id", nullable = false)
         private Pet pet;
@@ -63,14 +65,15 @@ public class Contact {
         @Column(name= "created_at", nullable = false)
         private Timestamp created_at;
 
-        // 返信　リスト
+        // Replyモデルとー対多で結びつく
         @OneToMany(mappedBy = "contact", fetch = FetchType.EAGER)
         private List<Reply> replies;
 
-        // 返信  多対多のモデリング付加
+        //Userモデルと多対多で結びつく
         @ManyToMany(mappedBy = "replyContacsUsers", fetch = FetchType.EAGER)
         Set<User> ContactRepliesUsers;
 
+        // ゲッターとセッター
         public Integer getId() {
             return id;
         }
@@ -85,11 +88,11 @@ public class Contact {
 
       public Set<User> getContactRepliesUsers() {
       return ContactRepliesUsers;
-  }
+      }
 
-  public void setContactRepliesUsers(Set<User> contactRepliesUsers) {
-      ContactRepliesUsers = contactRepliesUsers;
-  }
+      public void setContactRepliesUsers(Set<User> contactRepliesUsers) {
+          ContactRepliesUsers = contactRepliesUsers;
+      }
 
 
         public void setId(Integer id) {

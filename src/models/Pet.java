@@ -21,21 +21,22 @@ import javax.persistence.Table;
 @Table(name = "pets")
 @NamedQueries({
     @NamedQuery(
-         // すべてのペット情報を取得
+         // 全てのペットを表示する
         name = "getAllPets",
         query = "SELECT p FROM Pet AS p ORDER BY p.id DESC"
     ),
     @NamedQuery(
-            // 情報を取得
+            // // あるuserが投稿したペットを表示する
            name = "getMyPetUser",
            query = "SELECT p.user FROM Pet AS p"
        ),
     @NamedQuery(
-        // すべてのペット数をカウント
+        // 全てのペット数を数える
         name = "getPetsCount",
         query = "SELECT COUNT(p) FROM Pet AS p"
     )
 })
+//エンティティ
 @Entity
 public class Pet {
     @Id
@@ -43,6 +44,7 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // Userモデルと多対一で結びつく
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -72,10 +74,11 @@ public class Pet {
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
 
-    // いいね  多対多のモデリング付加
+    // Userモデルと多対多で結びつく
     @ManyToMany(mappedBy = "favotitePets", fetch = FetchType.EAGER)
     Set<User> favoritedUsers;
 
+    // ゲッターとセッター
     public Integer getId() {
         return id;
     }

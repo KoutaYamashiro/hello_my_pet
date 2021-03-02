@@ -17,25 +17,26 @@ import javax.persistence.Table;
 
 @Table(name = "replies")
 @NamedQueries({
- // 全ての返信を取得
+ // 全ての返信を表示する
     @NamedQuery(
             name = "getAllReplies",
             query = "SELECT r FROM Reply AS r ORDER BY r.id DESC"
         ),
-    // 全ての返信をカウント
+    // 全ての返信を数える
     @NamedQuery(
             name = "getRepliesCount",
             query = "SELECT COUNT(r) FROM Reply AS r"
         ),
-    // ログインユーザーへの返信一覧情報を取得
+    // ログインユーザーへの返信一覧表示する
     @NamedQuery(
             name= "getMyAllReplies",
             query = "SELECT r FROM Reply AS r WHERE r.user = :user ORDER BY r.id DESC"),
-    // ログインユーザーへの返信をカウント
+    // ログインユーザーへの返信を数える
     @NamedQuery(
             name= "getMyRepliesCount",
             query = "SELECT COUNT(r) FROM Reply AS r WHERE r.user = :user")
 })
+//エンティティ
 @Entity
 public class Reply {
     @Id
@@ -43,11 +44,12 @@ public class Reply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // Userモデルと多対一で結びつく
     @ManyToOne
     @JoinColumn(name = "send_user_id", nullable = false)
     private User user;
 
-    // 問い合わせ
+    // Contactモデルと多対一で結びつく
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "contacts_id", nullable = false)
     private Contact contact;
@@ -59,6 +61,7 @@ public class Reply {
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
 
+    // ゲッターとセッター
     public Integer getId() {
         return id;
     }

@@ -17,15 +17,15 @@ import javax.persistence.Table;
         @NamedQuery(
                 name= "getDestroyPet",
                 query = "SELECT f.id FROM Favorite AS f WHERE f.pet  = :pet AND f.user = :user"),
-        // 閲覧ペットのいいねをカウント
+        // 閲覧ペットのいいねを数える
         @NamedQuery(
                 name= "getPetFavoritesCount",
                 query = "SELECT COUNT(f) FROM Favorite AS f WHERE f.pet  = :pet"),
-        // ログインユーザーのいいねしたペット一覧情報を取得
+        // ログインユーザーのいいねしたペット一覧を表示する
         @NamedQuery(
                 name = "getMyFavoritePets",
                 query = "SELECT p FROM Pet AS p, Favorite AS f WHERE f.user = :user AND p.id = f.pet.id ORDER BY f.id DESC"),
-        // ログインユーザーのいいねしたペット数を取得
+        // ログインユーザーのいいねしたペットを数える
         @NamedQuery(
                 name= "getMyFavoritesCount",
                 query = "SELECT COUNT(f) FROM Favorite AS f WHERE f.user = :user"),
@@ -34,6 +34,7 @@ import javax.persistence.Table;
                 name = "checkMyFavoriteCount",
                 query = "SELECT COUNT(f) FROM Favorite AS f WHERE f.user = :user AND f.pet  = :pet")
 })
+//エンティティ
 @Entity
 public class Favorite {
     @Id
@@ -41,14 +42,17 @@ public class Favorite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // Userモデルと多対一で結びつく
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    // Petモデルと多対一で結びつく
     @ManyToOne
     @JoinColumn(name = "pet_id", nullable = false)
     private Pet pet;
 
+    // ゲッターとセッター
     public Integer getId() {
         return id;
     }

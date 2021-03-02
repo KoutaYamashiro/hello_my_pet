@@ -30,9 +30,12 @@ public class UsersNewServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        // CSRF対策
         request.setAttribute("_token", request.getSession().getId());
         request.setAttribute("user", new User());
 
+        // 画面遷移
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/new.jsp");
         rd.forward(request, response);
     }

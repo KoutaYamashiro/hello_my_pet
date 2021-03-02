@@ -20,31 +20,32 @@ import javax.persistence.Table;
 @Table(name = "Users")
 @NamedQueries({
     @NamedQuery(
-         // 全てのユーザー情報を取得
+         // 全てのユーザーを表示する
         name = "getAllUsers",
         query = "SELECT u FROM User AS u ORDER BY u.id DESC"
     ),
     @NamedQuery(
-            // すべてのユーザーをカウント
+         // 全てのユーザーを数える
         name = "getUsersCount",
         query = "SELECT COUNT(u) FROM User AS u"
     ),
     @NamedQuery(
-         // メールアドレスがすでに登録されていないかチェック
+         // メールアドレスの重複チェック
         name = "checkRegisteredMail_address",
         query = "SELECT COUNT(u) FROM User AS u WHERE u.mail_address = :mail_address"
     ),
     @NamedQuery(
-            // お問い合わせをした全てのユーザー情報を取得
-            name = "getContactedUsers",
-            query = "SELECT u FROM User AS u, Contact AS c WHERE u.id = c.user.id"
+        // お問い合わせをした全てのユーザー情報を表示する
+        name = "getContactedUsers",
+        query = "SELECT u FROM User AS u, Contact AS c WHERE u.id = c.user.id"
     ),
     @NamedQuery(
-            // ログイン時、メールアドレスとパスワードが正しいかをチェック
+         // ログイン時のメールアドレスとパスワードチェック
         name = "checkLoginMail_addressAndPassword",
         query = "SELECT u FROM User AS u WHERE u.delete_flag = 0 AND u.mail_address = :mail_address AND u.password = :pass"
     )
 })
+//エンティティ
 @Entity
 public class User {
     @Id
@@ -73,27 +74,21 @@ public class User {
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
 
-    // いいね 多対多のモデリング所有
+    // Petモデルと多対多で結びつく
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "favorites",
                        joinColumns = @JoinColumn(name = "user_id"),
                        inverseJoinColumns = @JoinColumn(name = "pet_id"))
     List<Pet> favotitePets;
 
-    // 問い合わせ 多対多のモデリング所有
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "contacts",
-//                       joinColumns = @JoinColumn(name = "user_id"),
-//                       inverseJoinColumns = @JoinColumn(name = "pet_id"))
-//    List<Pet> contactPets;
-
-    // 返信 多対多のモデリング所有
+    // Contactモデルと多対多で結びつく
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "replies",
                        joinColumns = @JoinColumn(name = "send_user_id"),
                        inverseJoinColumns = @JoinColumn(name = "contacts_id"))
     Set<Contact> replyContacsUsers;
 
+    // ゲッターとセッター
     public Integer getId() {
         return id;
     }
@@ -107,17 +102,6 @@ public class User {
     public void setReplyContacs(Set<Contact> replyContacs) {
         this.replyContacsUsers = replyContacs;
     }
-
-
-//    public List<Pet> getContactPets() {
-//        return contactPets;
-//    }
-//
-//
-//    public void setContactPets(List<Pet> contactPets) {
-//        this.contactPets = contactPets;
-//    }
-
 
     public List<Pet> getFavotitePets() {
         return favotitePets;
