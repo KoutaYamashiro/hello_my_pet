@@ -41,12 +41,14 @@ public class UsersCreateServlet extends HttpServlet {
         if(_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
-            // ユーザーを生成
+            // Userインスタンスの生成
             User u = new User();
 
-            // 値をセット
+            // 変数uに入力された名前をセットする
             u.setName(request.getParameter("name"));
+            // 変数uに入力されたアドレスをセットする
             u.setMail_address(request.getParameter("mail_address"));
+            // 変数uに暗号化されたパスワードをセットする
             u.setPassword(
                 EncryptUtil.getPasswordEncrypt(
                     request.getParameter("password"),
@@ -54,31 +56,35 @@ public class UsersCreateServlet extends HttpServlet {
                     )
                 );
 
-            // ユーザー登録の場合は　０　で登録するための処理記載
+            //管理者権限以外での ユーザー登録の場合はAdmin_flag(0)で登録するための処理記載
             Integer admin_flag = new Integer(0);
             String af_str = request.getParameter("admin_flag");
             if(af_str != null && !af_str.equals("")) {
                 admin_flag = Integer.parseInt(request.getParameter("admin_flag"));
             }
+            // 変数uにAdmin_flag(0)をセットする
             u.setAdmin_flag(admin_flag);
 
-            System.out.println("＊＊＊＊＊＊＊＊admin_flagチェック＊＊＊＊＊＊＊＊" + admin_flag);
-
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+            // 変数uに作成日時をセットする
             u.setCreated_at(currentTime);
+            // 変数uに更新日時をセットする
             u.setUpdated_at(currentTime);
+            // 変数uにDelete_flag(0)をセットする
             u.setDelete_flag(0);
 
-            //バリデーションを実行してエラーがあったら新規登録のフォームに戻る
+            // バリデーター の呼び出し
             List<String> errors = UserValidator.validate(u, true, true);
+            // errorsリストに1つでも追加されていたら
             if(errors.size() > 0) {
+                // DAOの破棄
                 em.close();
 
-                // フォームに初期値を設定、さらにエラーメッセージを送る
+                // リクエストスコープに各データをセット
                 request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("user", u);
                 request.setAttribute("errors", errors);
-
+                // 画面遷移
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/users/new.jsp");
                 rd.forward(request, response);
             } else {
@@ -86,11 +92,14 @@ public class UsersCreateServlet extends HttpServlet {
                 em.getTransaction().begin();
                 em.persist(u);
                 em.getTransaction().commit();
-                request.getSession().setAttribute("flush", "登録がありがとうございます！ログインをお願いします。");
+                // DAOの破棄
                 em.close();
-
-                // ログインページにリダイレクト
-                response.sendRedirect(request.getContextPath() + "/login");
+                // セッションスコープにフラッシュメッセージをセットする
+                request.getSession().setAttribute("flush", "登録が完了しました。");
+                // セッションスコープにをlogin_userセットする
+                request.getSession().setAttribute("login_user", u);
+                // 画面遷移
+                response.sendRedirect(request.getContextPath() + "/");
             }
         }
     }

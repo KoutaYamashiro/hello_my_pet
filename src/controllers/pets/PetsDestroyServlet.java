@@ -46,7 +46,7 @@ public class PetsDestroyServlet extends HttpServlet {
             em.getTransaction().begin();
             em.getTransaction().commit();
             em.close();
-            request.getSession().setAttribute("flush", "削除が完了しました。");
+            request.getSession().setAttribute("flush", "登録を変更しました。");
 
             // indexページへリダイレクト
             response.sendRedirect(request.getContextPath() + "/pets/index");

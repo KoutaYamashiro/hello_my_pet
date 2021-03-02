@@ -6,18 +6,22 @@
                 <form method="POST" enctype="multipart/form-data" action="<c:url value='/pets/update' />">
                     <c:import url="_form.jsp" />
                 </form>
-                <p><a href="#" onclick="confirmDestroy();">このペットは家族が決まりました。</a></p>
+
+                <p>
+                    <a id=destroy href="#" onclick="confirmDestroy();">飼い主が決まったと更新する</a>
+                </p>
                 <form method="POST" action="<c:url value='/pets/destroy' />">
                     <input type="hidden" name="_token" value="${_token}" />
+                    <input type="hidden" name="pet_id" value="${pet.id}" />
                 </form>
                 <script>
                     function confirmDestroy() {
-                        if(confirm("決定でよろしいですか？")) {
+                        if(confirm("本当によろしいですか？")) {
                             document.forms[1].submit();
                         }
                     }
                 </script>
 
-        <p><a href="<c:url value='/pets/show' />">ペット詳細に戻る</a></p>
+        <p><a id=all_pets href="<c:url value='/pets/index' />">ペット一覧に戻る</a></p>
     </c:param>
 </c:import>

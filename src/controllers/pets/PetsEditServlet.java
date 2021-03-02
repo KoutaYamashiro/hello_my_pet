@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Pet;
-import models.User;
 import utils.DBUtil;
 
 /**
@@ -40,15 +39,11 @@ public class PetsEditServlet extends HttpServlet {
 
         em.close();
 
-        User login_user = (User)request.getSession().getAttribute("login_user");
-        if(p != null && login_user.getId() == p.getUser().getId()) {
-
             // ペット情報とセッションIDをリクエストスコープに登録
             request.setAttribute("pet", p);
             request.setAttribute("_token", request.getSession().getId());
             // ペットIDをセッションスコープに登録
             request.getSession().setAttribute("pet_id", p.getId());
-        }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/pets/edit.jsp");
         rd.forward(request, response);

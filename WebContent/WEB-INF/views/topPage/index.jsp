@@ -12,6 +12,7 @@
         <h2>Pets List</h2>
             <table id="pet_list">
             <c:forEach var="pet" items="${pets}" varStatus="status">
+
             <tbody class="row${status.count % 2}">
                     <tr>
                             <th>ペット写真</th>

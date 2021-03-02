@@ -59,6 +59,7 @@
         <c:if test="${sessionScope.login_user.admin_flag == 1}">
             <p>
                 <a id=update href="<c:url value="/pets/edit?id=${pet.id}" />">ペット情報を更新する</a>
+                <input type="hidden" name="pet_id" value="${pet.id}">
             </p>
             <p>
                 <a id=all_pets href="<c:url value="/pets/index" />">ペット 一覧ページに戻る</a>
